@@ -27,10 +27,11 @@ export class FooterComponent {
   readonly phoneTel = PHONE_TEL;
   readonly email = EMAIL;
 
+  /** Stesso ordine delle sezioni home (scroll) della navbar. */
   readonly quickLinks: ReadonlyArray<{ label: string; path: string }> = [
     { label: 'Home', path: '/' },
-    { label: 'Chi siamo', path: '/chi-siamo' },
     { label: 'Camere', path: '/camere' },
+    { label: 'Chi siamo', path: '/chi-siamo' },
     { label: 'Galleria', path: '/galleria' },
     { label: 'Contatti', path: '/contatti' },
   ];

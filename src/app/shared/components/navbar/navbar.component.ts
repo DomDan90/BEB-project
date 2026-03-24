@@ -161,6 +161,86 @@ export class NavbarComponent {
     }
   }
 
+  /**
+   * Ogni click su una voce del menu principale: chiude sempre il collapse mobile.
+   * Su `/` + Home: scroll all’hero (l’URL non cambia → senza questo il menu resterebbe aperto).
+   * Voce già attiva: scroll sezione (home) o in cima (stessa route interna).
+   * Click con modificatori: non interferisce (nuova scheda ecc.).
+   */
+  onNavLinkClick(event: MouseEvent, sectionIdOnHome: string | null, navKey: NavRouteKey): void {
+    if (!isPlatformBrowser(this.platformId) || !this.isPlainLeftClick(event)) {
+      return;
+    }
+
+    const path = this.router.url.split('?')[0].split('#')[0];
+    const onHome = path === '/' || path === '';
+
+    const scheduleClose = (): void => queueMicrotask(() => this.closeMainNavIfOpen());
+
+    if (navKey === 'home' && onHome && sectionIdOnHome) {
+      event.preventDefault();
+      this.scrollToSectionById(sectionIdOnHome);
+      scheduleClose();
+      return;
+    }
+
+    if (this.isNavActive(navKey)) {
+      if (onHome && sectionIdOnHome) {
+        event.preventDefault();
+        this.scrollToSectionById(sectionIdOnHome);
+        scheduleClose();
+        return;
+      }
+      const prefix = this.routePrefixForNavKey(navKey);
+      if (prefix && path.startsWith(prefix)) {
+        event.preventDefault();
+        this.document.defaultView?.scrollTo({ top: 0, behavior: 'smooth' });
+        scheduleClose();
+        return;
+      }
+    }
+
+    scheduleClose();
+  }
+
+  private isPlainLeftClick(event: MouseEvent): boolean {
+    return event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey;
+  }
+
+  private routePrefixForNavKey(key: NavRouteKey): string | null {
+    switch (key) {
+      case 'home':
+        return null;
+      case 'camere':
+        return '/camere';
+      case 'chi-siamo':
+        return '/chi-siamo';
+      case 'galleria':
+        return '/galleria';
+      case 'contatti':
+        return '/contatti';
+      case 'blog':
+        return '/blog';
+      case 'prenota':
+        return '/prenota';
+      default:
+        return null;
+    }
+  }
+
+  private scrollToSectionById(id: string): void {
+    const win = this.document.defaultView;
+    if (!win) {
+      return;
+    }
+    const el = this.document.getElementById(id);
+    if (!el) {
+      return;
+    }
+    const y = el.getBoundingClientRect().top + win.scrollY - HOME_SPY_OFFSET_PX;
+    win.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+
   private scheduleHomeScrollSpy(): void {
     if (!isPlatformBrowser(this.platformId) || !this.isHomeRoute) {
       return;
