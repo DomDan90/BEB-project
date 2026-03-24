@@ -134,7 +134,9 @@ $nav-link-hover: $accent;
 $nav-link-active: $accent;
 
 // Hero / banner
-$hero-overlay: rgba(0, 0, 0, 0.62);
+// Opacità overlay hero: più bassa = immagine più luminosa (testo resta su bianco/oro).
+$hero-overlay: rgba(0, 0, 0, 0.5);
+$hero-overlay-gradient-end-opacity: 0.58;
 $hero-subtitle-color: $accent;
 $hero-heading-color: $neutral-100;
 $hero-max-content-width: 42rem;
