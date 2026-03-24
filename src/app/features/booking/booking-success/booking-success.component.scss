@@ -1,6 +1,15 @@
 @use 'variables' as v;
+@use 'mixins' as m;
 
 .accent-line.mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+@include m.respond-below(md) {
+  .btn-primary-bnb {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
 }

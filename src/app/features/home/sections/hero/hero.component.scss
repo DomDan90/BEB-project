@@ -16,8 +16,6 @@
   height: v.$hero-banner-height-desktop;
   min-height: v.$hero-banner-min-height-desktop;
   padding: v.$space-10 v.$container-padding-x;
-  margin-inline: 0;
-  border-radius: 0;
   overflow: hidden;
   background-color: v.$section-dark-bg;
   background-image:
@@ -26,7 +24,6 @@
   background-repeat: no-repeat, no-repeat;
   background-position: center, center;
   background-size: cover, cover;
-  background-attachment: scroll, scroll;
 
   @include m.respond-below(md) {
     height: auto;
@@ -110,7 +107,6 @@
   left: 50%;
   transform: translateX(-50%);
   width: min(90%, 1100px);
-  max-width: 1100px;
   z-index: 10;
 
   @include m.respond-below(md) {
@@ -120,7 +116,6 @@
     transform: none;
     width: 100%;
     max-width: none;
-    margin-top: v.$hero-booking-bottom-offset-mobile;
   }
 }
 

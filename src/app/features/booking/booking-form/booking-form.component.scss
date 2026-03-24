@@ -1,6 +1,15 @@
 @use 'variables' as v;
+@use 'mixins' as m;
 
 .opacity-50 {
   opacity: 0.5;
   pointer-events: none;
+}
+
+@include m.respond-below(md) {
+  .btn-primary-bnb {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
 }

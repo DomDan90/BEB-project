@@ -1,6 +1,15 @@
 @use 'variables' as v;
+@use 'mixins' as m;
 
 .room-card {
   border-radius: v.$border-radius-md;
   overflow: hidden;
+}
+
+@include m.respond-below(md) {
+  .room-card .btn-primary-bnb {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
 }
