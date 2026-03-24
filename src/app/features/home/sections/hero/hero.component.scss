@@ -125,13 +125,16 @@
 }
 
 .hero-booking {
-  border-radius: 0;
-  background-color: v.$booking-bar-bg;
-  box-shadow: v.$shadow-booking;
-  padding: v.$space-4 v.$space-3;
+  border: 1px solid rgba(v.$neutral-100, 0.14);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(8, 16, 34, 0.62), rgba(18, 27, 47, 0.48));
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: v.$space-3;
 
   @include m.respond-to(md) {
-    padding: v.$space-5 v.$space-4;
+    padding: 1.25rem 1.5rem;
   }
 }
 
@@ -143,21 +146,31 @@
 }
 
 .hero-booking__form {
+  > .row {
+    align-items: flex-start !important;
+  }
+
   .form-label {
-    font-size: v.$font-size-sm;
-    font-weight: v.$font-weight-medium;
-    color: v.$booking-label-color;
+    margin-bottom: 0.35rem;
+    font-size: 0.72rem;
+    font-weight: v.$font-weight-semibold;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(v.$accent, 0.95);
   }
 
   .form-control,
   .form-select {
+    height: 46px;
+    border-radius: 8px;
     background-color: v.$booking-field-bg;
     color: v.$booking-field-color;
-    border-color: v.$booking-field-border;
+    border: 1px solid rgba(v.$neutral-100, 0.18);
     font-size: v.$font-size-sm;
+    box-shadow: none;
 
     &::placeholder {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(v.$neutral-100, 0.78);
     }
 
     &:focus {
@@ -170,14 +183,22 @@
 
   .input-group-text {
     background-color: v.$booking-field-bg;
-    border-color: v.$booking-field-border;
+    border-color: rgba(v.$neutral-100, 0.18);
     color: v.$accent;
+    border-radius: 8px;
+  }
+
+  .text-muted {
+    color: rgba(v.$neutral-100, 0.92) !important;
   }
 }
 
 .btn-hero-submit {
   @include m.btn-accent();
+  min-height: 46px;
+  border-radius: 8px;
+  padding-inline: 1.5rem;
   text-transform: uppercase;
-  letter-spacing: v.$hero-cta-letter-spacing;
+  letter-spacing: 0.02em;
   font-weight: v.$font-weight-bold;
 }

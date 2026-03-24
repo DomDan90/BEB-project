@@ -77,8 +77,8 @@
 
 .nav-link {
   font-family: v.$font-body;
-  font-size: v.$font-size-sm;
-  font-weight: v.$font-weight-medium;
+  font-size: v.$font-size-md;
+  font-weight: v.$font-weight-semibold;
   color: v.$nav-link-color;
   transition: color v.$transition-fast;
   padding-inline: v.$space-2;
@@ -98,6 +98,7 @@
   background: transparent;
   text-align: left;
   width: 100%;
+  color: v.$nav-link-color;
 
   @include m.respond-to(lg) {
     width: auto;
