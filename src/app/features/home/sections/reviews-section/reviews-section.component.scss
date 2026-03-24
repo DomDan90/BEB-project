@@ -32,9 +32,9 @@
   padding-bottom: v.$space-2;
 
   @include m.respond-to(md) {
-    // Spazio tra frecce e card: padding laterale + offset nav verso l’esterno (offset basso = frecce più lontane dal centro)
-    max-width: min(100%, calc(42rem + #{v.$space-4} * 2));
-    padding-inline: v.$space-4;
+    // Area slider un po’ più larga + padding: più respiro tra card centrata e frecce
+    max-width: min(100%, calc(44rem + #{v.$space-6} * 2));
+    padding-inline: v.$space-6;
     box-sizing: border-box;
   }
 }
@@ -55,8 +55,8 @@
   }
 
   @include m.respond-to(md) {
-    // Default Swiper 4px: frecce più vicine al bordo dello swiper che alla card centrata
-    --swiper-navigation-sides-offset: 4px;
+    // Frecce al bordo dello swiper: massima distanza dalla card rispetto a offset più alti
+    --swiper-navigation-sides-offset: 0px;
   }
 }
 
