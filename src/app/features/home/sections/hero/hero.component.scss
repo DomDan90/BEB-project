@@ -121,6 +121,7 @@ $hero-booking-card-max: 1355px;
     transform: none;
     width: 100%;
     max-width: none;
+    margin-top: v.$space-6;
   }
 }
 
@@ -135,6 +136,11 @@ $hero-booking-card-max: 1355px;
 
   @include m.respond-to(md) {
     padding: 1.25rem 1.5rem;
+  }
+
+  // Su sfondo chiaro: stesso look del desktop (gradiente un filo più coprente)
+  @include m.respond-below(md) {
+    background: linear-gradient(135deg, rgba(8, 16, 34, 0.88), rgba(18, 27, 47, 0.82));
   }
 }
 
@@ -310,15 +316,33 @@ $hero-booking-card-max: 1355px;
   }
 
   @include m.respond-below(md) {
-    .row.g-4,
-    .row.g-3 {
+    // Solo la riga titolo + campi: niente gutter orizzontale; i campi mantengono g-3 (spazio tra colonne)
+    > .row.g-4 {
       --bs-gutter-x: 0;
+    }
+
+    .hero-booking__fields {
+      --bs-gutter-x: #{v.$space-4};
     }
 
     .form-control,
     .input-group-text,
     .hero-booking__dropdown-toggle {
       height: 44px;
+    }
+
+    // Adulti/bambini: controllo a tutta colonna + tendina = larghezza input (no pill stretti)
+    .hero-booking__field--guest-count .hero-booking__dropdown {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .hero-booking__field--guest-count .hero-booking__dropdown-toggle {
+      width: 100%;
+      min-width: 0;
+      justify-content: space-between;
+      padding-inline: 0.75rem 2rem;
     }
   }
 }

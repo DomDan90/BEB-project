@@ -25,6 +25,7 @@
   align-items: center;
   min-height: v.$navbar-min-height;
   padding-block: v.$space-2;
+  position: relative;
 
   @include m.respond-below(md) {
     padding-block: v.$space-1;
@@ -93,6 +94,31 @@
     min-height: v.$touch-target-min;
     min-width: v.$touch-target-min;
   }
+
+  // Mobile: niente box dietro l’icona; icone leggibili su chiaro e su hero scuro
+  @include m.respond-below(lg) {
+    background: transparent;
+    border: none;
+    padding: v.$space-1;
+    box-shadow: none;
+
+    .bi-list {
+      font-size: 1.65rem;
+      color: v.$primary-dark;
+      filter:
+        drop-shadow(0 0 1px rgba(v.$neutral-100, 0.95))
+        drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+    }
+  }
+}
+
+.header-bnb.is-home-top .navbar-toggler-bnb .bi-list {
+  @include m.respond-below(lg) {
+    color: v.$neutral-100;
+    filter:
+      drop-shadow(0 0 2px rgba(0, 0, 0, 0.85))
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
+  }
 }
 
 .nav-link {
@@ -138,16 +164,19 @@
 #mainNav {
   @include m.respond-below(lg) {
     position: absolute;
-    top: calc(100% - 1px);
-    left: v.$space-2;
-    right: v.$space-2;
-    z-index: 1;
-    margin-top: v.$space-2;
-    padding: v.$space-2;
-    border-radius: v.$border-radius-md;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    /* Sopra al contenuto della pagina (es. hero/booking) così i tap non “passano” sotto dopo lo scroll */
+    z-index: 1020;
+    margin-top: 0;
+    padding: v.$space-2 v.$space-3;
+    border-radius: 0;
+    border-top: 1px solid v.$border-subtle;
     background: rgba(v.$neutral-100, 0.98);
     box-shadow: v.$shadow-sm;
-    max-height: calc(100vh - v.$navbar-min-height - v.$space-4);
+    max-height: calc(100vh - v.$navbar-min-height);
     overflow: auto;
 
     .navbar-nav {

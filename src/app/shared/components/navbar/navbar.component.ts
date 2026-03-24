@@ -1,7 +1,11 @@
-import { isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Component, HostListener, inject, PLATFORM_ID } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs';
+
+type BootstrapCollapse = {
+  getOrCreateInstance(element: Element, options?: object): { hide(): void };
+};
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +17,7 @@ import { filter } from 'rxjs';
 export class NavbarComponent {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly router = inject(Router);
+  private readonly document = inject(DOCUMENT);
 
   readonly brandLogoSrc = 'https://picsum.photos/seed/bnb-logo/200/56';
   readonly brandLogoAlt = 'Logo B&B — torna alla homepage';
@@ -28,7 +33,31 @@ export class NavbarComponent {
       .subscribe(() => {
         this.updateRouteState();
         this.updateScrolledState();
+        // Chiudi il menu solo dopo la navigazione (evita race con routerLink su mobile)
+        queueMicrotask(() => this.closeMainNavIfOpen());
       });
+  }
+
+  private closeMainNavIfOpen(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    const el = this.document.getElementById('mainNav');
+    if (!el?.classList.contains('show')) {
+      return;
+    }
+    const win = this.document.defaultView as
+      | (Window & { bootstrap?: { Collapse: BootstrapCollapse } })
+      | null;
+    const Collapse = win?.bootstrap?.Collapse;
+    if (Collapse) {
+      Collapse.getOrCreateInstance(el).hide();
+    } else {
+      el.classList.remove('show');
+    }
+    this.document
+      .querySelector<HTMLButtonElement>('[data-bs-target="#mainNav"]')
+      ?.setAttribute('aria-expanded', 'false');
   }
 
   @HostListener('window:scroll')
