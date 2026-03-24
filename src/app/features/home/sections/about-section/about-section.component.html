@@ -2,18 +2,20 @@
   <div class="container-bnb">
     <div class="about-section__grid">
       <div class="about-section__text" data-aos="fade-left" data-aos-duration="750">
-        <h2 id="about-section-heading" class="about-section__title section-title">La nostra storia</h2>
+        <h2 id="about-section-heading" class="about-section__title section-title">
+          {{ 'home.about.title' | translate }}
+        </h2>
         <span class="accent-line about-section__accent" aria-hidden="true"></span>
-        <p class="about-section__lead">{{ lead }}</p>
+        <p class="about-section__lead">{{ 'home.about.lead' | translate }}</p>
         <ul class="about-section__list list-unstyled">
-          @for (item of strengths; track item.text) {
+          @for (item of strengths; track item.textKey) {
             <li class="about-section__list-item">
               <i class="bi {{ item.icon }}" aria-hidden="true"></i>
-              <span>{{ item.text }}</span>
+              <span>{{ item.textKey | translate }}</span>
             </li>
           }
         </ul>
-        <a routerLink="/chi-siamo" class="about-section__cta">Scopri di più</a>
+        <a routerLink="/chi-siamo" class="about-section__cta">{{ 'home.about.cta' | translate }}</a>
       </div>
 
       <div class="about-section__media" data-aos="fade-right" data-aos-duration="750">
@@ -21,7 +23,7 @@
           <div class="about-section__frame">
             <img
               [src]="imageUrl"
-              [alt]="imageAlt()"
+              [attr.alt]="'home.about.imageAlt' | translate"
               width="800"
               height="600"
               loading="lazy"

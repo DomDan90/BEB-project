@@ -1,48 +1,50 @@
 import { isPlatformBrowser } from '@angular/common';
 import { afterNextRender, Component, inject, PLATFORM_ID, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 export interface ServiceItem {
   icon: string;
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
 }
 
 const MOCK_SERVICES: ReadonlyArray<ServiceItem> = [
   {
     icon: 'bi-cup-hot',
-    title: 'Colazione inclusa',
-    description: 'Ogni mattina buffet dolce e salato con prodotti locali, torte fatte in casa e bevande calde.',
+    titleKey: 'home.services.breakfastTitle',
+    descriptionKey: 'home.services.breakfastDesc',
   },
   {
     icon: 'bi-wifi',
-    title: 'Wi‑Fi gratuito',
-    description: 'Connessione veloce in tutta la struttura per lavorare o condividere il soggiorno in relax.',
+    titleKey: 'home.services.wifiTitle',
+    descriptionKey: 'home.services.wifiDesc',
   },
   {
     icon: 'bi-p-square',
-    title: 'Parcheggio',
-    description: 'Posti auto riservati o convenzione nelle vicinanze, con indicazioni chiare al check-in.',
+    titleKey: 'home.services.parkingTitle',
+    descriptionKey: 'home.services.parkingDesc',
   },
   {
     icon: 'bi-snow',
-    title: 'Aria condizionata',
-    description: 'Climatizzazione autonoma in camera per il massimo comfort in ogni stagione.',
+    titleKey: 'home.services.acTitle',
+    descriptionKey: 'home.services.acDesc',
   },
   {
     icon: 'bi-brush',
-    title: 'Pulizie giornaliere',
-    description: 'Servizio di housekeeping quotidiano con biancheria fresca e prodotti di cortesia.',
+    titleKey: 'home.services.cleaningTitle',
+    descriptionKey: 'home.services.cleaningDesc',
   },
   {
     icon: 'bi-bus-front',
-    title: 'Navetta aeroporto',
-    description: 'Transfer su prenotazione da e per aeroporto e stazione — chiedi disponibilità in reception.',
+    titleKey: 'home.services.shuttleTitle',
+    descriptionKey: 'home.services.shuttleDesc',
   },
 ];
 
 @Component({
   selector: 'app-services-section',
   standalone: true,
+  imports: [TranslatePipe],
   templateUrl: './services-section.component.html',
   styleUrl: './services-section.component.scss',
 })

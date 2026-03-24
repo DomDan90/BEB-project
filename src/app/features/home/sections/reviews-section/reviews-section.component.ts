@@ -8,6 +8,7 @@ import {
   PLATFORM_ID,
   viewChild,
 } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { ISCHIA_REVIEW_AVATARS } from '../../../../core/media/ischia-media';
 
@@ -15,52 +16,23 @@ export interface ReviewItem {
   id: number;
   name: string;
   city: string;
-  text: string;
+  textKey: string;
   rating: number;
 }
 
 const MOCK_REVIEWS: ReadonlyArray<ReviewItem> = [
-  {
-    id: 1,
-    name: 'Elena Marini',
-    city: 'Napoli',
-    rating: 5,
-    text: 'Soggiorno perfetto a Ischia Porto: camera silenziosa, colazione con limoncello fatto in casa e consigli utili per le spiagge. Torneremo in primavera.',
-  },
-  {
-    id: 2,
-    name: 'Marco Vitale',
-    city: 'Salerno',
-    rating: 5,
-    text: 'Camera deluxe pulitissima, balconcino con vista sui tetti verdi. Dopo le terme di Ischia riposare lì è stato il massimo.',
-  },
-  {
-    id: 3,
-    name: 'Sofia Conti',
-    city: 'Roma',
-    rating: 4,
-    text: 'Posizione comoda per il traghetto e per passeggiare verso il porto. Atmosfera accogliente; unico neo: avremmo voluto restare una notte in più!',
-  },
-  {
-    id: 4,
-    name: 'Andrea Gallo',
-    city: 'Milano',
-    rating: 5,
-    text: 'Ottimo punto per esplorare l’isola: Castello Aragonese, Sant’Angelo e spiagge raggiungibili in bus. Letto comodissimo.',
-  },
-  {
-    id: 5,
-    name: 'Giulia Ferretti',
-    city: 'Torino',
-    rating: 5,
-    text: 'Ideale per una coppia: cena in un ristorante di pesce consigliato dalla struttura e rientro a piedi. Staff gentile e discreto.',
-  },
+  { id: 1, name: 'Elena Marini', city: 'Napoli', rating: 5, textKey: 'home.reviews.r1' },
+  { id: 2, name: 'Marco Vitale', city: 'Salerno', rating: 5, textKey: 'home.reviews.r2' },
+  { id: 3, name: 'Sofia Conti', city: 'Roma', rating: 4, textKey: 'home.reviews.r3' },
+  { id: 4, name: 'Andrea Gallo', city: 'Milano', rating: 5, textKey: 'home.reviews.r4' },
+  { id: 5, name: 'Giulia Ferretti', city: 'Torino', rating: 5, textKey: 'home.reviews.r5' },
 ];
 
 @Component({
   selector: 'app-reviews-section',
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [TranslatePipe],
   templateUrl: './reviews-section.component.html',
   styleUrl: './reviews-section.component.scss',
 })

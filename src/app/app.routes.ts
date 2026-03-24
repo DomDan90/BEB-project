@@ -66,13 +66,13 @@ export const routes: Routes = [
     path: 'privacy-policy',
     loadComponent: () =>
       import('./features/legal/legal-page.component').then((m) => m.LegalPageComponent),
-    data: { title: 'Privacy Policy' },
+    data: { titleKey: 'legal.privacyTitle' },
   },
   {
     path: 'cookie-policy',
     loadComponent: () =>
       import('./features/legal/legal-page.component').then((m) => m.LegalPageComponent),
-    data: { title: 'Cookie Policy' },
+    data: { titleKey: 'legal.cookieTitle' },
   },
   { path: '**', redirectTo: '' },
 ];

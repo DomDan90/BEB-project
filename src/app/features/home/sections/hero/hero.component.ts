@@ -9,6 +9,7 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -44,7 +45,7 @@ function createBookingDateRangeValidator(booking: BookingService): ValidatorFn {
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [ReactiveFormsModule, NgbDatepickerModule, NgbDropdownModule],
+  imports: [ReactiveFormsModule, NgbDatepickerModule, NgbDropdownModule, TranslatePipe],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })
@@ -56,6 +57,7 @@ export class HeroComponent implements OnInit {
   private readonly store = inject(BookingStore);
   private readonly router = inject(Router);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly translate = inject(TranslateService);
 
   readonly parallaxEnabled = signal(false);
   readonly guestCapacityError = signal<string | null>(null);
@@ -101,14 +103,18 @@ export class HeroComponent implements OnInit {
       this.parallaxEnabled.set(true);
       void import('aos').then((mod) => mod.default.refresh());
     });
+
+    this.translate.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.updateSeo());
   }
 
   ngOnInit(): void {
-    this.seo.updateMeta(
-      'B&B Ischia — Benvenuto',
-      'Prenota il tuo soggiorno a Ischia: B&B vicino al mare, colazione inclusa, terme e spiagge a portata di mano.',
-      ISCHIA_HERO_OG,
-    );
+    this.updateSeo();
+  }
+
+  private updateSeo(): void {
+    this.translate.get(['seo.homeTitle', 'seo.homeDesc']).subscribe((t) => {
+      this.seo.updateMeta(t['seo.homeTitle'], t['seo.homeDesc'], ISCHIA_HERO_OG);
+    });
   }
 
   showDateRangeError(): boolean {
@@ -128,10 +134,10 @@ export class HeroComponent implements OnInit {
   roomLabel(): string {
     const id = this.form.get('roomId')?.value as string;
     if (!id) {
-      return 'Seleziona…';
+      return this.translate.instant('common.select');
     }
     const room = this.rooms.find((r) => r.id === Number(id));
-    return room?.name ?? 'Seleziona…';
+    return room ? this.translate.instant(room.name) : this.translate.instant('common.select');
   }
 
   selectRoom(roomId: number): void {
@@ -155,7 +161,10 @@ export class HeroComponent implements OnInit {
     const guests = Number(v.adults) + Number(v.children);
     if (room && guests > room.maxGuests) {
       this.guestCapacityError.set(
-        `Per ${room.name} il numero massimo di ospiti è ${room.maxGuests}.`,
+        this.translate.instant('hero.errCapacity', {
+          room: this.translate.instant(room.name),
+          max: room.maxGuests,
+        }),
       );
       return;
     }

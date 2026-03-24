@@ -2,21 +2,22 @@ import { isPlatformBrowser } from '@angular/common';
 import {
   afterNextRender,
   Component,
+  DestroyRef,
   ElementRef,
   inject,
   OnDestroy,
   PLATFORM_ID,
   viewChild,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import type { Map as LeafletMap } from 'leaflet';
+import type { Marker } from 'leaflet';
 
 /** Ischia Porto (centro, zona porto/traghetti). */
 const MOCK_LAT = 40.7389;
 const MOCK_LNG = 13.951;
 
-const MOCK_ADDRESS_LINE = 'Via Roma 42, 80077 Ischia (NA)';
-const MOCK_CHECK_IN = 'Check-in: 15:00 – 20:00 (su accordi anche fuori fascia)';
-const MOCK_CHECK_OUT = 'Check-out: entro le 11:00';
 const MOCK_PHONE_DISPLAY = '+39 081 333 0142';
 const MOCK_PHONE_TEL = '+390813330142';
 const MOCK_EMAIL = 'info@beb-ischia-esempio.it';
@@ -24,21 +25,22 @@ const MOCK_EMAIL = 'info@beb-ischia-esempio.it';
 @Component({
   selector: 'app-location-section',
   standalone: true,
+  imports: [TranslatePipe],
   templateUrl: './location-section.component.html',
   styleUrl: './location-section.component.scss',
 })
 export class LocationSectionComponent implements OnDestroy {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly mapHost = viewChild<ElementRef<HTMLElement>>('mapHost');
+  private readonly translate = inject(TranslateService);
+  private readonly destroyRef = inject(DestroyRef);
 
   private map: LeafletMap | null = null;
+  private mapMarker: Marker | null = null;
   private mapResizeObserver: ResizeObserver | null = null;
 
   readonly lat = MOCK_LAT;
   readonly lng = MOCK_LNG;
-  readonly addressLine = MOCK_ADDRESS_LINE;
-  readonly checkInLine = MOCK_CHECK_IN;
-  readonly checkOutLine = MOCK_CHECK_OUT;
   readonly phoneDisplay = MOCK_PHONE_DISPLAY;
   readonly phoneTel = MOCK_PHONE_TEL;
   readonly email = MOCK_EMAIL;
@@ -47,6 +49,11 @@ export class LocationSectionComponent implements OnDestroy {
   readonly googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${MOCK_LAT},${MOCK_LNG}`;
 
   constructor() {
+    this.translate.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      const txt = this.translate.instant('home.location.mapPopup');
+      this.mapMarker?.setPopupContent(txt);
+    });
+
     afterNextRender(() => {
       if (!isPlatformBrowser(this.platformId)) {
         return;
@@ -58,6 +65,7 @@ export class LocationSectionComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.mapResizeObserver?.disconnect();
     this.mapResizeObserver = null;
+    this.mapMarker = null;
     this.map?.remove();
     this.map = null;
   }
@@ -88,9 +96,10 @@ export class LocationSectionComponent implements OnDestroy {
       maxZoom: 19,
     }).addTo(this.map);
 
-    L.marker([MOCK_LAT, MOCK_LNG], { icon: customIcon })
+    const popupText = this.translate.instant('home.location.mapPopup');
+    this.mapMarker = L.marker([MOCK_LAT, MOCK_LNG], { icon: customIcon })
       .addTo(this.map)
-      .bindPopup('Il nostro B&B a Ischia');
+      .bindPopup(popupText);
 
     if (typeof ResizeObserver !== 'undefined') {
       this.mapResizeObserver = new ResizeObserver(() => {

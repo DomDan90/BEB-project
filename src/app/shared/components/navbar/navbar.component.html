@@ -1,8 +1,8 @@
 <header class="header-bnb" [class.is-home-top]="isHomeTop">
-  <nav class="navbar navbar-expand-lg navbar-bnb" aria-label="Navigazione principale">
+  <nav class="navbar navbar-expand-lg navbar-bnb" [attr.aria-label]="'nav.ariaMain' | translate">
     <div class="container-fluid container-bnb">
       <a class="navbar-brand logo-bnb d-flex align-items-center gap-2" routerLink="/">
-        <app-brand-logo class="logo-img" [ariaLabel]="brandLogoAlt" />
+        <app-brand-logo class="logo-img" [ariaLabel]="'brand.logoAltNavbar' | translate" />
       </a>
 
       <button
@@ -12,14 +12,13 @@
         data-bs-target="#mainNav"
         aria-controls="mainNav"
         aria-expanded="false"
-        aria-label="Apri o chiudi menu di navigazione"
+        [attr.aria-label]="'nav.toggleMenu' | translate"
       >
         <i class="bi bi-list" aria-hidden="true"></i>
       </button>
 
       <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
-          <!-- Ordine come le sezioni della home (scroll); poi Blog e Prenota. -->
           <li class="nav-item">
             <a
               class="nav-link"
@@ -27,7 +26,7 @@
               (click)="onNavLinkClick($event, 'home-hero', 'home')"
               [class.active]="isNavActive('home')"
               [attr.aria-current]="isNavActive('home') ? 'page' : null"
-              >Home</a
+              >{{ 'nav.home' | translate }}</a
             >
           </li>
           <li class="nav-item">
@@ -37,7 +36,7 @@
               (click)="onNavLinkClick($event, 'home-camere', 'camere')"
               [class.active]="isNavActive('camere')"
               [attr.aria-current]="isNavActive('camere') ? 'page' : null"
-              >Camere</a
+              >{{ 'nav.rooms' | translate }}</a
             >
           </li>
           <li class="nav-item">
@@ -47,7 +46,7 @@
               (click)="onNavLinkClick($event, 'home-chi-siamo', 'chi-siamo')"
               [class.active]="isNavActive('chi-siamo')"
               [attr.aria-current]="isNavActive('chi-siamo') ? 'page' : null"
-              >Chi siamo</a
+              >{{ 'nav.about' | translate }}</a
             >
           </li>
           <li class="nav-item">
@@ -57,7 +56,7 @@
               (click)="onNavLinkClick($event, 'home-galleria', 'galleria')"
               [class.active]="isNavActive('galleria')"
               [attr.aria-current]="isNavActive('galleria') ? 'page' : null"
-              >Galleria</a
+              >{{ 'nav.gallery' | translate }}</a
             >
           </li>
           <li class="nav-item">
@@ -67,7 +66,7 @@
               (click)="onNavLinkClick($event, 'home-dove-siamo', 'contatti')"
               [class.active]="isNavActive('contatti')"
               [attr.aria-current]="isNavActive('contatti') ? 'page' : null"
-              >Contatti</a
+              >{{ 'nav.contacts' | translate }}</a
             >
           </li>
 
@@ -81,7 +80,7 @@
               aria-haspopup="true"
               id="navBlogDropdown"
             >
-              Blog
+              {{ 'nav.blog' | translate }}
             </button>
             <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="navBlogDropdown">
               <li>
@@ -91,7 +90,7 @@
                   (click)="onNavLinkClick($event, null, 'blog')"
                   [class.active]="isNavActive('blog')"
                   [attr.aria-current]="isNavActive('blog') ? 'page' : null"
-                  >Tutti gli articoli</a
+                  >{{ 'nav.blogAll' | translate }}</a
                 >
               </li>
               <li>
@@ -100,11 +99,41 @@
                   routerLink="/blog"
                   (click)="onNavLinkClick($event, null, 'blog')"
                   [class.active]="isNavActive('blog')"
-                  >Approfondimenti</a
+                  >{{ 'nav.blogInsights' | translate }}</a
                 >
               </li>
             </ul>
           </li>
+
+          <li class="nav-item dropdown ms-lg-2">
+            <button
+              type="button"
+              class="nav-link dropdown-toggle dropdown-toggle-bnb lang-switcher__toggle d-inline-flex align-items-center gap-1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              id="navLangDropdown"
+              [attr.aria-label]="'lang.menu' | translate"
+            >
+              <i class="bi bi-translate" aria-hidden="true"></i>
+              <span class="lang-switcher__code">{{ language.currentLang() | uppercase }}</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm lang-switcher__menu" aria-labelledby="navLangDropdown">
+              @for (opt of langMenu; track opt.code) {
+                <li>
+                  <button
+                    type="button"
+                    class="dropdown-item lang-switcher__item d-flex align-items-center gap-2 w-100 text-start border-0 bg-transparent"
+                    [class.active]="language.currentLang() === opt.code"
+                    (click)="language.setLanguage(opt.code)"
+                  >
+                    <span class="lang-switcher__flag" aria-hidden="true">{{ opt.flag }}</span>
+                    <span>{{ opt.labelKey | translate }}</span>
+                  </button>
+                </li>
+              }
+            </ul>
+          </li>
+
           <li class="nav-item ms-lg-2">
             <a
               class="btn btn-prenota"
@@ -112,7 +141,7 @@
               (click)="onNavLinkClick($event, null, 'prenota')"
               [class.active]="isNavActive('prenota')"
               [attr.aria-current]="isNavActive('prenota') ? 'page' : null"
-              >Prenota</a
+              >{{ 'nav.book' | translate }}</a
             >
           </li>
         </ul>

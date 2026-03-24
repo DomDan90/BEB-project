@@ -1,18 +1,18 @@
-import { Component, computed, effect, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, computed, DestroyRef, effect, inject } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { SeoService } from '../../../core/services/seo.service';
 import { getRoomBySlug } from '../../../mock/rooms.mock';
 import { CurrencyEurPipe } from '../../../shared/pipes/currency-eur.pipe';
 import { LazyImageDirective } from '../../../shared/directives/lazy-image.directive';
 import { BreadcrumbComponent, BreadcrumbItem } from '../../../shared/components/breadcrumb/breadcrumb.component';
 import { BookingStore } from '../../../store/booking.store';
-
 @Component({
   selector: 'app-room-detail',
   standalone: true,
-  imports: [RouterLink, CurrencyEurPipe, LazyImageDirective, BreadcrumbComponent],
+  imports: [RouterLink, CurrencyEurPipe, LazyImageDirective, BreadcrumbComponent, TranslatePipe],
   templateUrl: './room-detail.component.html',
   styleUrl: './room-detail.component.scss',
 })
@@ -20,6 +20,8 @@ export class RoomDetailComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly seo = inject(SeoService);
   private readonly bookingStore = inject(BookingStore);
+  private readonly translate = inject(TranslateService);
+  private readonly destroyRef = inject(DestroyRef);
 
   private readonly slug = toSignal(this.route.paramMap.pipe(map((p) => p.get('slug') ?? '')), {
     initialValue: '',
@@ -33,19 +35,28 @@ export class RoomDetailComponent {
   readonly crumbs = computed<BreadcrumbItem[]>(() => {
     const r = this.room();
     return [
-      { label: 'Home', link: '/' },
-      { label: 'Camere', link: '/camere' },
+      { label: 'nav.home', link: '/' },
+      { label: 'nav.rooms', link: '/camere' },
       ...(r ? [{ label: r.name }] : []),
     ];
   });
 
   constructor() {
     effect(() => {
-      const r = this.room();
-      if (r) {
-        this.seo.updateMeta(`${r.name} | B&B`, r.shortDescription, r.thumbnail);
-      }
+      this.room();
+      this.updateRoomSeo();
     });
+
+    this.translate.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.updateRoomSeo());
+  }
+
+  private updateRoomSeo(): void {
+    const r = this.room();
+    if (!r) {
+      return;
+    }
+    const title = this.translate.instant('seo.roomTitle', { name: this.translate.instant(r.name) });
+    this.seo.updateMeta(title, this.translate.instant(r.shortDescription), r.thumbnail);
   }
 
   selectForBooking(): void {

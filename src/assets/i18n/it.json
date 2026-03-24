@@ -1,0 +1,288 @@
+{
+  "common": {
+    "loading": "Caricamento in corso",
+    "select": "Seleziona…",
+    "continue": "Continua",
+    "adults": "Adulti",
+    "children": "Bambini",
+    "nights": "notti",
+    "night": "notte",
+    "guests": "Ospiti",
+    "room": "Camera",
+    "modify": "Modifica",
+    "submitRequest": "Invia richiesta",
+    "submitting": "Invio…",
+    "total": "Totale",
+    "estimated": "Totale stimato",
+    "backHome": "Torna alla home",
+    "backToForm": "Torna al modulo",
+    "discoverMore": "Scopri di più",
+    "book": "Prenota",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "openCalendarCheckIn": "Apri calendario check-in",
+    "openCalendarCheckOut": "Apri calendario check-out",
+    "perNight": "/ notte",
+    "dateError": "Controlla le date (check-out dopo check-in, minimo {{min}} notti).",
+    "referenceCode": "Codice di riferimento",
+    "status": "Stato",
+    "fromTo": "Dal {{from}} al {{to}}",
+    "noneSelected": "Nessuna camera selezionata.",
+    "legalNote": "Note legali"
+  },
+  "nav": {
+    "ariaMain": "Navigazione principale",
+    "toggleMenu": "Apri o chiudi menu di navigazione",
+    "home": "Home",
+    "rooms": "Camere",
+    "about": "Chi siamo",
+    "gallery": "Galleria",
+    "contacts": "Contatti",
+    "blog": "Blog",
+    "blogAll": "Tutti gli articoli",
+    "blogInsights": "Approfondimenti",
+    "book": "Prenota",
+    "breadcrumb": "Percorso di navigazione"
+  },
+  "lang": {
+    "menu": "Lingua del sito",
+    "native": {
+      "it": "Italiano",
+      "de": "Deutsch",
+      "en": "English",
+      "fr": "Français",
+      "es": "Español"
+    }
+  },
+  "brand": {
+    "logoAltNavbar": "B&B Ischia — torna alla homepage",
+    "logoAltFooter": "B&B Ischia"
+  },
+  "hero": {
+    "kicker": "Ischia, isola verde",
+    "title": "Mare, terme e dolce vita",
+    "lead": "Il tuo B&B a Ischia Porto: camere curate, colazione con sapori locali e prenotazione diretta, a due passi dal mare e dai traghetti per il Golfo di Napoli.",
+    "bookingLine1": "Prenota",
+    "bookingLine2": "la tua camera",
+    "arrival": "Arrivo",
+    "departure": "Partenza",
+    "openCalendarArrival": "Apri calendario data di arrivo",
+    "openCalendarDeparture": "Apri calendario data di partenza",
+    "errArrival": "Seleziona la data di arrivo.",
+    "errDeparture": "Seleziona la data di partenza.",
+    "errAdults": "Indica almeno 1 adulto.",
+    "errRoom": "Scegli una camera.",
+    "errDateRange": "Date non valide: check-out dopo l'arrivo, non nel passato, almeno {{min}} notti.",
+    "errCapacity": "Per {{room}} il numero massimo di ospiti è {{max}}.",
+    "ctaContinue": "Continua prenotazione"
+  },
+  "home": {
+    "about": {
+      "title": "La nostra storia",
+      "lead": "Siamo a Ischia Porto, a due passi dal mare e dai collegamenti col continente: un B&B familiare dove accoglienza, colazioni con prodotti locali e consigli su terme, spiagge e borghi fanno la differenza. Ogni soggiorno è pensato per farvi vivere l’isola con calma, tra natura e tradizione.",
+      "strength1": "Accoglienza familiare e ambiente curato, dalla primavera all’autunno.",
+      "strength2": "Ideale per esplorare Ischia: porto, spiagge, Castello Aragonese e sentieri.",
+      "strength3": "Colazione con dolci, frutta e sapori del Golfo di Napoli.",
+      "strength4": "Suggerimenti su terme, crociere in barca e giornate al sole.",
+      "cta": "Scopri di più",
+      "imageAlt": "Il B&B a Ischia: terrazza e vista sul Mediterraneo in una giornata limpida."
+    },
+    "services": {
+      "title": "I nostri servizi",
+      "intro": "Tutto ciò che serve per un soggiorno senza pensieri, con la cura del dettaglio che ci contraddistingue.",
+      "breakfastTitle": "Colazione inclusa",
+      "breakfastDesc": "Ogni mattina buffet dolce e salato con prodotti locali, torte fatte in casa e bevande calde.",
+      "wifiTitle": "Wi‑Fi gratuito",
+      "wifiDesc": "Connessione veloce in tutta la struttura per lavorare o condividere il soggiorno in relax.",
+      "parkingTitle": "Parcheggio",
+      "parkingDesc": "Posti auto riservati o convenzione nelle vicinanze, con indicazioni chiare al check-in.",
+      "acTitle": "Aria condizionata",
+      "acDesc": "Climatizzazione autonoma in camera per il massimo comfort in ogni stagione.",
+      "cleaningTitle": "Pulizie giornaliere",
+      "cleaningDesc": "Servizio di housekeeping quotidiano con biancheria fresca e prodotti di cortesia.",
+      "shuttleTitle": "Navetta aeroporto",
+      "shuttleDesc": "Transfer su prenotazione da e per aeroporto e stazione — chiedi disponibilità in reception."
+    },
+    "gallery": {
+      "title": "Galleria",
+      "intro": "Atmosfera del nostro B&B a Ischia: spazi, colazione e dettagli — clicca per aprire la lightbox.",
+      "openLightbox": "Apri in lightbox",
+      "items": {
+        "brightRoom": "Camera luminosa con letto matrimoniale e lenzuola chiare",
+        "stairs": "Dettaglio scala e arredi in stile mediterraneo",
+        "breakfastTable": "Tavola della colazione con prodotti locali e caffè",
+        "garden": "Giardino e spazi esterni della struttura",
+        "lounge": "Salone comune con divani e luce naturale",
+        "greenView": "Camera con vista sul verde e tende leggere",
+        "relaxCorner": "Angolo relax con arredi chiari",
+        "terrace": "Terrazza e zona living all’aperto",
+        "linens": "Dettaglio biancheria e fiori freschi in camera"
+      }
+    },
+    "reviews": {
+      "title": "Cosa dicono gli ospiti",
+      "intro": "Chi ha soggiornato nel nostro B&B a Ischia condivide la propria esperienza.",
+      "avatarAlt": "Foto profilo di {{name}}",
+      "ratingAria": "Valutazione {{rating}} su 5",
+      "r1": "Soggiorno perfetto a Ischia Porto: camera silenziosa, colazione con limoncello fatto in casa e consigli utili per le spiagge. Torneremo in primavera.",
+      "r2": "Camera deluxe pulitissima, balconcino con vista sui tetti verdi. Dopo le terme di Ischia riposare lì è stato il massimo.",
+      "r3": "Posizione comoda per il traghetto e per passeggiare verso il porto. Atmosfera accogliente; unico neo: avremmo voluto restare una notte in più!",
+      "r4": "Ottimo punto per esplorare l’isola: Castello Aragonese, Sant’Angelo e spiagge raggiungibili in bus. Letto comodissimo.",
+      "r5": "Ideale per una coppia: cena in un ristorante di pesce consigliato dalla struttura e rientro a piedi. Staff gentile e discreto."
+    },
+    "roomsPreview": {
+      "title": "Le nostre camere",
+      "lead": "Scegli tra le nostre soluzioni: ogni camera è pensata per il massimo comfort durante il tuo soggiorno.",
+      "imageAlt": "Foto della camera: {{caption}}"
+    },
+    "location": {
+      "title": "Dove siamo",
+      "intro": "A Ischia Porto, vicino al mare e ai collegamenti con il continente.",
+      "mapAria": "Mappa interattiva con la posizione del bed and breakfast",
+      "address": "Indirizzo",
+      "hours": "Orari",
+      "phone": "Telefono",
+      "email": "Email",
+      "openMaps": "Apri in Google Maps",
+      "mapPopup": "Il nostro B&B a Ischia",
+      "checkIn": "Check-in: 15:00 – 20:00 (su accordi anche fuori fascia)",
+      "checkOut": "Check-out: entro le 11:00",
+      "addressLine": "Via Roma 42, 80077 Ischia (NA)"
+    }
+  },
+  "rooms": {
+    "listTitle": "Camere e suite",
+    "details": "Dettagli",
+    "notFound": "Camera non trovata.",
+    "backToList": "Elenco camere",
+    "maxGuests": "max {{max}} ospiti",
+    "directBooking": "Prenotazione diretta",
+    "minStay": "Soggiorno minimo {{min}} notti.",
+    "confirmTitle": "Conferma prenotazione",
+    "successTitle": "Richiesta inviata",
+    "amenity": {
+      "wifi": "Wi‑Fi",
+      "tv": "TV",
+      "smartTv": "Smart TV",
+      "ac": "Aria condizionata",
+      "privateBath": "Bagno privato",
+      "breakfast": "Colazione inclusa",
+      "minibar": "Minifrigo",
+      "balcony": "Balcone",
+      "living": "Zona living",
+      "safe": "Cassaforte",
+      "fridge": "Frigorifero",
+      "teaCorner": "Angolo tè"
+    },
+    "standard": {
+      "name": "Camera Standard",
+      "description": "Camera accogliente nel centro di Ischia Porto, ideale dopo una giornata al mare o alle terme. Arredi chiari, bagno privato con doccia e aria condizionata per le notti d’estate.",
+      "shortDescription": "Comfort per due ospiti, bagno privato, vicino al porto."
+    },
+    "deluxe": {
+      "name": "Camera Deluxe",
+      "description": "Camera spaziosa con balconcino affacciato sui tetti e sulle colline verdi dell’isola. Letto queen size, minifrigo e set da tè: perfetta per colazioni in camera prima di una gita al Castello Aragonese.",
+      "shortDescription": "Balconcino, minifrigo e letto queen size."
+    },
+    "suite": {
+      "name": "Suite Junior",
+      "description": "Suite open space con zona giorno separata e divano letto singolo: ideale per famiglie con un bambino o per chi vuole più spazio dopo il sole di Citara o Maronti.",
+      "shortDescription": "Open space fino a 3 ospiti, zona living."
+    },
+    "family": {
+      "name": "Camera Familiare",
+      "description": "Due ambienti comunicanti con letto matrimoniale e letti singoli, pensata per chi esplora l’isola in quattro. Bagno ampio con vasca, utile dopo una giornata in barca lungo la costa.",
+      "shortDescription": "Fino a 4 ospiti, due ambienti, bagno con vasca."
+    }
+  },
+  "booking": {
+    "crumbConfirm": "Conferma",
+    "crumbSuccess": "Successo",
+    "successFrom": "Dal",
+    "successTo": "al",
+    "roomLine": "{{name}} — {{price}} €/notte"
+  },
+  "footer": {
+    "tagline": "Ospitalità a Ischia, tra mare e terme: camere curate, colazione con prodotti dell’isola e consigli per spiagge e borghi.",
+    "socialAria": "Social",
+    "quickLinks": "Link rapidi",
+    "contacts": "Contatti",
+    "copyright": "© 2026 B&B Nome — Tutti i diritti riservati",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "socialInstagram": "Instagram",
+    "socialFacebook": "Facebook",
+    "socialWhatsapp": "WhatsApp"
+  },
+  "pages": {
+    "about": {
+      "title": "Chi siamo",
+      "lead": "Contenuto della pagina in arrivo.",
+      "body": "Troverai la nostra storia, i valori del B&B e l’approccio all’ospitalità."
+    },
+    "contact": {
+      "title": "Contatti",
+      "lead": "Modulo e mappa Leaflet — prossima iterazione.",
+      "body": "Intanto puoi contattarci via telefono o email dalla sezione footer."
+    },
+    "gallery": {
+      "title": "Galleria",
+      "lead": "Integrazione ngx-lightbox e swiper nella prossima iterazione.",
+      "body": "La pagina sarà collegata alla stessa libreria immagini già usata in home."
+    },
+    "blog": {
+      "title": "Blog",
+      "lead": "Articoli in arrivo.",
+      "body": "Stiamo preparando guide su itinerari, eventi locali e consigli pratici per il soggiorno."
+    }
+  },
+  "legal": {
+    "privacyTitle": "Privacy Policy",
+    "cookieTitle": "Cookie Policy",
+    "lead": "Pagina in costruzione — contenuto legale da integrare.",
+    "defaultTitle": "Documento legale"
+  },
+  "seo": {
+    "brandSuffix": "B&B",
+    "homeTitle": "B&B Ischia — Benvenuto",
+    "homeDesc": "Prenota il tuo soggiorno a Ischia: B&B vicino al mare, colazione inclusa, terme e spiagge a portata di mano.",
+    "bookTitle": "Prenota | B&B",
+    "bookDesc": "Prenotazione diretta: scegli le date e la camera.",
+    "roomsTitle": "Camere | B&B",
+    "roomsDesc": "Scopri le nostre camere e suite con prezzi trasparenti e prenotazione diretta.",
+    "confirmTitle": "Conferma prenotazione | B&B",
+    "confirmDesc": "Riepilogo e invio richiesta di prenotazione.",
+    "successTitle": "Prenotazione ricevuta | B&B",
+    "successDesc": "Grazie: abbiamo registrato la tua richiesta.",
+    "roomTitle": "{{name}} | B&B",
+    "aboutTitle": "Chi siamo | B&B",
+    "aboutDesc": "La nostra storia, valori e accoglienza.",
+    "blogTitle": "Blog | B&B",
+    "blogDesc": "Notizie, eventi e consigli di viaggio.",
+    "contactTitle": "Contatti | B&B",
+    "contactDesc": "Come raggiungerci, telefono, email e modulo contatti.",
+    "galleryPageTitle": "Galleria | B&B",
+    "galleryPageDesc": "Foto di camere, spazi comuni e dettagli."
+  },
+  "scrollTop": {
+    "aria": "Torna in alto"
+  },
+  "reviews": {
+    "orphanTitle": "Dicono di noi",
+    "source": {
+      "google": "Google",
+      "booking": "Booking.com",
+      "airbnb": "Airbnb",
+      "direct": "Diretto",
+      "tripadvisor": "Tripadvisor"
+    }
+  },
+  "mockReviews": {
+    "m1": "Posizione perfetta a Ischia Porto, colazione con torte fatte in casa e proprietari pieni di consigli sulle spiagge. Torneremo in primavera!",
+    "m2": "Camera deluxe pulitissima, silenziosa nonostante fossimo vicino al centro. Il balconcino con vista sull’isola la sera è stato un plus.",
+    "m3": "Lovely B&B on Ischia, authentic breakfast with local lemons. Short walk to the ferry — stairs a bit steep, typical of the island.",
+    "m4": "Suite junior ideale con nostra figlia dopo le giornate a Maronti e Sant’Angelo. Spaziosa e ben organizzata.",
+    "m5": "Ottimo rapporto qualità-prezzo, parcheggio convenzionato a pochi minuti. Personale cordiale e disponibile per i traghetti.",
+    "m6": "Camera familiare perfetta con due bambini: comoda per girare l’isola in bus. Letti comodi dopo il sole e il mare."
+  }
+}

@@ -1,5 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterLink } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { SeoService } from '../../../core/services/seo.service';
 import { SmoobuService } from '../../../core/services/smoobu.service';
 import { BookingStore } from '../../../store/booking.store';
@@ -11,26 +13,38 @@ import { BreadcrumbComponent, BreadcrumbItem } from '../../../shared/components/
 @Component({
   selector: 'app-booking-confirm',
   standalone: true,
-  imports: [RouterLink, CurrencyEurPipe, DateItaPipe, BreadcrumbComponent],
+  imports: [RouterLink, CurrencyEurPipe, DateItaPipe, BreadcrumbComponent, TranslatePipe],
   templateUrl: './booking-confirm.component.html',
   styleUrl: './booking-confirm.component.scss',
 })
 export class BookingConfirmComponent implements OnInit {
   private readonly seo = inject(SeoService);
   private readonly smoobu = inject(SmoobuService);
+  private readonly translate = inject(TranslateService);
+  private readonly destroyRef = inject(DestroyRef);
   readonly store = inject(BookingStore);
   private readonly router = inject(Router);
 
   readonly crumbs: BreadcrumbItem[] = [
-    { label: 'Home', link: '/' },
-    { label: 'Prenota', link: '/prenota' },
-    { label: 'Conferma' },
+    { label: 'nav.home', link: '/' },
+    { label: 'nav.book', link: '/prenota' },
+    { label: 'booking.crumbConfirm' },
   ];
 
   submitting = false;
 
+  constructor() {
+    this.translate.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.updateSeo());
+  }
+
   ngOnInit(): void {
-    this.seo.updateMeta('Conferma prenotazione | B&B', 'Riepilogo e invio richiesta di prenotazione.');
+    this.updateSeo();
+  }
+
+  private updateSeo(): void {
+    this.translate.get(['seo.confirmTitle', 'seo.confirmDesc']).subscribe((t) => {
+      this.seo.updateMeta(t['seo.confirmTitle'], t['seo.confirmDesc']);
+    });
   }
 
   confirm(): void {

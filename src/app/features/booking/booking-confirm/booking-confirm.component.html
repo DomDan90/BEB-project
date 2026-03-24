@@ -1,31 +1,31 @@
 <div class="container-bnb section page-shell">
   <app-breadcrumb [items]="crumbs" />
-  <h1 class="section-title mt-3">Conferma prenotazione</h1>
+  <h1 class="section-title mt-3">{{ 'rooms.confirmTitle' | translate }}</h1>
   <span class="accent-line" aria-hidden="true"></span>
 
   @if (store.selectedRoom(); as room) {
     <dl class="row mt-4">
-      <dt class="col-sm-3">Camera</dt>
-      <dd class="col-sm-9">{{ room.name }}</dd>
-      <dt class="col-sm-3">Check-in</dt>
+      <dt class="col-sm-3">{{ 'common.room' | translate }}</dt>
+      <dd class="col-sm-9">{{ room.name | translate }}</dd>
+      <dt class="col-sm-3">{{ 'common.checkIn' | translate }}</dt>
       <dd class="col-sm-9">{{ store.checkIn() | dateIta }}</dd>
-      <dt class="col-sm-3">Check-out</dt>
+      <dt class="col-sm-3">{{ 'common.checkOut' | translate }}</dt>
       <dd class="col-sm-9">{{ store.checkOut() | dateIta }}</dd>
-      <dt class="col-sm-3">Ospiti</dt>
+      <dt class="col-sm-3">{{ 'common.guests' | translate }}</dt>
       <dd class="col-sm-9">{{ store.guests() }}</dd>
-      <dt class="col-sm-3">Totale</dt>
+      <dt class="col-sm-3">{{ 'common.total' | translate }}</dt>
       <dd class="col-sm-9 fw-semibold">{{ store.totalPrice() | currencyEur }}</dd>
     </dl>
     <button type="button" class="btn-primary-bnb border-0 me-2" [disabled]="submitting" (click)="confirm()">
       @if (submitting) {
-        Invio…
+        {{ 'common.submitting' | translate }}
       } @else {
-        Invia richiesta
+        {{ 'common.submitRequest' | translate }}
       }
     </button>
-    <a routerLink="/prenota" class="btn-outline-bnb">Modifica</a>
+    <a routerLink="/prenota" class="btn-outline-bnb">{{ 'common.modify' | translate }}</a>
   } @else {
-    <p>Nessuna camera selezionata.</p>
-    <a routerLink="/prenota" class="btn-outline-bnb">Torna al modulo</a>
+    <p>{{ 'common.noneSelected' | translate }}</p>
+    <a routerLink="/prenota" class="btn-outline-bnb">{{ 'common.backToForm' | translate }}</a>
   }
 </div>

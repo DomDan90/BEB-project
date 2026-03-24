@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { BrandLogoComponent } from '../brand-logo/brand-logo.component';
 
@@ -12,33 +13,27 @@ const EMAIL = 'info@beb-ischia-esempio.it';
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterLink, BrandLogoComponent],
+  imports: [RouterLink, BrandLogoComponent, TranslatePipe],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
-  readonly brandLogoAlt = 'B&B Ischia';
-
-  readonly tagline =
-    'Ospitalità a Ischia, tra mare e terme: camere curate, colazione con prodotti dell’isola e consigli per spiagge e borghi.';
-
   readonly addressLine = ADDRESS_LINE;
   readonly phoneDisplay = PHONE_DISPLAY;
   readonly phoneTel = PHONE_TEL;
   readonly email = EMAIL;
 
-  /** Stesso ordine delle sezioni home (scroll) della navbar. */
-  readonly quickLinks: ReadonlyArray<{ label: string; path: string }> = [
-    { label: 'Home', path: '/' },
-    { label: 'Camere', path: '/camere' },
-    { label: 'Chi siamo', path: '/chi-siamo' },
-    { label: 'Galleria', path: '/galleria' },
-    { label: 'Contatti', path: '/contatti' },
+  readonly quickLinks: ReadonlyArray<{ labelKey: string; path: string }> = [
+    { labelKey: 'nav.home', path: '/' },
+    { labelKey: 'nav.rooms', path: '/camere' },
+    { labelKey: 'nav.about', path: '/chi-siamo' },
+    { labelKey: 'nav.gallery', path: '/galleria' },
+    { labelKey: 'nav.contacts', path: '/contatti' },
   ];
 
-  readonly socialLinks: ReadonlyArray<{ icon: string; label: string; href: string }> = [
-    { icon: 'bi-instagram', label: 'Instagram', href: '#' },
-    { icon: 'bi-facebook', label: 'Facebook', href: '#' },
-    { icon: 'bi-whatsapp', label: 'WhatsApp', href: '#' },
+  readonly socialLinks: ReadonlyArray<{ icon: string; labelKey: string; href: string }> = [
+    { icon: 'bi-instagram', labelKey: 'footer.socialInstagram', href: '#' },
+    { icon: 'bi-facebook', labelKey: 'footer.socialFacebook', href: '#' },
+    { icon: 'bi-whatsapp', labelKey: 'footer.socialWhatsapp', href: '#' },
   ];
 }

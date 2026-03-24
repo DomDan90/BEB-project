@@ -1,4 +1,4 @@
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser, UpperCasePipe } from '@angular/common';
 import {
   afterNextRender,
   ChangeDetectorRef,
@@ -10,8 +10,10 @@ import {
   signal,
 } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 
+import { AppLang, LanguageService } from '../../../core/services/language.service';
 import { BrandLogoComponent } from '../brand-logo/brand-logo.component';
 
 type BootstrapCollapse = {
@@ -38,7 +40,7 @@ const HOME_SPY_OFFSET_PX = 88;
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, BrandLogoComponent],
+  imports: [RouterLink, BrandLogoComponent, TranslatePipe, UpperCasePipe],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
@@ -48,8 +50,15 @@ export class NavbarComponent {
   private readonly document = inject(DOCUMENT);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly destroyRef = inject(DestroyRef);
+  readonly language = inject(LanguageService);
 
-  readonly brandLogoAlt = 'B&B Ischia — torna alla homepage';
+  readonly langMenu: ReadonlyArray<{ code: AppLang; flag: string; labelKey: string }> = [
+    { code: 'it', flag: '🇮🇹', labelKey: 'lang.native.it' },
+    { code: 'de', flag: '🇩🇪', labelKey: 'lang.native.de' },
+    { code: 'en', flag: '🇬🇧', labelKey: 'lang.native.en' },
+    { code: 'fr', flag: '🇫🇷', labelKey: 'lang.native.fr' },
+    { code: 'es', flag: '🇪🇸', labelKey: 'lang.native.es' },
+  ];
   isScrolled = false;
   isHomeRoute = false;
   isMainNavOpen = false;

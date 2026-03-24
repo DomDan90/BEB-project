@@ -1,9 +1,11 @@
 import { formatNumber } from '@angular/common';
-import { Component, effect, inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, DestroyRef, effect, inject, LOCALE_ID, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgbDatepickerModule, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap/datepicker';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap/dropdown';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { minCheckoutStructFromCheckInIso, todayNgbStruct } from '../../../core/booking-date/booking-date-struct.util';
 import { ngbPopperMatchReferenceWidth } from '../../../core/booking-date/ngb-popper-match-reference';
 import { SeoService } from '../../../core/services/seo.service';
@@ -23,6 +25,7 @@ import { BreadcrumbComponent, BreadcrumbItem } from '../../../shared/components/
     NgbDropdownModule,
     CurrencyEurPipe,
     BreadcrumbComponent,
+    TranslatePipe,
   ],
   templateUrl: './booking-form.component.html',
   styleUrl: './booking-form.component.scss',
@@ -30,13 +33,15 @@ import { BreadcrumbComponent, BreadcrumbItem } from '../../../shared/components/
 export class BookingFormComponent implements OnInit {
   private readonly seo = inject(SeoService);
   private readonly locale = inject(LOCALE_ID);
+  private readonly translate = inject(TranslateService);
+  private readonly destroyRef = inject(DestroyRef);
   readonly store = inject(BookingStore);
   private readonly bookingService = inject(BookingService);
 
   readonly rooms = MOCK_ROOMS;
   readonly crumbs: BreadcrumbItem[] = [
-    { label: 'Home', link: '/' },
-    { label: 'Prenota' },
+    { label: 'nav.home', link: '/' },
+    { label: 'nav.book' },
   ];
 
   readonly minStay = this.bookingService.getMinimumStay();
@@ -55,10 +60,18 @@ export class BookingFormComponent implements OnInit {
         this.store.checkOut.set('');
       }
     });
+
+    this.translate.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.updateSeo());
   }
 
   ngOnInit(): void {
-    this.seo.updateMeta('Prenota | B&B', 'Prenotazione diretta: scegli le date e la camera.');
+    this.updateSeo();
+  }
+
+  private updateSeo(): void {
+    this.translate.get(['seo.bookTitle', 'seo.bookDesc']).subscribe((t) => {
+      this.seo.updateMeta(t['seo.bookTitle'], t['seo.bookDesc']);
+    });
   }
 
   minCheckOutDate(): NgbDateStruct {
@@ -68,10 +81,13 @@ export class BookingFormComponent implements OnInit {
   roomToggleLabel(): string {
     const r = this.store.selectedRoom();
     if (!r) {
-      return 'Seleziona…';
+      return this.translate.instant('common.select');
     }
     const p = formatNumber(r.pricePerNight, this.locale, '1.0-0');
-    return `${r.name} — ${p} €/notte`;
+    return this.translate.instant('booking.roomLine', {
+      name: this.translate.instant(r.name),
+      price: p,
+    });
   }
 
   selectRoom(roomId: number): void {

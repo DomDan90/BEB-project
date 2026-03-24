@@ -64,12 +64,13 @@ export const ISCHIA_ROOM_IMAGES = {
 export interface IschiaGalleryItem {
   thumbSrc: string;
   fullSrc: string;
-  alt: string;
+  /** Chiave i18n (ngx-translate). */
+  altKey: string;
   thumbW: number;
   thumbH: number;
 }
 
-function galleryItem(photoId: string, thumbW: number, thumbH: number, alt: string): IschiaGalleryItem {
+function galleryItem(photoId: string, thumbW: number, thumbH: number, altKey: string): IschiaGalleryItem {
   const maxEdge = 1600;
   let fullW: number;
   let fullH: number;
@@ -83,7 +84,7 @@ function galleryItem(photoId: string, thumbW: number, thumbH: number, alt: strin
   return {
     thumbSrc: unsplash(photoId, thumbW, thumbH),
     fullSrc: unsplash(photoId, fullW, fullH),
-    alt,
+    altKey,
     thumbW,
     thumbH,
   };
@@ -91,15 +92,15 @@ function galleryItem(photoId: string, thumbW: number, thumbH: number, alt: strin
 
 /** Galleria home. */
 export const ISCHIA_GALLERY: ReadonlyArray<IschiaGalleryItem> = [
-  galleryItem('1631049307264-da0ec9d70304', 800, 600, 'Camera luminosa con letto matrimoniale e lenzuola chiare'),
-  galleryItem('1618773928121-c32242e63f39', 600, 800, 'Dettaglio scala e arredi in stile mediterraneo'),
-  galleryItem('1556912172-45b7abe8b7e1', 800, 800, 'Tavola della colazione con prodotti locali e caffè'),
-  galleryItem('1512917774080-9991f1c4c750', 800, 600, 'Giardino e spazi esterni della struttura'),
-  galleryItem('1586023492125-27b2c045efd7', 600, 800, 'Salone comune con divani e luce naturale'),
-  galleryItem('1600210492486-724fe5c67fb0', 800, 800, 'Camera con vista sul verde e tende leggere'),
-  galleryItem('1506905925346-21bda4d32df4', 800, 600, 'Angolo relax con arredi chiari'),
-  galleryItem('1564013799919-ab600027ffc6', 600, 800, 'Terrazza e zona living all’aperto'),
-  galleryItem('1522771739844-6a9f6d5f14af', 800, 800, 'Dettaglio biancheria e fiori freschi in camera'),
+  galleryItem('1631049307264-da0ec9d70304', 800, 600, 'home.gallery.items.brightRoom'),
+  galleryItem('1618773928121-c32242e63f39', 600, 800, 'home.gallery.items.stairs'),
+  galleryItem('1556912172-45b7abe8b7e1', 800, 800, 'home.gallery.items.breakfastTable'),
+  galleryItem('1512917774080-9991f1c4c750', 800, 600, 'home.gallery.items.garden'),
+  galleryItem('1586023492125-27b2c045efd7', 600, 800, 'home.gallery.items.lounge'),
+  galleryItem('1600210492486-724fe5c67fb0', 800, 800, 'home.gallery.items.greenView'),
+  galleryItem('1506905925346-21bda4d32df4', 800, 600, 'home.gallery.items.relaxCorner'),
+  galleryItem('1564013799919-ab600027ffc6', 600, 800, 'home.gallery.items.terrace'),
+  galleryItem('1522771739844-6a9f6d5f14af', 800, 800, 'home.gallery.items.linens'),
 ];
 
 /** Avatar recensioni. */

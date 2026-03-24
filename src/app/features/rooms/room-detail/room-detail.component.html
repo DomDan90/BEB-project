@@ -6,27 +6,32 @@
         <img
           [src]="r.images.length ? r.images[0] : r.thumbnail"
           class="img-fluid rounded-3 w-100"
-          [alt]="r.name"
+          [attr.alt]="r.name | translate"
           appLazyImage
         />
       </div>
       <div class="col-lg-5">
-        <h1 class="section-title">{{ r.name }}</h1>
+        <h1 class="section-title">{{ r.name | translate }}</h1>
         <span class="accent-line" aria-hidden="true"></span>
-        <p class="lead mt-3">{{ r.shortDescription }}</p>
-        <p>{{ r.description }}</p>
-        <p class="fw-semibold">{{ r.pricePerNight | currencyEur }} / notte · max {{ r.maxGuests }} ospiti</p>
+        <p class="lead mt-3">{{ r.shortDescription | translate }}</p>
+        <p>{{ r.description | translate }}</p>
+        <p class="fw-semibold">
+          {{ r.pricePerNight | currencyEur }}{{ 'common.perNight' | translate }} ·
+          {{ 'rooms.maxGuests' | translate: { max: r.maxGuests } }}
+        </p>
         <ul class="small text-muted">
           @for (a of r.amenities; track a) {
-            <li>{{ a }}</li>
+            <li>{{ a | translate }}</li>
           }
         </ul>
-        <a routerLink="/prenota" class="btn-primary-bnb me-2" (click)="selectForBooking()">Prenota</a>
-        <a routerLink="/camere" class="btn-outline-bnb">Torna alle camere</a>
+        <a routerLink="/prenota" class="btn-primary-bnb me-2" (click)="selectForBooking()">{{
+          'common.book' | translate
+        }}</a>
+        <a routerLink="/camere" class="btn-outline-bnb">{{ 'rooms.backToList' | translate }}</a>
       </div>
     </div>
   } @else {
-    <p>Camera non trovata.</p>
-    <a routerLink="/camere" class="btn-outline-bnb">Elenco camere</a>
+    <p>{{ 'rooms.notFound' | translate }}</p>
+    <a routerLink="/camere" class="btn-outline-bnb">{{ 'rooms.backToList' | translate }}</a>
   }
 </div>

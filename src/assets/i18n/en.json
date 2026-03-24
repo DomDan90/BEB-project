@@ -1,0 +1,288 @@
+{
+  "common": {
+    "loading": "Loading",
+    "select": "Select…",
+    "continue": "Continue",
+    "adults": "Adults",
+    "children": "Children",
+    "nights": "nights",
+    "night": "night",
+    "guests": "Guests",
+    "room": "Room",
+    "modify": "Edit",
+    "submitRequest": "Send request",
+    "submitting": "Sending…",
+    "total": "Total",
+    "estimated": "Estimated total",
+    "backHome": "Back to home",
+    "backToForm": "Back to form",
+    "discoverMore": "Learn more",
+    "book": "Book",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "openCalendarCheckIn": "Open check-in calendar",
+    "openCalendarCheckOut": "Open check-out calendar",
+    "perNight": "/ night",
+    "dateError": "Please check dates (check-out after check-in, minimum {{min}} nights).",
+    "referenceCode": "Reference code",
+    "status": "Status",
+    "fromTo": "From {{from}} to {{to}}",
+    "noneSelected": "No room selected.",
+    "legalNote": "Legal information"
+  },
+  "nav": {
+    "ariaMain": "Main navigation",
+    "toggleMenu": "Open or close navigation menu",
+    "home": "Home",
+    "rooms": "Rooms",
+    "about": "About us",
+    "gallery": "Gallery",
+    "contacts": "Contact",
+    "blog": "Blog",
+    "blogAll": "All articles",
+    "blogInsights": "Insights",
+    "book": "Book",
+    "breadcrumb": "Breadcrumb"
+  },
+  "lang": {
+    "menu": "Site language",
+    "native": {
+      "it": "Italiano",
+      "de": "Deutsch",
+      "en": "English",
+      "fr": "Français",
+      "es": "Español"
+    }
+  },
+  "brand": {
+    "logoAltNavbar": "B&B Ischia — back to homepage",
+    "logoAltFooter": "B&B Ischia"
+  },
+  "hero": {
+    "kicker": "Ischia, the green island",
+    "title": "Sea, spas and la dolce vita",
+    "lead": "Your B&B in Ischia Porto: thoughtfully designed rooms, breakfast with local flavours and direct booking, steps from the sea and ferries to the Gulf of Naples.",
+    "bookingLine1": "Book",
+    "bookingLine2": "your room",
+    "arrival": "Arrival",
+    "departure": "Departure",
+    "openCalendarArrival": "Open arrival date calendar",
+    "openCalendarDeparture": "Open departure date calendar",
+    "errArrival": "Select your arrival date.",
+    "errDeparture": "Select your departure date.",
+    "errAdults": "Please enter at least one adult.",
+    "errRoom": "Choose a room.",
+    "errDateRange": "Invalid dates: check-out after arrival, not in the past, at least {{min}} nights.",
+    "errCapacity": "For {{room}} the maximum number of guests is {{max}}.",
+    "ctaContinue": "Continue booking"
+  },
+  "home": {
+    "about": {
+      "title": "Our story",
+      "lead": "We are in Ischia Porto, steps from the sea and mainland links: a family-run B&B where warm hospitality, breakfasts with local produce and tips on spas, beaches and villages make the difference. Every stay is designed to let you enjoy the island at an easy pace, between nature and tradition.",
+      "strength1": "Family hospitality and a cared-for setting from spring through autumn.",
+      "strength2": "Ideal for exploring Ischia: harbour, beaches, Aragonese Castle and trails.",
+      "strength3": "Breakfast with pastries, fruit and flavours from the Gulf of Naples.",
+      "strength4": "Suggestions for thermal baths, boat trips and sunny days.",
+      "cta": "Learn more",
+      "imageAlt": "The B&B in Ischia: terrace and Mediterranean view on a clear day."
+    },
+    "services": {
+      "title": "Our services",
+      "intro": "Everything you need for a carefree stay, with the attention to detail that defines us.",
+      "breakfastTitle": "Breakfast included",
+      "breakfastDesc": "Every morning a sweet and savoury buffet with local products, homemade cakes and hot drinks.",
+      "wifiTitle": "Free Wi‑Fi",
+      "wifiDesc": "Fast connection throughout the property to work or share your stay in comfort.",
+      "parkingTitle": "Parking",
+      "parkingDesc": "Reserved spaces or partner parking nearby, with clear directions at check-in.",
+      "acTitle": "Air conditioning",
+      "acDesc": "In-room climate control for maximum comfort in every season.",
+      "cleaningTitle": "Daily housekeeping",
+      "cleaningDesc": "Daily housekeeping with fresh linen and courtesy amenities.",
+      "shuttleTitle": "Airport shuttle",
+      "shuttleDesc": "Bookable transfers to and from airport and station — ask reception for availability."
+    },
+    "gallery": {
+      "title": "Gallery",
+      "intro": "The atmosphere of our B&B in Ischia: spaces, breakfast and details — click to open the lightbox.",
+      "openLightbox": "Open in lightbox",
+      "items": {
+        "brightRoom": "Bright room with double bed and light-coloured linens",
+        "stairs": "Staircase and Mediterranean-style furnishing details",
+        "breakfastTable": "Breakfast table with local products and coffee",
+        "garden": "Garden and outdoor areas of the property",
+        "lounge": "Common lounge with sofas and natural light",
+        "greenView": "Room with a view of greenery and light curtains",
+        "relaxCorner": "Relaxation corner with light furnishings",
+        "terrace": "Terrace and outdoor living area",
+        "linens": "Detail of linens and fresh flowers in the room"
+      }
+    },
+    "reviews": {
+      "title": "What our guests say",
+      "intro": "Guests who stayed at our B&B in Ischia share their experience.",
+      "avatarAlt": "Profile photo of {{name}}",
+      "ratingAria": "Rating {{rating}} out of 5",
+      "r1": "Perfect stay in Ischia Porto: quiet room, breakfast with homemade limoncello and useful beach tips. We will return in spring.",
+      "r2": "Spotless deluxe room, small balcony with a view over green rooftops. After Ischia’s spas, resting there was perfect.",
+      "r3": "Handy for the ferry and walks towards the harbour. Welcoming atmosphere; only wish we could have stayed one more night!",
+      "r4": "Great base to explore the island: Aragonese Castle, Sant’Angelo and beaches reachable by bus. Very comfortable bed.",
+      "r5": "Ideal for a couple: dinner at a fish restaurant recommended by the property and a walk back. Kind, discreet staff."
+    },
+    "roomsPreview": {
+      "title": "Our rooms",
+      "lead": "Choose from our options: each room is designed for maximum comfort during your stay.",
+      "imageAlt": "Room photo: {{caption}}"
+    },
+    "location": {
+      "title": "Where we are",
+      "intro": "In Ischia Porto, near the sea and links to the mainland.",
+      "mapAria": "Interactive map with the bed and breakfast location",
+      "address": "Address",
+      "hours": "Hours",
+      "phone": "Phone",
+      "email": "Email",
+      "openMaps": "Open in Google Maps",
+      "mapPopup": "Our B&B in Ischia",
+      "checkIn": "Check-in: 3:00 pm – 8:00 pm (other times by arrangement)",
+      "checkOut": "Check-out: by 11:00 am",
+      "addressLine": "Via Roma 42, 80077 Ischia (NA)"
+    }
+  },
+  "rooms": {
+    "listTitle": "Rooms and suites",
+    "details": "Details",
+    "notFound": "Room not found.",
+    "backToList": "Back to room list",
+    "maxGuests": "max {{max}} guests",
+    "directBooking": "Direct booking",
+    "minStay": "Minimum stay {{min}} nights.",
+    "confirmTitle": "Confirm booking",
+    "successTitle": "Request sent",
+    "amenity": {
+      "wifi": "Wi‑Fi",
+      "tv": "TV",
+      "smartTv": "Smart TV",
+      "ac": "Air conditioning",
+      "privateBath": "Private bathroom",
+      "breakfast": "Breakfast included",
+      "minibar": "Minibar",
+      "balcony": "Balcony",
+      "living": "Living area",
+      "safe": "Safe",
+      "fridge": "Refrigerator",
+      "teaCorner": "Tea corner"
+    },
+    "standard": {
+      "name": "Standard room",
+      "description": "Cosy room in central Ischia Porto, ideal after a day at the sea or spas. Light furnishings, private shower bathroom and air conditioning for summer nights.",
+      "shortDescription": "Comfort for two guests, private bathroom, near the harbour."
+    },
+    "deluxe": {
+      "name": "Deluxe room",
+      "description": "Spacious room with a small balcony over rooftops and green hills. Queen bed, minibar and tea set: perfect for breakfast in the room before visiting Aragonese Castle.",
+      "shortDescription": "Balcony, minibar and queen bed."
+    },
+    "suite": {
+      "name": "Junior suite",
+      "description": "Open-plan suite with separate day area and single sofa bed: ideal for families with one child or anyone wanting more space after Citara or Maronti.",
+      "shortDescription": "Open space for up to 3 guests, living zone."
+    },
+    "family": {
+      "name": "Family room",
+      "description": "Two connecting spaces with double and single beds, designed for four exploring the island. Large bathroom with tub, handy after a day on a boat along the coast.",
+      "shortDescription": "Up to 4 guests, two areas, bathroom with tub."
+    }
+  },
+  "booking": {
+    "crumbConfirm": "Confirm",
+    "crumbSuccess": "Success",
+    "successFrom": "From",
+    "successTo": "to",
+    "roomLine": "{{name}} — {{price}} €/night"
+  },
+  "footer": {
+    "tagline": "Hospitality in Ischia, between sea and spas: curated rooms, island breakfast and tips for beaches and villages.",
+    "socialAria": "Social",
+    "quickLinks": "Quick links",
+    "contacts": "Contact",
+    "copyright": "© 2026 B&B Name — All rights reserved",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "socialInstagram": "Instagram",
+    "socialFacebook": "Facebook",
+    "socialWhatsapp": "WhatsApp"
+  },
+  "pages": {
+    "about": {
+      "title": "About us",
+      "lead": "Page content coming soon.",
+      "body": "You will find our story, the values of the B&B and our approach to hospitality."
+    },
+    "contact": {
+      "title": "Contact",
+      "lead": "Contact form and Leaflet map — next iteration.",
+      "body": "In the meantime you can reach us by phone or email from the footer."
+    },
+    "gallery": {
+      "title": "Gallery",
+      "lead": "ngx-lightbox and swiper integration in the next iteration.",
+      "body": "This page will use the same image library as the home page."
+    },
+    "blog": {
+      "title": "Blog",
+      "lead": "Articles coming soon.",
+      "body": "We are preparing guides on itineraries, local events and practical stay tips."
+    }
+  },
+  "legal": {
+    "privacyTitle": "Privacy Policy",
+    "cookieTitle": "Cookie Policy",
+    "lead": "Page under construction — legal content to be added.",
+    "defaultTitle": "Legal document"
+  },
+  "seo": {
+    "brandSuffix": "B&B",
+    "homeTitle": "B&B Ischia — Welcome",
+    "homeDesc": "Book your stay in Ischia: B&B near the sea, breakfast included, spas and beaches within easy reach.",
+    "bookTitle": "Book | B&B",
+    "bookDesc": "Direct booking: choose dates and room.",
+    "roomsTitle": "Rooms | B&B",
+    "roomsDesc": "Discover our rooms and suites with transparent prices and direct booking.",
+    "confirmTitle": "Confirm booking | B&B",
+    "confirmDesc": "Summary and booking request submission.",
+    "successTitle": "Booking received | B&B",
+    "successDesc": "Thank you — we have registered your request.",
+    "roomTitle": "{{name}} | B&B",
+    "aboutTitle": "About us | B&B",
+    "aboutDesc": "Our story, values and hospitality.",
+    "blogTitle": "Blog | B&B",
+    "blogDesc": "News, events and travel tips.",
+    "contactTitle": "Contact | B&B",
+    "contactDesc": "How to reach us, phone, email and contact form.",
+    "galleryPageTitle": "Gallery | B&B",
+    "galleryPageDesc": "Photos of rooms, common areas and details."
+  },
+  "scrollTop": {
+    "aria": "Back to top"
+  },
+  "reviews": {
+    "orphanTitle": "What people say",
+    "source": {
+      "google": "Google",
+      "booking": "Booking.com",
+      "airbnb": "Airbnb",
+      "direct": "Direct",
+      "tripadvisor": "Tripadvisor"
+    }
+  },
+  "mockReviews": {
+    "m1": "Perfect location in Ischia Porto, breakfast with homemade cakes and hosts full of beach tips. We will return in spring!",
+    "m2": "Spotless deluxe room, quiet despite being near the centre. The balcony with an island view in the evening was a plus.",
+    "m3": "Lovely B&B on Ischia, authentic breakfast with local lemons. Short walk to the ferry — stairs a bit steep, typical of the island.",
+    "m4": "Junior suite ideal with our daughter after days at Maronti and Sant’Angelo. Spacious and well organised.",
+    "m5": "Great value for money, partner parking a few minutes away. Friendly staff, helpful with ferries.",
+    "m6": "Family room perfect with two children: handy for getting around the island by bus. Comfortable beds after sun and sea."
+  }
+}

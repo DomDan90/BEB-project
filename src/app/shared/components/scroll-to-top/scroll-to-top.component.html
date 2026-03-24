@@ -1,5 +1,10 @@
 @if (visible()) {
-  <button type="button" class="btn-scroll" (click)="scrollTop()" aria-label="Torna in alto">
+  <button
+    type="button"
+    class="btn-scroll"
+    (click)="scrollTop()"
+    [attr.aria-label]="'scrollTop.aria' | translate"
+  >
     <i class="bi bi-arrow-up" aria-hidden="true"></i>
   </button>
 }

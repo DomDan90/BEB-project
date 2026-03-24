@@ -1,12 +1,12 @@
 <div class="container-bnb section page-shell booking-form-page">
   <app-breadcrumb [items]="crumbs" />
-  <h1 class="section-title mt-3">Prenotazione diretta</h1>
+  <h1 class="section-title mt-3">{{ 'rooms.directBooking' | translate }}</h1>
   <span class="accent-line" aria-hidden="true"></span>
-  <p class="lead">Soggiorno minimo {{ minStay }} notti.</p>
+  <p class="lead">{{ 'rooms.minStay' | translate: { min: minStay } }}</p>
 
   <div class="row g-4 mt-2">
     <div class="col-12 col-md-6 col-lg-4">
-      <label class="form-label" id="booking-room-label">Camera</label>
+      <label class="form-label" id="booking-room-label">{{ 'common.room' | translate }}</label>
       <div
         ngbDropdown
         placement="bottom-start"
@@ -25,17 +25,18 @@
           {{ roomToggleLabel() }}
         </button>
         <div ngbDropdownMenu aria-labelledby="booking-room-label">
-          <button type="button" ngbDropdownItem (click)="clearRoom()">Seleziona…</button>
+          <button type="button" ngbDropdownItem (click)="clearRoom()">{{ 'common.select' | translate }}</button>
           @for (room of rooms; track room.id) {
             <button type="button" ngbDropdownItem (click)="selectRoom(room.id)">
-              {{ room.name }} — {{ room.pricePerNight | currencyEur }}/notte
+              {{ room.name | translate }} — {{ room.pricePerNight | currencyEur
+              }}{{ 'common.perNight' | translate }}
             </button>
           }
         </div>
       </div>
     </div>
     <div class="col-12 col-md-6 col-lg-4">
-      <label class="form-label" for="check-in">Check-in</label>
+      <label class="form-label" for="check-in">{{ 'common.checkIn' | translate }}</label>
       <div class="input-group booking-form-page__date" #bookingCinGroup>
         <input
           id="check-in"
@@ -56,14 +57,14 @@
           type="button"
           class="btn btn-outline-secondary booking-form-page__date-btn"
           (click)="cinDp.toggle()"
-          aria-label="Apri calendario check-in"
+          [attr.aria-label]="'common.openCalendarCheckIn' | translate"
         >
           <i class="bi bi-calendar3" aria-hidden="true"></i>
         </button>
       </div>
     </div>
     <div class="col-12 col-md-6 col-lg-4">
-      <label class="form-label" for="check-out">Check-out</label>
+      <label class="form-label" for="check-out">{{ 'common.checkOut' | translate }}</label>
       <div class="input-group booking-form-page__date" #bookingCoutGroup>
         <input
           id="check-out"
@@ -84,14 +85,14 @@
           type="button"
           class="btn btn-outline-secondary booking-form-page__date-btn"
           (click)="coutDp.toggle()"
-          aria-label="Apri calendario check-out"
+          [attr.aria-label]="'common.openCalendarCheckOut' | translate"
         >
           <i class="bi bi-calendar3" aria-hidden="true"></i>
         </button>
       </div>
     </div>
     <div class="col-12">
-      <label class="form-label" for="guests">Ospiti</label>
+      <label class="form-label" for="guests">{{ 'common.guests' | translate }}</label>
       <input
         id="guests"
         type="number"
@@ -105,19 +106,26 @@
 
   @if (dateError) {
     <p class="text-danger small mt-2" role="alert">
-      Controlla le date (check-out dopo check-in, minimo {{ minStay }} notti).
+      {{ 'common.dateError' | translate: { min: minStay } }}
     </p>
   }
 
   @if (store.selectedRoom(); as room) {
     <p class="mt-3 fw-semibold">
-      Totale stimato: {{ store.totalPrice() | currencyEur }} ({{ store.totalNights() }} notti)
+      {{ 'common.estimated' | translate }}: {{ store.totalPrice() | currencyEur }} ({{
+        store.totalNights()
+      }}
+      {{ 'common.nights' | translate }})
     </p>
   }
 
   @if (!dateError && store.selectedRoom() && store.checkIn() && store.checkOut()) {
-    <a routerLink="/prenota/conferma" class="btn-primary-bnb mt-3 d-inline-block">Continua</a>
+    <a routerLink="/prenota/conferma" class="btn-primary-bnb mt-3 d-inline-block">{{
+      'common.continue' | translate
+    }}</a>
   } @else {
-    <span class="btn-primary-bnb mt-3 d-inline-block opacity-50" aria-disabled="true">Continua</span>
+    <span class="btn-primary-bnb mt-3 d-inline-block opacity-50" aria-disabled="true">{{
+      'common.continue' | translate
+    }}</span>
   }
 </div>

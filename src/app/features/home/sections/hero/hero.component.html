@@ -2,9 +2,9 @@
   <div class="hero-banner" [class.hero-banner--parallax]="parallaxEnabled()">
     <div class="hero-banner__overlay" aria-hidden="true"></div>
     <div class="container-bnb hero-banner__inner text-center">
-      <p class="hero-banner__kicker" id="hero-kicker">Ischia, isola verde</p>
+      <p class="hero-banner__kicker" id="hero-kicker">{{ 'hero.kicker' | translate }}</p>
       <h1 id="hero-title" class="hero-banner__title" data-aos="fade-down" data-aos-duration="800">
-        Mare, terme e dolce vita
+        {{ 'hero.title' | translate }}
       </h1>
       <p
         class="hero-banner__lead"
@@ -12,8 +12,7 @@
         data-aos-duration="800"
         data-aos-delay="200"
       >
-        Il tuo B&amp;B a Ischia Porto: camere curate, colazione con sapori locali e prenotazione diretta,
-        a due passi dal mare e dai traghetti per il Golfo di Napoli.
+        {{ 'hero.lead' | translate }}
       </p>
     </div>
   </div>
@@ -29,14 +28,15 @@
         <div class="row g-4 align-items-center">
           <div class="col-lg-2">
             <h2 class="hero-booking__heading mb-0">
-              Prenota<br class="d-none d-md-inline" />
-              la tua camera
+              <span class="d-block d-md-inline">{{ 'hero.bookingLine1' | translate }}</span>
+              <br class="d-none d-md-inline" />
+              <span class="d-block d-md-inline">{{ 'hero.bookingLine2' | translate }}</span>
             </h2>
           </div>
           <div class="col-lg-10">
             <div class="row g-3 hero-booking__fields">
               <div class="col-12 col-sm-6 col-xl-3 hero-booking__field--date">
-                <label class="form-label" for="hero-check-in">Arrivo</label>
+                <label class="form-label" for="hero-check-in">{{ 'hero.arrival' | translate }}</label>
                 <div class="input-group" #heroCheckInGroup>
                   <input
                     id="hero-check-in"
@@ -57,17 +57,17 @@
                     type="button"
                     class="input-group-text input-group-text--picker"
                     (click)="checkInDp.toggle()"
-                    aria-label="Apri calendario data di arrivo"
+                    [attr.aria-label]="'hero.openCalendarArrival' | translate"
                   >
                     <i class="bi bi-calendar3"></i>
                   </button>
                 </div>
                 @if (form.get('checkIn')?.invalid && form.get('checkIn')?.touched) {
-                  <p class="form-text text-danger small mb-0">Seleziona la data di arrivo.</p>
+                  <p class="form-text text-danger small mb-0">{{ 'hero.errArrival' | translate }}</p>
                 }
               </div>
               <div class="col-12 col-sm-6 col-xl-3 hero-booking__field--date">
-                <label class="form-label" for="hero-check-out">Partenza</label>
+                <label class="form-label" for="hero-check-out">{{ 'hero.departure' | translate }}</label>
                 <div class="input-group" #heroCheckOutGroup>
                   <input
                     id="hero-check-out"
@@ -88,17 +88,17 @@
                     type="button"
                     class="input-group-text input-group-text--picker"
                     (click)="checkOutDp.toggle()"
-                    aria-label="Apri calendario data di partenza"
+                    [attr.aria-label]="'hero.openCalendarDeparture' | translate"
                   >
                     <i class="bi bi-calendar3"></i>
                   </button>
                 </div>
                 @if (form.get('checkOut')?.invalid && form.get('checkOut')?.touched) {
-                  <p class="form-text text-danger small mb-0">Seleziona la data di partenza.</p>
+                  <p class="form-text text-danger small mb-0">{{ 'hero.errDeparture' | translate }}</p>
                 }
               </div>
               <div class="col-12 col-sm-6 col-md-6 col-xl-3 hero-booking__field--guest-count">
-                <label class="form-label" id="hero-adults-label">Adulti</label>
+                <label class="form-label" id="hero-adults-label">{{ 'common.adults' | translate }}</label>
                 <div
                   ngbDropdown
                   placement="bottom-start"
@@ -125,11 +125,11 @@
                   </div>
                 </div>
                 @if (form.get('adults')?.invalid && form.get('adults')?.touched) {
-                  <p class="form-text text-danger small mb-0">Indica almeno 1 adulto.</p>
+                  <p class="form-text text-danger small mb-0">{{ 'hero.errAdults' | translate }}</p>
                 }
               </div>
               <div class="col-12 col-sm-6 col-md-6 col-xl-3 hero-booking__field--guest-count">
-                <label class="form-label" id="hero-children-label">Bambini</label>
+                <label class="form-label" id="hero-children-label">{{ 'common.children' | translate }}</label>
                 <div
                   ngbDropdown
                   placement="bottom-start"
@@ -157,7 +157,7 @@
                 </div>
               </div>
               <div class="col-12 col-md-8 col-xl-12 mt-2">
-                <label class="form-label" id="hero-room-label">Camera</label>
+                <label class="form-label" id="hero-room-label">{{ 'common.room' | translate }}</label>
                 <div
                   ngbDropdown
                   placement="bottom-start"
@@ -177,32 +177,27 @@
                   </button>
                   <div ngbDropdownMenu aria-labelledby="hero-room-label">
                     @for (room of rooms; track room.id) {
-                      <button
-                        type="button"
-                        ngbDropdownItem
-                        (click)="selectRoom(room.id)"
-                      >
-                        {{ room.name }}
+                      <button type="button" ngbDropdownItem (click)="selectRoom(room.id)">
+                        {{ room.name | translate }}
                       </button>
                     }
                   </div>
                 </div>
                 @if (form.get('roomId')?.invalid && form.get('roomId')?.touched) {
-                  <p class="form-text text-danger small mb-0">Scegli una camera.</p>
+                  <p class="form-text text-danger small mb-0">{{ 'hero.errRoom' | translate }}</p>
                 }
               </div>
             </div>
             @if (showDateRangeError()) {
               <p class="text-danger small mt-2 mb-0" role="alert">
-                Date non valide: check-out dopo l’arrivo, non nel passato, almeno {{ minStayNights }}
-                notti.
+                {{ 'hero.errDateRange' | translate: { min: minStayNights } }}
               </p>
             }
             @if (guestCapacityError(); as msg) {
               <p class="text-danger small mt-2 mb-0" role="alert">{{ msg }}</p>
             }
             <div class="mt-3 d-flex flex-wrap gap-2 justify-content-xl-end">
-              <button type="submit" class="btn btn-hero-submit">Continua prenotazione</button>
+              <button type="submit" class="btn btn-hero-submit">{{ 'hero.ctaContinue' | translate }}</button>
             </div>
           </div>
         </div>

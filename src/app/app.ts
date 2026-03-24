@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { afterNextRender, Component, inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { LanguageService } from './core/services/language.service';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
@@ -14,6 +15,7 @@ export class App {
   private readonly platformId = inject(PLATFORM_ID);
 
   constructor() {
+    inject(LanguageService).initLanguage();
     afterNextRender(() => {
       if (!isPlatformBrowser(this.platformId)) {
         return;

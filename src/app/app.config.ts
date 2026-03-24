@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
   NgbDateAdapter,
   NgbDateParserFormatter,
@@ -40,6 +42,8 @@ export const appConfig: ApplicationConfig = {
     ),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withInterceptors([apiInterceptor])),
+    ...provideTranslateService({ lang: 'it', fallbackLang: 'it' }),
+    ...provideTranslateHttpLoader({ prefix: '/assets/i18n/', suffix: '.json' }),
     importProvidersFrom(LightboxModule),
     // ngx-lightbox attende transitionend per togliere il loader; se l’evento non arriva (CSS/browser), resta il caricamento infinito.
     {
