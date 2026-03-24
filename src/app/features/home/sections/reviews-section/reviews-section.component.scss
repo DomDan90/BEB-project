@@ -30,6 +30,13 @@
   max-width: 42rem;
   margin-inline: auto;
   padding-bottom: v.$space-2;
+
+  @include m.respond-to(md) {
+    // Spazio tra frecce e card: padding laterale + offset nav verso l’esterno (offset basso = frecce più lontane dal centro)
+    max-width: min(100%, calc(42rem + #{v.$space-4} * 2));
+    padding-inline: v.$space-4;
+    box-sizing: border-box;
+  }
 }
 
 .reviews-section__swiper {
@@ -37,7 +44,6 @@
   width: 100%;
   --swiper-theme-color: #{v.$accent};
   --swiper-navigation-color: #{v.$accent};
-  --swiper-navigation-sides-offset: #{v.$space-2};
   --swiper-pagination-color: #{v.$accent};
   --swiper-pagination-bullet-inactive-color: #{v.$neutral-500};
   --swiper-pagination-bullet-inactive-opacity: 0.45;
@@ -46,6 +52,11 @@
 
   @include m.respond-below(md) {
     --swiper-navigation-size: 0px;
+  }
+
+  @include m.respond-to(md) {
+    // Default Swiper 4px: frecce più vicine al bordo dello swiper che alla card centrata
+    --swiper-navigation-sides-offset: 4px;
   }
 }
 

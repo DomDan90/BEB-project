@@ -52,8 +52,8 @@ $border-radius-lg: 16px;
 $border-radius-xl: 24px;
 $border-radius-pill: 999px;
 
-// Pulsanti primari tema: quasi squadrati
-$btn-accent-border-radius: 2px;
+// Pulsanti primari tema: stesso raggio di “Continua prenotazione” / campi booking (8px)
+$btn-accent-border-radius: $border-radius-md;
 
 $max-width: 1320px;
 $container-padding-x: $space-3;

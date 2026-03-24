@@ -328,7 +328,6 @@ $hero-booking-card-max: 1355px;
 .btn-hero-submit {
   @include m.btn-accent();
   min-height: 46px;
-  border-radius: 8px;
   padding-inline: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 0.02em;
