@@ -54,12 +54,15 @@ export class HeroComponent implements OnInit {
 
   readonly rooms = MOCK_ROOMS;
   readonly minStayNights = this.bookingService.getMinimumStay();
+  readonly todayIso = this.toIsoDate(new Date());
+  readonly adultsOptions = Array.from({ length: 10 }, (_, i) => i + 1);
+  readonly childrenOptions = Array.from({ length: 11 }, (_, i) => i);
 
   readonly form: FormGroup = this.fb.group(
     {
       checkIn: ['', Validators.required],
       checkOut: ['', Validators.required],
-      adults: [2, [Validators.required, Validators.min(1), Validators.max(20)]],
+      adults: [2, [Validators.required, Validators.min(1), Validators.max(10)]],
       children: [0, [Validators.min(0), Validators.max(10)]],
       roomId: ['', Validators.required],
     },
@@ -91,6 +94,18 @@ export class HeroComponent implements OnInit {
       (c.get('checkIn')?.touched ?? false) &&
       (c.get('checkOut')?.touched ?? false)
     );
+  }
+
+  openDatePicker(input: HTMLInputElement): void {
+    input.focus();
+    input.showPicker?.();
+  }
+
+  private toIsoDate(date: Date): string {
+    const y = date.getFullYear();
+    const m = `${date.getMonth() + 1}`.padStart(2, '0');
+    const d = `${date.getDate()}`.padStart(2, '0');
+    return `${y}-${m}-${d}`;
   }
 
   onSubmit(): void {

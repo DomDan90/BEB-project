@@ -106,7 +106,7 @@
   bottom: v.$hero-booking-bottom-offset;
   left: 50%;
   transform: translateX(-50%);
-  width: min(90%, 1100px);
+  width: min(94%, 1280px);
   z-index: 10;
 
   @include m.respond-below(md) {
@@ -154,9 +154,16 @@
     color: rgba(v.$accent, 0.95);
   }
 
+  .input-group {
+    flex-wrap: nowrap;
+    align-items: stretch;
+    min-width: 0;
+  }
+
   .form-control,
   .form-select {
     height: 46px;
+    width: 100%;
     border-radius: 8px;
     background-color: v.$booking-field-bg;
     color: v.$booking-field-color;
@@ -176,21 +183,90 @@
     }
   }
 
+  .form-select {
+    appearance: none;
+    background-image:
+      linear-gradient(45deg, transparent 50%, rgba(v.$accent, 0.95) 50%),
+      linear-gradient(135deg, rgba(v.$accent, 0.95) 50%, transparent 50%);
+    background-position:
+      calc(100% - 16px) calc(50% - 3px),
+      calc(100% - 10px) calc(50% - 3px);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    option {
+      background-color: rgba(v.$primary-dark, 0.96);
+      color: v.$neutral-100;
+    }
+  }
+
+  input[type='date'] {
+    color-scheme: dark;
+  }
+
+  input[type='date']::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+  }
+
   .input-group-text {
+    height: 46px;
     background-color: v.$booking-field-bg;
     border-color: rgba(v.$neutral-100, 0.18);
     color: v.$accent;
     border-radius: 8px;
   }
 
+  .input-group-text--picker {
+    cursor: pointer;
+    min-width: v.$touch-target-min;
+    padding-inline: 0.7rem;
+    justify-content: center;
+    transition:
+      background-color v.$transition-fast,
+      color v.$transition-fast;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    &:hover {
+      background-color: rgba(v.$accent, 0.2);
+      color: v.$accent-light;
+    }
+
+    &:focus-visible {
+      outline: v.$outline-width solid v.$input-focus-border;
+      outline-offset: v.$outline-offset;
+    }
+  }
+
   .text-muted {
     color: rgba(v.$neutral-100, 0.92) !important;
+  }
+
+  @include m.respond-to(lg) {
+    .form-control,
+    .form-select {
+      min-width: 7.25rem;
+    }
+
+    .input-group .form-control[type='date'] {
+      min-width: 9.25rem;
+    }
   }
 
   @include m.respond-below(md) {
     .row.g-4,
     .row.g-3 {
       --bs-gutter-x: 0;
+    }
+
+    .form-control,
+    .form-select,
+    .input-group-text {
+      height: 44px;
     }
   }
 }

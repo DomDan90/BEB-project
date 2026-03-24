@@ -27,7 +27,7 @@
     >
       <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="hero-booking__form">
         <div class="row g-4 align-items-end">
-          <div class="col-lg-3">
+          <div class="col-lg-2">
             <h2 class="hero-booking__heading h5 mb-0">
               Prenota<br class="d-none d-md-inline" />
               la tua camera
@@ -36,7 +36,7 @@
               Soggiorno minimo {{ minStayNights }} notti.
             </p>
           </div>
-          <div class="col-lg-9">
+          <div class="col-lg-10">
             <div class="row g-3">
               <div class="col-md-6 col-xl-3">
                 <label class="form-label" for="hero-check-in">Arrivo</label>
@@ -47,10 +47,17 @@
                     class="form-control"
                     formControlName="checkIn"
                     autocomplete="off"
+                    [min]="todayIso"
+                    #checkInInput
                   />
-                  <span class="input-group-text" aria-hidden="true">
+                  <button
+                    type="button"
+                    class="input-group-text input-group-text--picker"
+                    (click)="openDatePicker(checkInInput)"
+                    aria-label="Apri calendario data di arrivo"
+                  >
                     <i class="bi bi-calendar3"></i>
-                  </span>
+                  </button>
                 </div>
                 @if (form.get('checkIn')?.invalid && form.get('checkIn')?.touched) {
                   <p class="form-text text-danger small mb-0">Seleziona la data di arrivo.</p>
@@ -65,41 +72,42 @@
                     class="form-control"
                     formControlName="checkOut"
                     autocomplete="off"
+                    [min]="form.get('checkIn')?.value || todayIso"
+                    #checkOutInput
                   />
-                  <span class="input-group-text" aria-hidden="true">
+                  <button
+                    type="button"
+                    class="input-group-text input-group-text--picker"
+                    (click)="openDatePicker(checkOutInput)"
+                    aria-label="Apri calendario data di partenza"
+                  >
                     <i class="bi bi-calendar3"></i>
-                  </span>
+                  </button>
                 </div>
                 @if (form.get('checkOut')?.invalid && form.get('checkOut')?.touched) {
                   <p class="form-text text-danger small mb-0">Seleziona la data di partenza.</p>
                 }
               </div>
-              <div class="col-md-6 col-xl-2">
+              <div class="col-md-4 col-xl-2">
                 <label class="form-label" for="hero-adults">Adulti</label>
-                <input
-                  id="hero-adults"
-                  type="number"
-                  min="1"
-                  max="20"
-                  class="form-control"
-                  formControlName="adults"
-                />
+                <select id="hero-adults" class="form-select" formControlName="adults">
+                  @for (n of adultsOptions; track n) {
+                    <option [value]="n">{{ n }}</option>
+                  }
+                </select>
                 @if (form.get('adults')?.invalid && form.get('adults')?.touched) {
                   <p class="form-text text-danger small mb-0">Indica almeno 1 adulto.</p>
                 }
               </div>
-              <div class="col-md-6 col-xl-2">
+              <div class="col-md-4 col-xl-2">
                 <label class="form-label" for="hero-children">Bambini</label>
-                <input
-                  id="hero-children"
-                  type="number"
-                  min="0"
-                  max="10"
-                  class="form-control"
-                  formControlName="children"
-                />
+                <select id="hero-children" class="form-select" formControlName="children">
+                  @for (n of childrenOptions; track n) {
+                    <option [value]="n">{{ n }}</option>
+                  }
+                </select>
               </div>
-              <div class="col-xl-2">
+              <div class="col-md-4 col-xl-2">
                 <label class="form-label" for="hero-room">Camera</label>
                 <select id="hero-room" class="form-select" formControlName="roomId">
                   <option value="" disabled>Seleziona…</option>
