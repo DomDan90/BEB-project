@@ -1,3 +1,4 @@
+@use 'sass:string';
 @use 'variables' as v;
 @use 'mixins' as m;
 
@@ -101,12 +102,16 @@
   }
 }
 
+// Più largo del container sito (1320px) così datepicker e campi respirano meglio
+$hero-booking-card-max: 1540px;
+
 .hero-booking-wrap {
   position: absolute;
   bottom: v.$hero-booking-bottom-offset;
   left: 50%;
   transform: translateX(-50%);
-  width: min(94%, 1280px);
+  width: min(98%, $hero-booking-card-max);
+  max-width: min(#{$hero-booking-card-max}, calc(100vw - 1.5rem));
   z-index: 10;
 
   @include m.respond-below(md) {
@@ -160,8 +165,7 @@
     min-width: 0;
   }
 
-  .form-control,
-  .form-select {
+  .form-control {
     height: 46px;
     width: 100%;
     border-radius: 8px;
@@ -183,33 +187,47 @@
     }
   }
 
-  .form-select {
-    appearance: none;
-    background-image:
-      linear-gradient(45deg, transparent 50%, rgba(v.$accent, 0.95) 50%),
-      linear-gradient(135deg, rgba(v.$accent, 0.95) 50%, transparent 50%);
-    background-position:
-      calc(100% - 16px) calc(50% - 3px),
-      calc(100% - 10px) calc(50% - 3px);
-    background-size: 6px 6px, 6px 6px;
-    background-repeat: no-repeat;
-    padding-right: 2rem;
+  .hero-booking__dropdown {
+    width: 100%;
+  }
+
+  .hero-booking__dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 46px;
+    padding: 0 2rem 0 0.75rem;
+    border-radius: 8px;
+    background-color: v.$booking-field-bg;
+    color: v.$booking-field-color;
+    border: 1px solid rgba(v.$neutral-100, 0.18);
+    font-size: v.$font-size-sm;
+    text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
+    overflow: hidden;
+    $chevron-stroke: '%23' + string.slice('#{v.$accent}', 2);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath stroke='#{$chevron-stroke}' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round' d='M5%207.5l5-3.5%205%203.5'/%3E%3Cpath stroke='#{$chevron-stroke}' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round' d='M5%2012.5l5%203.5%205-3.5'/%3E%3C/svg%3E");
+    background-position: right 0.65rem center;
+    background-size: 1.125rem 1.125rem;
+    background-repeat: no-repeat;
+    box-shadow: none;
 
-    option {
-      background-color: rgba(v.$primary-dark, 0.96);
-      color: v.$neutral-100;
+    &::after {
+      display: none;
     }
-  }
 
-  input[type='date'] {
-    color-scheme: dark;
-  }
+    &:hover {
+      border-color: rgba(v.$neutral-100, 0.28);
+      color: v.$booking-field-color;
+    }
 
-  input[type='date']::-webkit-calendar-picker-indicator {
-    display: none;
-    -webkit-appearance: none;
+    &:focus-visible {
+      border-color: v.$input-focus-border;
+      box-shadow: 0 0 0 v.$space-1 v.$input-focus-ring;
+      outline: none;
+    }
   }
 
   .input-group-text {
@@ -246,14 +264,23 @@
     color: rgba(v.$neutral-100, 0.92) !important;
   }
 
+  .hero-booking__fields {
+    @include m.respond-to(xl) {
+      --bs-gutter-x: 1rem;
+    }
+  }
+
   @include m.respond-to(lg) {
-    .form-control,
-    .form-select {
-      min-width: 7.25rem;
+    .form-control {
+      min-width: 9rem;
     }
 
-    .input-group .form-control[type='date'] {
-      min-width: 9.25rem;
+    .input-group .form-control {
+      min-width: 11.5rem;
+    }
+
+    .hero-booking__dropdown-toggle {
+      min-width: 9rem;
     }
   }
 
@@ -264,8 +291,8 @@
     }
 
     .form-control,
-    .form-select,
-    .input-group-text {
+    .input-group-text,
+    .hero-booking__dropdown-toggle {
       height: 44px;
     }
   }

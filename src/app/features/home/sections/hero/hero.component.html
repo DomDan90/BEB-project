@@ -37,23 +37,29 @@
             </p>
           </div>
           <div class="col-lg-10">
-            <div class="row g-3">
-              <div class="col-md-6 col-xl-3">
+            <div class="row g-3 hero-booking__fields">
+              <div class="col-12 col-sm-6 col-xl-3">
                 <label class="form-label" for="hero-check-in">Arrivo</label>
-                <div class="input-group">
+                <div class="input-group" #heroCheckInGroup>
                   <input
                     id="hero-check-in"
-                    type="date"
                     class="form-control"
                     formControlName="checkIn"
                     autocomplete="off"
-                    [min]="todayIso"
-                    #checkInInput
+                    ngbDatepicker
+                    #checkInDp="ngbDatepicker"
+                    [minDate]="todayStruct"
+                    [container]="'body'"
+                    [placement]="'bottom-start'"
+                    [positionTarget]="heroCheckInGroup"
+                    [datepickerClass]="'bnb-ngb-datepicker'"
+                    [autoClose]="'outside'"
+                    [popperOptions]="popperMatchReferenceWidth"
                   />
                   <button
                     type="button"
                     class="input-group-text input-group-text--picker"
-                    (click)="openDatePicker(checkInInput)"
+                    (click)="checkInDp.toggle()"
                     aria-label="Apri calendario data di arrivo"
                   >
                     <i class="bi bi-calendar3"></i>
@@ -63,22 +69,28 @@
                   <p class="form-text text-danger small mb-0">Seleziona la data di arrivo.</p>
                 }
               </div>
-              <div class="col-md-6 col-xl-3">
+              <div class="col-12 col-sm-6 col-xl-3">
                 <label class="form-label" for="hero-check-out">Partenza</label>
-                <div class="input-group">
+                <div class="input-group" #heroCheckOutGroup>
                   <input
                     id="hero-check-out"
-                    type="date"
                     class="form-control"
                     formControlName="checkOut"
                     autocomplete="off"
-                    [min]="form.get('checkIn')?.value || todayIso"
-                    #checkOutInput
+                    ngbDatepicker
+                    #checkOutDp="ngbDatepicker"
+                    [minDate]="minCheckOutDate()"
+                    [container]="'body'"
+                    [placement]="'bottom-start'"
+                    [positionTarget]="heroCheckOutGroup"
+                    [datepickerClass]="'bnb-ngb-datepicker'"
+                    [autoClose]="'outside'"
+                    [popperOptions]="popperMatchReferenceWidth"
                   />
                   <button
                     type="button"
                     class="input-group-text input-group-text--picker"
-                    (click)="openDatePicker(checkOutInput)"
+                    (click)="checkOutDp.toggle()"
                     aria-label="Apri calendario data di partenza"
                   >
                     <i class="bi bi-calendar3"></i>
@@ -88,33 +100,96 @@
                   <p class="form-text text-danger small mb-0">Seleziona la data di partenza.</p>
                 }
               </div>
-              <div class="col-md-4 col-xl-2">
-                <label class="form-label" for="hero-adults">Adulti</label>
-                <select id="hero-adults" class="form-select" formControlName="adults">
-                  @for (n of adultsOptions; track n) {
-                    <option [value]="n">{{ n }}</option>
-                  }
-                </select>
+              <div class="col-6 col-md-6 col-xl-3">
+                <label class="form-label" id="hero-adults-label">Adulti</label>
+                <div
+                  ngbDropdown
+                  placement="bottom-start"
+                  container="body"
+                  dropdownClass="bnb-dropdown-panel"
+                  class="hero-booking__dropdown"
+                  [popperOptions]="popperMatchReferenceWidth"
+                >
+                  <button
+                    type="button"
+                    class="hero-booking__dropdown-toggle"
+                    ngbDropdownToggle
+                    id="hero-adults"
+                    aria-labelledby="hero-adults-label"
+                  >
+                    {{ form.get('adults')?.value }}
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="hero-adults-label">
+                    @for (n of adultsOptions; track n) {
+                      <button type="button" ngbDropdownItem (click)="form.patchValue({ adults: n })">
+                        {{ n }}
+                      </button>
+                    }
+                  </div>
+                </div>
                 @if (form.get('adults')?.invalid && form.get('adults')?.touched) {
                   <p class="form-text text-danger small mb-0">Indica almeno 1 adulto.</p>
                 }
               </div>
-              <div class="col-md-4 col-xl-2">
-                <label class="form-label" for="hero-children">Bambini</label>
-                <select id="hero-children" class="form-select" formControlName="children">
-                  @for (n of childrenOptions; track n) {
-                    <option [value]="n">{{ n }}</option>
-                  }
-                </select>
+              <div class="col-6 col-md-6 col-xl-3">
+                <label class="form-label" id="hero-children-label">Bambini</label>
+                <div
+                  ngbDropdown
+                  placement="bottom-start"
+                  container="body"
+                  dropdownClass="bnb-dropdown-panel"
+                  class="hero-booking__dropdown"
+                  [popperOptions]="popperMatchReferenceWidth"
+                >
+                  <button
+                    type="button"
+                    class="hero-booking__dropdown-toggle"
+                    ngbDropdownToggle
+                    id="hero-children"
+                    aria-labelledby="hero-children-label"
+                  >
+                    {{ form.get('children')?.value }}
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="hero-children-label">
+                    @for (n of childrenOptions; track n) {
+                      <button type="button" ngbDropdownItem (click)="form.patchValue({ children: n })">
+                        {{ n }}
+                      </button>
+                    }
+                  </div>
+                </div>
               </div>
-              <div class="col-md-4 col-xl-2">
-                <label class="form-label" for="hero-room">Camera</label>
-                <select id="hero-room" class="form-select" formControlName="roomId">
-                  <option value="" disabled>Seleziona…</option>
-                  @for (room of rooms; track room.id) {
-                    <option [value]="room.id">{{ room.name }}</option>
-                  }
-                </select>
+              <div class="col-12 col-md-8 col-xl-12 mt-2">
+                <label class="form-label" id="hero-room-label">Camera</label>
+                <div
+                  ngbDropdown
+                  placement="bottom-start"
+                  container="body"
+                  dropdownClass="bnb-dropdown-panel"
+                  class="hero-booking__dropdown"
+                  [popperOptions]="popperMatchReferenceWidth"
+                >
+                  <button
+                    type="button"
+                    class="hero-booking__dropdown-toggle"
+                    ngbDropdownToggle
+                    id="hero-room"
+                    aria-labelledby="hero-room-label"
+                  >
+                    {{ roomLabel() }}
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="hero-room-label">
+                    @for (room of rooms; track room.id) {
+                      <button
+                        type="button"
+                        ngbDropdownItem
+                        (click)="selectRoom(room.id)"
+                      >
+                        {{ room.name }}
+                      </button>
+                    }
+                  </div>
+                </div>
                 @if (form.get('roomId')?.invalid && form.get('roomId')?.touched) {
                   <p class="form-text text-danger small mb-0">Scegli una camera.</p>
                 }

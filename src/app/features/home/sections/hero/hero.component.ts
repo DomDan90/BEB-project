@@ -2,11 +2,13 @@ import { isPlatformBrowser } from '@angular/common';
 import {
   afterNextRender,
   Component,
+  DestroyRef,
   inject,
   OnInit,
   PLATFORM_ID,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   AbstractControl,
   FormBuilder,
@@ -17,6 +19,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbDatepickerModule, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap/datepicker';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap/dropdown';
+import { minCheckoutStructFromCheckInIso, todayNgbStruct } from '../../../../core/booking-date/booking-date-struct.util';
+import { ngbPopperMatchReferenceWidth } from '../../../../core/booking-date/ngb-popper-match-reference';
 import { BookingService } from '../../../../core/services/booking.service';
 import { SeoService } from '../../../../core/services/seo.service';
 import { MOCK_ROOMS } from '../../../../mock/rooms.mock';
@@ -37,12 +43,13 @@ function createBookingDateRangeValidator(booking: BookingService): ValidatorFn {
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgbDatepickerModule, NgbDropdownModule],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })
 export class HeroComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
+  private readonly destroyRef = inject(DestroyRef);
   private readonly bookingService = inject(BookingService);
   private readonly seo = inject(SeoService);
   private readonly store = inject(BookingStore);
@@ -54,9 +61,11 @@ export class HeroComponent implements OnInit {
 
   readonly rooms = MOCK_ROOMS;
   readonly minStayNights = this.bookingService.getMinimumStay();
-  readonly todayIso = this.toIsoDate(new Date());
+  readonly todayStruct: NgbDateStruct = todayNgbStruct();
   readonly adultsOptions = Array.from({ length: 10 }, (_, i) => i + 1);
   readonly childrenOptions = Array.from({ length: 11 }, (_, i) => i);
+
+  readonly popperMatchReferenceWidth = ngbPopperMatchReferenceWidth;
 
   readonly form: FormGroup = this.fb.group(
     {
@@ -70,6 +79,20 @@ export class HeroComponent implements OnInit {
   );
 
   constructor() {
+    this.form
+      .get('checkIn')
+      ?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        const ci = this.form.get('checkIn')?.value as string;
+        const co = this.form.get('checkOut')?.value as string;
+        if (!co) {
+          return;
+        }
+        if (!ci || !this.bookingService.validateBookingDates(ci, co)) {
+          this.form.patchValue({ checkOut: '' }, { emitEvent: false });
+        }
+      });
+
     afterNextRender(() => {
       if (!isPlatformBrowser(this.platformId)) {
         return;
@@ -96,16 +119,22 @@ export class HeroComponent implements OnInit {
     );
   }
 
-  openDatePicker(input: HTMLInputElement): void {
-    input.focus();
-    input.showPicker?.();
+  minCheckOutDate(): NgbDateStruct {
+    const checkIn = this.form.get('checkIn')?.value as string;
+    return minCheckoutStructFromCheckInIso(checkIn, this.minStayNights);
   }
 
-  private toIsoDate(date: Date): string {
-    const y = date.getFullYear();
-    const m = `${date.getMonth() + 1}`.padStart(2, '0');
-    const d = `${date.getDate()}`.padStart(2, '0');
-    return `${y}-${m}-${d}`;
+  roomLabel(): string {
+    const id = this.form.get('roomId')?.value as string;
+    if (!id) {
+      return 'Seleziona…';
+    }
+    const room = this.rooms.find((r) => r.id === Number(id));
+    return room?.name ?? 'Seleziona…';
+  }
+
+  selectRoom(roomId: number): void {
+    this.form.patchValue({ roomId: String(roomId) });
   }
 
   onSubmit(): void {

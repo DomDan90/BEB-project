@@ -1,43 +1,94 @@
-<div class="container-bnb section page-shell">
+<div class="container-bnb section page-shell booking-form-page">
   <app-breadcrumb [items]="crumbs" />
   <h1 class="section-title mt-3">Prenotazione diretta</h1>
   <span class="accent-line" aria-hidden="true"></span>
   <p class="lead">Soggiorno minimo {{ minStay }} notti.</p>
 
   <div class="row g-4 mt-2">
-    <div class="col-lg-6">
-      <label class="form-label" for="room-select">Camera</label>
-      <select
-        id="room-select"
-        class="form-select"
-        [ngModel]="store.selectedRoom()?.id ?? ''"
-        (ngModelChange)="onRoomChange($event)"
+    <div class="col-12 col-md-6 col-lg-4">
+      <label class="form-label" id="booking-room-label">Camera</label>
+      <div
+        ngbDropdown
+        placement="bottom-start"
+        container="body"
+        dropdownClass="bnb-dropdown-panel"
+        class="booking-form-page__dropdown"
+        [popperOptions]="popperMatchReferenceWidth"
       >
-        <option value="">Seleziona…</option>
-        @for (room of rooms; track room.id) {
-          <option [value]="room.id">{{ room.name }} — {{ room.pricePerNight | currencyEur }}/notte</option>
-        }
-      </select>
+        <button
+          type="button"
+          class="booking-form-page__dropdown-toggle"
+          ngbDropdownToggle
+          id="room-select"
+          aria-labelledby="booking-room-label"
+        >
+          {{ roomToggleLabel() }}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="booking-room-label">
+          <button type="button" ngbDropdownItem (click)="clearRoom()">Seleziona…</button>
+          @for (room of rooms; track room.id) {
+            <button type="button" ngbDropdownItem (click)="selectRoom(room.id)">
+              {{ room.name }} — {{ room.pricePerNight | currencyEur }}/notte
+            </button>
+          }
+        </div>
+      </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-12 col-md-6 col-lg-4">
       <label class="form-label" for="check-in">Check-in</label>
-      <input
-        id="check-in"
-        type="date"
-        class="form-control"
-        [ngModel]="store.checkIn()"
-        (ngModelChange)="store.checkIn.set($event); validateAndFlag()"
-      />
+      <div class="input-group booking-form-page__date" #bookingCinGroup>
+        <input
+          id="check-in"
+          class="form-control"
+          [ngModel]="store.checkIn()"
+          (ngModelChange)="store.checkIn.set($event ?? ''); validateAndFlag()"
+          ngbDatepicker
+          #cinDp="ngbDatepicker"
+          [minDate]="todayStruct"
+          [container]="'body'"
+          [placement]="'bottom-start'"
+          [positionTarget]="bookingCinGroup"
+          [datepickerClass]="'bnb-ngb-datepicker'"
+          [autoClose]="'outside'"
+          [popperOptions]="popperMatchReferenceWidth"
+        />
+        <button
+          type="button"
+          class="btn btn-outline-secondary booking-form-page__date-btn"
+          (click)="cinDp.toggle()"
+          aria-label="Apri calendario check-in"
+        >
+          <i class="bi bi-calendar3" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-12 col-md-6 col-lg-4">
       <label class="form-label" for="check-out">Check-out</label>
-      <input
-        id="check-out"
-        type="date"
-        class="form-control"
-        [ngModel]="store.checkOut()"
-        (ngModelChange)="store.checkOut.set($event); validateAndFlag()"
-      />
+      <div class="input-group booking-form-page__date" #bookingCoutGroup>
+        <input
+          id="check-out"
+          class="form-control"
+          [ngModel]="store.checkOut()"
+          (ngModelChange)="store.checkOut.set($event ?? ''); validateAndFlag()"
+          ngbDatepicker
+          #coutDp="ngbDatepicker"
+          [minDate]="minCheckOutDate()"
+          [container]="'body'"
+          [placement]="'bottom-start'"
+          [positionTarget]="bookingCoutGroup"
+          [datepickerClass]="'bnb-ngb-datepicker'"
+          [autoClose]="'outside'"
+          [popperOptions]="popperMatchReferenceWidth"
+        />
+        <button
+          type="button"
+          class="btn btn-outline-secondary booking-form-page__date-btn"
+          (click)="coutDp.toggle()"
+          aria-label="Apri calendario check-out"
+        >
+          <i class="bi bi-calendar3" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
     <div class="col-12">
       <label class="form-label" for="guests">Ospiti</label>
@@ -45,7 +96,7 @@
         id="guests"
         type="number"
         min="1"
-        class="form-control"
+        class="form-control booking-form-page__guests"
         [ngModel]="store.guests()"
         (ngModelChange)="store.guests.set(+$event)"
       />
@@ -53,7 +104,9 @@
   </div>
 
   @if (dateError) {
-    <p class="text-danger small mt-2" role="alert">Controlla le date (check-out dopo check-in, minimo {{ minStay }} notti).</p>
+    <p class="text-danger small mt-2" role="alert">
+      Controlla le date (check-out dopo check-in, minimo {{ minStay }} notti).
+    </p>
   }
 
   @if (store.selectedRoom(); as room) {
