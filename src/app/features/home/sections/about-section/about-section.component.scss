@@ -104,6 +104,12 @@
     border-radius: v.$border-radius-lg;
     pointer-events: none;
   }
+
+  @include m.respond-below(md) {
+    &::before {
+      display: none;
+    }
+  }
 }
 
 .about-section__img {

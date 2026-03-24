@@ -27,7 +27,7 @@
   gap: v.$space-6;
   align-items: stretch;
 
-  @include m.respond-to(lg) {
+  @include m.respond-to(lg-plus) {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
     gap: v.$space-8;
     column-gap: v.$space-8;
@@ -41,7 +41,7 @@
 .location-section__map {
   width: 100%;
   min-height: 280px;
-  height: 340px;
+  height: 280px;
   border-radius: v.$border-radius-lg;
   overflow: hidden;
   border: 1px solid v.$border-subtle;
@@ -50,7 +50,7 @@
   z-index: 0;
 
   @include m.respond-to(md) {
-    min-height: 360px;
+    min-height: 400px;
     height: 400px;
   }
 }
@@ -141,6 +141,9 @@
 }
 
 .location-section__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: v.$touch-target-min;
   color: v.$link-color;
   text-decoration: underline;
   text-underline-offset: 0.15em;

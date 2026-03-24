@@ -22,23 +22,22 @@
   margin: v.$space-4 auto 0;
 }
 
-// Masonry-style: colonne CSS, altezze naturali dalle proporzioni delle immagini
 .gallery-section__masonry {
-  column-count: 1;
-  column-gap: v.$space-3;
+  display: grid;
+  gap: v.$space-3;
+  grid-template-columns: 1fr;
 
   @include m.respond-to(md) {
-    column-count: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   @include m.respond-to(lg) {
-    column-count: 3;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 .gallery-section__item {
-  break-inside: avoid;
-  margin-bottom: v.$space-3;
+  min-width: 0;
 }
 
 .gallery-section__trigger {

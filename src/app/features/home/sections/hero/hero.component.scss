@@ -43,10 +43,6 @@
     @include m.respond-below(md) {
       background-attachment: scroll, scroll;
     }
-
-    @media (hover: none) {
-      background-attachment: scroll, scroll;
-    }
   }
 }
 
@@ -90,6 +86,10 @@
   line-height: v.$line-height-tight;
   color: v.$hero-heading-color;
   margin: 0 0 v.$space-3;
+
+  @include m.respond-below(md) {
+    font-size: clamp(1.9rem, 9vw, 2.65rem);
+  }
 }
 
 .hero-banner__lead {
@@ -120,7 +120,7 @@
     transform: none;
     width: 100%;
     max-width: none;
-    margin-top: -1px;
+    margin-top: v.$hero-booking-bottom-offset-mobile;
   }
 }
 
@@ -191,6 +191,13 @@
   .text-muted {
     color: rgba(v.$neutral-100, 0.92) !important;
   }
+
+  @include m.respond-below(md) {
+    .row.g-4,
+    .row.g-3 {
+      --bs-gutter-x: 0;
+    }
+  }
 }
 
 .btn-hero-submit {
@@ -201,4 +208,8 @@
   text-transform: uppercase;
   letter-spacing: 0.02em;
   font-weight: v.$font-weight-bold;
+
+  @include m.respond-below(md) {
+    width: 100%;
+  }
 }

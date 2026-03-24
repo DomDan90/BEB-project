@@ -43,6 +43,17 @@
   --swiper-pagination-bullet-inactive-opacity: 0.45;
   --swiper-pagination-bottom: 0;
   --swiper-pagination-top: auto;
+
+  @include m.respond-below(md) {
+    --swiper-navigation-size: 0px;
+  }
+}
+
+.reviews-section__swiper::part(button-prev),
+.reviews-section__swiper::part(button-next) {
+  @include m.respond-below(md) {
+    display: none;
+  }
 }
 
 .reviews-section__card {
@@ -58,6 +69,10 @@
 
   @include m.respond-to(md) {
     padding: v.$space-8 v.$space-6;
+  }
+
+  @include m.respond-below(md) {
+    padding: v.$space-4 v.$space-3;
   }
 }
 

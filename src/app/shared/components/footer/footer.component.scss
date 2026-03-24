@@ -22,6 +22,10 @@
   display: grid;
   gap: v.$space-8;
 
+  @include m.respond-to(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   @include m.respond-to(lg) {
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
     gap: v.$space-8;
@@ -101,6 +105,10 @@
 .footer-bnb__social {
   display: flex;
   gap: v.$space-3;
+
+  @include m.respond-below(md) {
+    justify-content: center;
+  }
 }
 
 .footer-bnb__social-link {
