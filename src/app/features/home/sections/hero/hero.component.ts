@@ -26,6 +26,7 @@ import { ngbPopperMatchReferenceWidth } from '../../../../core/booking-date/ngb-
 import { BookingService } from '../../../../core/services/booking.service';
 import { SeoService } from '../../../../core/services/seo.service';
 import { MOCK_ROOMS } from '../../../../mock/rooms.mock';
+import { ISCHIA_HERO_OG } from '../../../../core/media/ischia-media';
 import { BookingStore } from '../../../../store/booking.store';
 
 function createBookingDateRangeValidator(booking: BookingService): ValidatorFn {
@@ -104,9 +105,9 @@ export class HeroComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.updateMeta(
-      'B&B — Benvenuto',
-      'Prenota il tuo soggiorno in un bed & breakfast elegante: camere curate, colazione inclusa e accoglienza autentica.',
-      'https://picsum.photos/seed/bnb-hero/1200/630',
+      'B&B Ischia — Benvenuto',
+      'Prenota il tuo soggiorno a Ischia: B&B vicino al mare, colazione inclusa, terme e spiagge a portata di mano.',
+      ISCHIA_HERO_OG,
     );
   }
 

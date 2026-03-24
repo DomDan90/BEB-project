@@ -3,15 +3,7 @@
     <div class="footer-bnb__grid">
       <div class="footer-bnb__col">
         <a routerLink="/" class="footer-bnb__logo-link">
-          <img
-            [src]="brandLogoSrc"
-            [alt]="brandLogoAlt"
-            width="180"
-            height="50"
-            class="footer-bnb__logo"
-            loading="lazy"
-            decoding="async"
-          />
+          <app-brand-logo class="footer-bnb__logo" [ariaLabel]="brandLogoAlt" />
         </a>
         <p class="footer-bnb__desc">{{ tagline }}</p>
         <div class="footer-bnb__social" aria-label="Social">

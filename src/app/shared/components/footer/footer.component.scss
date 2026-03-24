@@ -45,11 +45,10 @@
   }
 }
 
+/* Dimensioni SVG nel componente app-brand-logo. */
 .footer-bnb__logo {
-  width: auto;
-  max-height: 48px;
-  object-fit: cover;
   border-radius: v.$border-radius-sm;
+  overflow: hidden;
 }
 
 .footer-bnb__desc {

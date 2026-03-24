@@ -9,9 +9,10 @@ import {
   viewChild,
 } from '@angular/core';
 
+import { ISCHIA_REVIEW_AVATARS } from '../../../../core/media/ischia-media';
+
 export interface ReviewItem {
   id: number;
-  avatarSeed: string;
   name: string;
   city: string;
   text: string;
@@ -21,43 +22,38 @@ export interface ReviewItem {
 const MOCK_REVIEWS: ReadonlyArray<ReviewItem> = [
   {
     id: 1,
-    avatarSeed: 'avatar-1',
     name: 'Elena Marini',
-    city: 'Torino',
+    city: 'Napoli',
     rating: 5,
-    text: 'Soggiorno perfetto: camera silenziosa, colazione abbondante e proprietari disponibili. Torneremo in primavera per esplorare i sentieri vicini.',
+    text: 'Soggiorno perfetto a Ischia Porto: camera silenziosa, colazione con limoncello fatto in casa e consigli utili per le spiagge. Torneremo in primavera.',
   },
   {
     id: 2,
-    avatarSeed: 'avatar-2',
     name: 'Marco Vitale',
-    city: 'Bologna',
+    city: 'Salerno',
     rating: 5,
-    text: 'Pulizia impeccabile e dettagli curati. Il parcheggio comodo è stato un plus dopo un viaggio lungo. Consigliatissimo per una fuga dal traffico.',
+    text: 'Camera deluxe pulitissima, balconcino con vista sui tetti verdi. Dopo le terme di Ischia riposare lì è stato il massimo.',
   },
   {
     id: 3,
-    avatarSeed: 'avatar-3',
     name: 'Sofia Conti',
-    city: 'Firenze',
+    city: 'Roma',
     rating: 4,
-    text: 'Atmosfera accogliente e arredi eleganti. Abbiamo apprezzato i consigli sui ristoranti del posto. Unico neo: avremmo voluto restare una notte in più!',
+    text: 'Posizione comoda per il traghetto e per passeggiare verso il porto. Atmosfera accogliente; unico neo: avremmo voluto restare una notte in più!',
   },
   {
     id: 4,
-    avatarSeed: 'avatar-4',
     name: 'Andrea Gallo',
-    city: 'Genova',
+    city: 'Milano',
     rating: 5,
-    text: 'Ottimo rapporto qualità-prezzo. Letto comodissimo e doccia spaziosa. La navetta concordata dall’aeroporto ha funzionato senza intoppi.',
+    text: 'Ottimo punto per esplorare l’isola: Castello Aragonese, Sant’Angelo e spiagge raggiungibili in bus. Letto comodissimo.',
   },
   {
     id: 5,
-    avatarSeed: 'avatar-5',
     name: 'Giulia Ferretti',
-    city: 'Verona',
+    city: 'Torino',
     rating: 5,
-    text: 'Ideale per coppie: cena in un locale segnalato dalla struttura e rientro tranquilli a piedi. Staff gentile e discreto. Esperienza da ripetere.',
+    text: 'Ideale per una coppia: cena in un ristorante di pesce consigliato dalla struttura e rientro a piedi. Staff gentile e discreto.',
   },
 ];
 
@@ -90,7 +86,7 @@ export class ReviewsSectionComponent {
     });
   }
 
-  avatarUrl(seed: string): string {
-    return `https://picsum.photos/seed/${seed}/100/100`;
+  avatarUrl(index: number): string {
+    return ISCHIA_REVIEW_AVATARS[index % ISCHIA_REVIEW_AVATARS.length];
   }
 }

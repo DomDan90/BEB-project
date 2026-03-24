@@ -1,25 +1,26 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-/** Allineato ai mock della LocationSection (Napoli). */
-const ADDRESS_LINE = 'Via Toledo 156, 80132 Napoli';
-const PHONE_DISPLAY = '+39 081 555 0142';
-const PHONE_TEL = '+390815550142';
-const EMAIL = 'accoglienza@bb-napoli-esempio.it';
+import { BrandLogoComponent } from '../brand-logo/brand-logo.component';
+
+/** Allineato ai mock della LocationSection (Ischia). */
+const ADDRESS_LINE = 'Via Roma 42, 80077 Ischia (NA)';
+const PHONE_DISPLAY = '+39 081 333 0142';
+const PHONE_TEL = '+390813330142';
+const EMAIL = 'info@beb-ischia-esempio.it';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, BrandLogoComponent],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
-  readonly brandLogoSrc = 'https://picsum.photos/seed/bnb-logo/200/56';
-  readonly brandLogoAlt = 'Logo B&B';
+  readonly brandLogoAlt = 'B&B Ischia';
 
   readonly tagline =
-    'Ospitalità autentica nel cuore di Napoli: camere curate, colazione inclusa e accoglienza che fa la differenza.';
+    'Ospitalità a Ischia, tra mare e terme: camere curate, colazione con prodotti dell’isola e consigli per spiagge e borghi.';
 
   readonly addressLine = ADDRESS_LINE;
   readonly phoneDisplay = PHONE_DISPLAY;

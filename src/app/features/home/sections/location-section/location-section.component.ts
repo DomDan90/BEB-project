@@ -10,15 +10,16 @@ import {
 } from '@angular/core';
 import type { Map as LeafletMap } from 'leaflet';
 
-const MOCK_LAT = 40.8518;
-const MOCK_LNG = 14.2681;
+/** Ischia Porto (centro, zona porto/traghetti). */
+const MOCK_LAT = 40.7389;
+const MOCK_LNG = 13.951;
 
-const MOCK_ADDRESS_LINE = 'Via Toledo 156, 80132 Napoli';
+const MOCK_ADDRESS_LINE = 'Via Roma 42, 80077 Ischia (NA)';
 const MOCK_CHECK_IN = 'Check-in: 15:00 – 20:00 (su accordi anche fuori fascia)';
 const MOCK_CHECK_OUT = 'Check-out: entro le 11:00';
-const MOCK_PHONE_DISPLAY = '+39 081 555 0142';
-const MOCK_PHONE_TEL = '+390815550142';
-const MOCK_EMAIL = 'accoglienza@bb-napoli-esempio.it';
+const MOCK_PHONE_DISPLAY = '+39 081 333 0142';
+const MOCK_PHONE_TEL = '+390813330142';
+const MOCK_EMAIL = 'info@beb-ischia-esempio.it';
 
 @Component({
   selector: 'app-location-section',
@@ -86,7 +87,7 @@ export class LocationSectionComponent implements OnDestroy {
 
     L.marker([MOCK_LAT, MOCK_LNG], { icon: customIcon })
       .addTo(this.map)
-      .bindPopup('Benvenuti al nostro B&B');
+      .bindPopup('Il nostro B&B a Ischia');
 
     requestAnimationFrame(() => {
       this.map?.invalidateSize();

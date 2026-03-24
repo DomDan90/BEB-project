@@ -138,7 +138,8 @@ $hero-overlay: rgba(0, 0, 0, 0.62);
 $hero-subtitle-color: $accent;
 $hero-heading-color: $neutral-100;
 $hero-max-content-width: 42rem;
-$hero-image-url: 'https://picsum.photos/seed/bnb-hero/1920/900';
+// Allineare a src/app/core/media/ischia-media.ts → ISCHIA_HERO_WIDE
+$hero-image-url: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=1920&h=900&q=80';
 
 $outline-width: 2px;
 $outline-offset: 4px;
@@ -155,7 +156,8 @@ $booking-field-color: #ffffff;
 // Sezioni scure / facilities
 $section-dark-bg: #0a0a0a;
 $section-dark-overlay: rgba(0, 0, 0, 0.65);
-$facilities-section-image-url: 'https://picsum.photos/seed/bnb-facilities/1920/600';
+// Allineare a ischia-media.ts → ISCHIA_FACILITIES_BG
+$facilities-section-image-url: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&h=600&q=80';
 
 // Card camere
 $card-bg: $neutral-100;

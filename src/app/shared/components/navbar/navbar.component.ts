@@ -3,6 +3,8 @@ import { Component, HostListener, inject, PLATFORM_ID } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs';
 
+import { BrandLogoComponent } from '../brand-logo/brand-logo.component';
+
 type BootstrapCollapse = {
   getOrCreateInstance(element: Element, options?: object): { hide(): void };
 };
@@ -10,7 +12,7 @@ type BootstrapCollapse = {
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, BrandLogoComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
@@ -19,8 +21,7 @@ export class NavbarComponent {
   private readonly router = inject(Router);
   private readonly document = inject(DOCUMENT);
 
-  readonly brandLogoSrc = 'https://picsum.photos/seed/bnb-logo/200/56';
-  readonly brandLogoAlt = 'Logo B&B — torna alla homepage';
+  readonly brandLogoAlt = 'B&B Ischia — torna alla homepage';
   isScrolled = false;
   isHomeRoute = false;
 

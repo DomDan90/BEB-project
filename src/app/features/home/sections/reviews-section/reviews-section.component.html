@@ -4,7 +4,7 @@
       <h2 id="reviews-section-heading" class="section-title">Cosa dicono gli ospiti</h2>
       <span class="accent-line reviews-section__accent" aria-hidden="true"></span>
       <p class="reviews-section__intro text-body-secondary">
-        Le esperienze di chi ha scelto il nostro B&amp;B per il proprio soggiorno.
+        Chi ha soggiornato nel nostro B&amp;B a Ischia condivide la propria esperienza.
       </p>
     </header>
 
@@ -28,13 +28,13 @@
         space-between="24"
         auto-height="true"
       >
-        @for (review of reviews; track review.id) {
+        @for (review of reviews; track review.id; let i = $index) {
           <swiper-slide>
             <article class="reviews-section__card">
               <div class="reviews-section__profile">
                 <img
                   class="reviews-section__avatar"
-                  [src]="avatarUrl(review.avatarSeed)"
+                  [src]="avatarUrl(i)"
                   [alt]="'Foto profilo di ' + review.name"
                   width="100"
                   height="100"

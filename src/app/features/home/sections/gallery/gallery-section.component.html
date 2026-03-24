@@ -4,12 +4,12 @@
       <h2 id="gallery-section-heading" class="section-title">Galleria</h2>
       <span class="accent-line gallery-section__accent" aria-hidden="true"></span>
       <p class="gallery-section__intro text-body-secondary">
-        Un assaggio degli spazi del B&amp;B: clicca sulle foto per ingrandirle e sfogliare la raccolta.
+        Atmosfera del nostro B&amp;B a Ischia: spazi, colazione e dettagli — clicca per aprire la lightbox.
       </p>
     </header>
 
     <div class="gallery-section__masonry" role="list">
-      @for (item of items; track item.seed; let i = $index) {
+      @for (item of items; track item.thumbSrc; let i = $index) {
         <div
           class="gallery-section__item"
           role="listitem"
@@ -27,8 +27,8 @@
               class="gallery-section__img"
               [src]="gridSrc(item)"
               [alt]="item.alt"
-              [width]="item.width"
-              [height]="item.height"
+              [width]="item.thumbW"
+              [height]="item.thumbH"
               loading="lazy"
               decoding="async"
             />

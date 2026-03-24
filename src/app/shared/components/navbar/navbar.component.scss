@@ -45,20 +45,10 @@
   }
 }
 
+/* Le dimensioni del logo sono in brand-logo.component.scss (encapsulation). */
 .logo-img {
-  width: auto;
-  max-height: 40px;
-  object-fit: cover;
   border-radius: v.$border-radius-sm;
-
-  @include m.respond-to(md) {
-    max-height: 48px;
-  }
-
-  @include m.respond-below(md) {
-    max-height: 32px;
-    max-width: 132px;
-  }
+  overflow: hidden;
 }
 
 .brand-text {

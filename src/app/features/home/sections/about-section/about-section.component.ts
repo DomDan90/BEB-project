@@ -2,17 +2,16 @@ import { isPlatformBrowser } from '@angular/common';
 import { afterNextRender, Component, inject, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-/** Dati statici sezione About (mock, nessun servizio esterno). */
-const ABOUT_IMAGE_URL = 'https://picsum.photos/seed/bnb-about/800/600';
+import { ISCHIA_ABOUT } from '../../../../core/media/ischia-media';
 
 const ABOUT_LEAD =
-  'Da generazioni accogliamo viaggiatori nel cuore del territorio: un B&B dove eleganza discreta, colazioni genuine e attenzione ai dettagli si incontrano. Ogni soggiorno è pensato per farvi sentire come a casa, con il calore di chi vive questi spazi ogni giorno.';
+  'Siamo a Ischia Porto, a due passi dal mare e dai collegamenti col continente: un B&B familiare dove accoglienza, colazioni con prodotti locali e consigli su terme, spiagge e borghi fanno la differenza. Ogni soggiorno è pensato per farvi vivere l’isola con calma, tra natura e tradizione.';
 
 const ABOUT_STRENGTHS: ReadonlyArray<{ icon: string; text: string }> = [
-  { icon: 'bi-house-heart', text: 'Accoglienza familiare e ambiente curato in ogni stagione.' },
-  { icon: 'bi-geo-alt', text: 'Posizione strategica tra borghi, natura e itinerari enogastronomici.' },
-  { icon: 'bi-cup-hot', text: 'Colazione con prodotti locali e ricette della tradizione.' },
-  { icon: 'bi-leaf', text: 'Impegno per sostenibilità e pulizia quotidiana delle camere.' },
+  { icon: 'bi-house-heart', text: 'Accoglienza familiare e ambiente curato, dalla primavera all’autunno.' },
+  { icon: 'bi-geo-alt', text: 'Ideale per esplorare Ischia: porto, spiagge, Castello Aragonese e sentieri.' },
+  { icon: 'bi-cup-hot', text: 'Colazione con dolci, frutta e sapori del Golfo di Napoli.' },
+  { icon: 'bi-water', text: 'Suggerimenti su terme, crociere in barca e giornate al sole.' },
 ];
 
 @Component({
@@ -25,7 +24,7 @@ const ABOUT_STRENGTHS: ReadonlyArray<{ icon: string; text: string }> = [
 export class AboutSectionComponent {
   private readonly platformId = inject(PLATFORM_ID);
 
-  readonly imageUrl = ABOUT_IMAGE_URL;
+  readonly imageUrl = ISCHIA_ABOUT;
   readonly lead = ABOUT_LEAD;
   readonly strengths = ABOUT_STRENGTHS;
 
@@ -39,6 +38,6 @@ export class AboutSectionComponent {
   }
 
   imageAlt(): string {
-    return 'Il bed & breakfast: facciata e giardino in una giornata soleggiata.';
+    return 'Il B&B a Ischia: terrazza e vista sul Mediterraneo in una giornata limpida.';
   }
 }
