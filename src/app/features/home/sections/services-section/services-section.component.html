@@ -1,0 +1,35 @@
+<section class="services-section" aria-labelledby="services-section-heading">
+  <div
+    class="services-section__bg"
+    [class.services-section__bg--parallax]="parallaxEnabled()"
+  >
+    <div class="services-section__overlay" aria-hidden="true"></div>
+    <div class="container-bnb services-section__inner">
+      <header class="services-section__header text-center">
+        <h2 id="services-section-heading" class="services-section__title">I nostri servizi</h2>
+        <span class="services-section__accent" aria-hidden="true"></span>
+        <p class="services-section__intro">
+          Tutto ciò che serve per un soggiorno senza pensieri, con la cura del dettaglio che ci contraddistingue.
+        </p>
+      </header>
+
+      <div class="services-section__grid" role="list">
+        @for (item of services; track item.title; let i = $index) {
+          <article
+            class="services-section__card"
+            role="listitem"
+            data-aos="fade-up"
+            [attr.data-aos-delay]="i * 100"
+            data-aos-duration="700"
+          >
+            <div class="services-section__icon-wrap" aria-hidden="true">
+              <i class="bi {{ item.icon }} services-section__icon"></i>
+            </div>
+            <h3 class="services-section__card-title">{{ item.title }}</h3>
+            <p class="services-section__card-text">{{ item.description }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -62,5 +62,17 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/contact/contact.component').then((m) => m.ContactComponent),
   },
+  {
+    path: 'privacy-policy',
+    loadComponent: () =>
+      import('./features/legal/legal-page.component').then((m) => m.LegalPageComponent),
+    data: { title: 'Privacy Policy' },
+  },
+  {
+    path: 'cookie-policy',
+    loadComponent: () =>
+      import('./features/legal/legal-page.component').then((m) => m.LegalPageComponent),
+    data: { title: 'Cookie Policy' },
+  },
   { path: '**', redirectTo: '' },
 ];

@@ -1,27 +1,207 @@
 @use 'variables' as v;
+@use 'mixins' as m;
 
 .footer-bnb {
-  background-color: v.$primary;
+  background-color: v.$footer-bg;
+  color: v.$footer-text;
+  padding: v.$space-10 0 v.$space-4;
+  margin-top: auto;
 }
 
-.text-muted-custom {
-  color: v.$neutral-300;
+.footer-bnb__inner {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-8;
 }
 
-.letter-spacing {
-  letter-spacing: 0.08em;
+.footer-bnb__grid {
+  display: grid;
+  gap: v.$space-8;
+
+  @include m.respond-to(lg) {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: v.$space-8;
+    column-gap: v.$space-10;
+  }
 }
 
-a {
-  color: v.$neutral-200;
+.footer-bnb__logo-link {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: v.$space-3;
+
+  &:focus-visible {
+    outline: v.$outline-width solid v.$accent;
+    outline-offset: v.$outline-offset;
+    border-radius: v.$border-radius-sm;
+  }
+}
+
+.footer-bnb__logo {
+  width: auto;
+  max-height: 48px;
+  object-fit: cover;
+  border-radius: v.$border-radius-sm;
+}
+
+.footer-bnb__desc {
+  font-family: v.$font-body;
+  font-size: v.$font-size-sm;
+  line-height: v.$line-height-relaxed;
+  color: v.$footer-text;
+  margin: 0 0 v.$space-4;
+  max-width: 22rem;
+}
+
+.footer-bnb__heading {
+  font-family: v.$font-heading;
+  font-size: v.$font-size-lg;
+  font-weight: v.$font-weight-bold;
+  color: v.$footer-heading;
+  margin: 0 0 v.$space-3;
+}
+
+.footer-bnb__list {
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin-bottom: v.$space-2;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.footer-bnb__link {
+  font-family: v.$font-body;
+  font-size: v.$font-size-sm;
+  color: v.$footer-link;
   text-decoration: none;
   transition: color v.$transition-fast;
 
   &:hover {
-    color: v.$accent-light;
+    color: v.$accent;
+  }
+
+  &:focus-visible {
+    outline: v.$outline-width solid v.$accent;
+    outline-offset: v.$outline-offset;
+    border-radius: v.$border-radius-sm;
   }
 }
 
-.copyright {
-  color: v.$neutral-400;
+.footer-bnb__social {
+  display: flex;
+  gap: v.$space-3;
+}
+
+.footer-bnb__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  color: v.$footer-heading;
+  background: rgba(v.$neutral-100, 0.08);
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition:
+    color v.$transition-fast,
+    background-color v.$transition-fast;
+
+  &:hover {
+    color: v.$accent;
+    background: rgba(v.$neutral-100, 0.14);
+  }
+
+  &:focus-visible {
+    outline: v.$outline-width solid v.$accent;
+    outline-offset: v.$outline-offset;
+  }
+}
+
+.footer-bnb__contacts {
+  margin: 0;
+  padding: 0;
+}
+
+.footer-bnb__contact {
+  display: flex;
+  gap: v.$space-2;
+  align-items: flex-start;
+  font-family: v.$font-body;
+  font-size: v.$font-size-sm;
+  line-height: v.$line-height-relaxed;
+  color: v.$footer-text;
+  margin-bottom: v.$space-3;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.footer-bnb__icon {
+  flex-shrink: 0;
+  margin-top: 0.12rem;
+  color: v.$accent-light;
+}
+
+.footer-bnb__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: v.$space-3;
+  padding-top: v.$space-6;
+  border-top: 1px solid v.$footer-border;
+  text-align: center;
+
+  @include m.respond-to(md) {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: start;
+  }
+}
+
+.footer-bnb__copyright {
+  font-family: v.$font-body;
+  font-size: v.$font-size-xs;
+  color: v.$footer-text;
+  margin: 0;
+}
+
+.footer-bnb__legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: v.$space-2;
+  font-size: v.$font-size-xs;
+
+  @include m.respond-to(md) {
+    justify-content: flex-end;
+  }
+}
+
+.footer-bnb__legal-link {
+  color: v.$footer-link;
+  text-decoration: none;
+  transition: color v.$transition-fast;
+
+  &:hover {
+    color: v.$accent;
+  }
+
+  &:focus-visible {
+    outline: v.$outline-width solid v.$accent;
+    outline-offset: v.$outline-offset;
+    border-radius: v.$border-radius-sm;
+  }
+}
+
+.footer-bnb__legal-sep {
+  color: rgba(v.$neutral-100, 0.35);
+  user-select: none;
 }

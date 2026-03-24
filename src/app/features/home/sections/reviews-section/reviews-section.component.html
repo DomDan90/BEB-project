@@ -1,0 +1,68 @@
+<section class="reviews-section section-sm" aria-labelledby="reviews-section-heading">
+  <div class="container-bnb">
+    <header class="reviews-section__header text-center">
+      <h2 id="reviews-section-heading" class="section-title">Cosa dicono gli ospiti</h2>
+      <span class="accent-line reviews-section__accent" aria-hidden="true"></span>
+      <p class="reviews-section__intro text-body-secondary">
+        Le esperienze di chi ha scelto il nostro B&amp;B per il proprio soggiorno.
+      </p>
+    </header>
+
+    <div
+      class="reviews-section__slider-wrap"
+      data-aos="fade-up"
+      data-aos-duration="750"
+    >
+      <swiper-container
+        #reviewsSwiper
+        class="reviews-section__swiper"
+        init="false"
+        loop="true"
+        navigation="true"
+        pagination="true"
+        pagination-clickable="true"
+        autoplay="true"
+        autoplay-delay="4000"
+        autoplay-disable-on-interaction="false"
+        slides-per-view="1"
+        space-between="24"
+        auto-height="true"
+      >
+        @for (review of reviews; track review.id) {
+          <swiper-slide>
+            <article class="reviews-section__card">
+              <div class="reviews-section__profile">
+                <img
+                  class="reviews-section__avatar"
+                  [src]="avatarUrl(review.avatarSeed)"
+                  [alt]="'Foto profilo di ' + review.name"
+                  width="100"
+                  height="100"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="reviews-section__meta">
+                  <p class="reviews-section__name">{{ review.name }}</p>
+                  <p class="reviews-section__city">{{ review.city }}</p>
+                </div>
+              </div>
+              <div class="reviews-section__stars" [attr.aria-label]="'Valutazione ' + review.rating + ' su 5'">
+                @for (s of starSlots; track s) {
+                  <i
+                    class="bi reviews-section__star"
+                    [class.bi-star-fill]="s <= review.rating"
+                    [class.bi-star]="s > review.rating"
+                    aria-hidden="true"
+                  ></i>
+                }
+              </div>
+              <blockquote class="reviews-section__quote">
+                <p class="reviews-section__text">“{{ review.text }}”</p>
+              </blockquote>
+            </article>
+          </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+  </div>
+</section>

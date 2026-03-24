@@ -1,27 +1,71 @@
-<footer class="footer-bnb mt-auto" role="contentinfo">
-  <div class="container-bnb py-5">
-    <div class="row g-4">
-      <div class="col-md-4">
-        <h2 class="h5 text-white">B&amp;B</h2>
-        <p class="small mb-0 text-muted-custom">
-          Ospitalità italiana nel cuore del centro. Prenotazione diretta, senza intermediari.
-        </p>
+<footer class="footer-bnb" role="contentinfo">
+  <div class="container-bnb footer-bnb__inner">
+    <div class="footer-bnb__grid">
+      <div class="footer-bnb__col">
+        <a routerLink="/" class="footer-bnb__logo-link">
+          <img
+            [src]="brandLogoSrc"
+            [alt]="brandLogoAlt"
+            width="180"
+            height="50"
+            class="footer-bnb__logo"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <p class="footer-bnb__desc">{{ tagline }}</p>
+        <div class="footer-bnb__social" aria-label="Social">
+          @for (s of socialLinks; track s.label) {
+            <a
+              class="footer-bnb__social-link"
+              [href]="s.href"
+              [attr.aria-label]="s.label"
+            >
+              <i class="bi {{ s.icon }}" aria-hidden="true"></i>
+            </a>
+          }
+        </div>
       </div>
-      <div class="col-md-4">
-        <h3 class="h6 text-white text-uppercase letter-spacing">Link</h3>
-        <ul class="list-unstyled small mb-0">
-          <li><a routerLink="/camere">Camere</a></li>
-          <li><a routerLink="/prenota">Prenota</a></li>
-          <li><a routerLink="/contatti">Contatti</a></li>
+
+      <div class="footer-bnb__col">
+        <h2 class="footer-bnb__heading">Link rapidi</h2>
+        <ul class="footer-bnb__list list-unstyled">
+          @for (link of quickLinks; track link.path) {
+            <li>
+              <a class="footer-bnb__link" [routerLink]="link.path">{{ link.label }}</a>
+            </li>
+          }
         </ul>
       </div>
-      <div class="col-md-4">
-        <h3 class="h6 text-white text-uppercase letter-spacing">Contatti</h3>
-        <p class="small mb-0 text-muted-custom">info@bnb.example · +39 000 0000000</p>
+
+      <div class="footer-bnb__col">
+        <h2 class="footer-bnb__heading">Contatti</h2>
+        <ul class="footer-bnb__contacts list-unstyled">
+          <li class="footer-bnb__contact">
+            <i class="bi bi-geo-alt footer-bnb__icon" aria-hidden="true"></i>
+            <span>{{ addressLine }}</span>
+          </li>
+          <li class="footer-bnb__contact">
+            <i class="bi bi-telephone footer-bnb__icon" aria-hidden="true"></i>
+            <a class="footer-bnb__link" [href]="'tel:' + phoneTel">{{ phoneDisplay }}</a>
+          </li>
+          <li class="footer-bnb__contact">
+            <i class="bi bi-envelope footer-bnb__icon" aria-hidden="true"></i>
+            <a class="footer-bnb__link" [href]="'mailto:' + email">{{ email }}</a>
+          </li>
+        </ul>
       </div>
     </div>
-    <p class="small text-center mb-0 mt-4 pt-4 border-top border-secondary-subtle copyright">
-      © {{ currentYear }} B&amp;B — Tutti i diritti riservati.
-    </p>
+
+    <div class="footer-bnb__bottom">
+      <p class="footer-bnb__copyright">
+        © 2026 B&amp;B Nome — Tutti i diritti riservati
+      </p>
+      <nav class="footer-bnb__legal" aria-label="Note legali">
+        <a routerLink="/privacy-policy" class="footer-bnb__legal-link">Privacy Policy</a>
+        <span class="footer-bnb__legal-sep" aria-hidden="true">·</span>
+        <a routerLink="/cookie-policy" class="footer-bnb__legal-link">Cookie Policy</a>
+      </nav>
+    </div>
   </div>
 </footer>

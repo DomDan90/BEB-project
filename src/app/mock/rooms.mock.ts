@@ -1,6 +1,7 @@
 import { Room } from '../models/room.model';
 
-const img = (id: number, w = 1200, h = 800) => `https://picsum.photos/id/${id}/${w}/${h}`;
+const seedImg = (seed: string, w = 800, h = 600) =>
+  `https://picsum.photos/seed/${seed}/${w}/${h}`;
 
 export const MOCK_ROOMS: Room[] = [
   {
@@ -14,8 +15,8 @@ export const MOCK_ROOMS: Room[] = [
     maxGuests: 2,
     size: 18,
     bedType: 'double',
-    thumbnail: img(237, 800, 600),
-    images: [img(237), img(238), img(239)],
+    thumbnail: seedImg('room-1'),
+    images: [seedImg('room-1', 1200, 800), seedImg('room-1b', 1200, 800), seedImg('room-1c', 1200, 800)],
     amenities: ['Wi‑Fi', 'TV', 'Aria condizionata', 'Bagno privato', 'Colazione inclusa'],
     isAvailable: true,
     featured: false,
@@ -32,8 +33,8 @@ export const MOCK_ROOMS: Room[] = [
     maxGuests: 2,
     size: 25,
     bedType: 'queen',
-    thumbnail: img(366, 800, 600),
-    images: [img(366), img(367), img(368)],
+    thumbnail: seedImg('room-2'),
+    images: [seedImg('room-2', 1200, 800), seedImg('room-2b', 1200, 800), seedImg('room-2c', 1200, 800)],
     amenities: ['Wi‑Fi', 'Smart TV', 'Minifrigo', 'Balcone', 'Aria condizionata', 'Colazione inclusa'],
     isAvailable: true,
     featured: true,
@@ -50,8 +51,8 @@ export const MOCK_ROOMS: Room[] = [
     maxGuests: 3,
     size: 35,
     bedType: 'king',
-    thumbnail: img(431, 800, 600),
-    images: [img(431), img(432), img(433)],
+    thumbnail: seedImg('room-3'),
+    images: [seedImg('room-3', 1200, 800), seedImg('room-3b', 1200, 800), seedImg('room-3c', 1200, 800)],
     amenities: ['Wi‑Fi', 'Smart TV', 'Zona living', 'Cassaforte', 'Aria condizionata', 'Colazione inclusa'],
     isAvailable: true,
     featured: true,
@@ -68,8 +69,8 @@ export const MOCK_ROOMS: Room[] = [
     maxGuests: 4,
     size: 30,
     bedType: 'twin',
-    thumbnail: img(508, 800, 600),
-    images: [img(508), img(509), img(510)],
+    thumbnail: seedImg('room-4'),
+    images: [seedImg('room-4', 1200, 800), seedImg('room-4b', 1200, 800), seedImg('room-4c', 1200, 800)],
     amenities: ['Wi‑Fi', 'TV', 'Frigorifero', 'Angolo tè', 'Aria condizionata', 'Colazione inclusa'],
     isAvailable: true,
     featured: false,

@@ -8,4 +8,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  readonly brandLogoSrc = 'https://picsum.photos/seed/bnb-logo/200/56';
+  readonly brandLogoAlt = 'Logo B&B — torna alla homepage';
+}

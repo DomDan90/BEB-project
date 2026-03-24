@@ -1,24 +1,127 @@
 @use 'variables' as v;
+@use 'mixins' as m;
 
-.navbar-bnb {
+.header-bnb {
+  position: sticky;
+  top: 0;
   z-index: v.$z-sticky;
-  background-color: v.$neutral-100;
-  border-bottom: 1px solid v.$neutral-300;
+  background-color: v.$header-bg;
+  border-bottom: 1px solid v.$header-border;
+  box-shadow: v.$shadow-sm;
 }
 
-.navbar-brand {
+.navbar-bnb {
+  padding-block: v.$space-2;
+}
+
+.logo-bnb {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: v.$outline-width solid v.$input-focus-border;
+    outline-offset: v.$outline-offset;
+  }
+}
+
+.logo-img {
+  width: auto;
+  max-height: 40px;
+  object-fit: cover;
+  border-radius: v.$border-radius-sm;
+
+  @include m.respond-to(md) {
+    max-height: 48px;
+  }
+}
+
+.brand-text {
   font-family: v.$font-heading;
-  color: v.$primary;
-  letter-spacing: 0.02em;
+  font-size: v.$font-size-xl;
+  font-weight: v.$font-weight-bold;
+  color: v.$text-title;
+  letter-spacing: v.$letter-spacing-tight;
+}
+
+.navbar-toggler-bnb {
+  border: 1px solid v.$border-subtle;
+  border-radius: v.$border-radius-md;
+  padding: v.$space-1 v.$space-2;
+  color: v.$nav-link-color;
+  background: v.$input-bg;
+
+  &:focus-visible {
+    box-shadow: 0 0 0 v.$space-1 v.$input-focus-ring;
+  }
+
+  .bi-list {
+    display: block;
+    font-size: v.$font-size-icon-toggle;
+    line-height: 1;
+  }
 }
 
 .nav-link {
-  color: v.$neutral-700;
-  font-weight: 500;
+  font-family: v.$font-body;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  color: v.$nav-link-color;
   transition: color v.$transition-fast;
+  padding-inline: v.$space-2;
 
   &:hover,
+  &:focus-visible {
+    color: v.$nav-link-hover;
+  }
+
   &.active {
-    color: v.$accent;
+    color: v.$nav-link-active;
+  }
+}
+
+.dropdown-toggle-bnb {
+  border: none;
+  background: transparent;
+  text-align: left;
+  width: 100%;
+
+  @include m.respond-to(lg) {
+    width: auto;
+  }
+
+  &::after {
+    margin-left: 0.35em;
+    vertical-align: 0.15em;
+  }
+}
+
+.dropdown-menu {
+  border: 1px solid v.$border-subtle;
+  border-radius: v.$border-radius-md;
+  padding-block: v.$space-1;
+  margin-top: v.$space-1;
+}
+
+.dropdown-item {
+  font-size: v.$font-size-sm;
+  color: v.$text-body;
+  padding-block: v.$space-1;
+  padding-inline: v.$space-3;
+
+  &:hover,
+  &:focus {
+    color: v.$nav-link-hover;
+    background-color: v.$neutral-200;
+  }
+}
+
+.btn-prenota {
+  @include m.btn-accent();
+
+  @include m.respond-below(lg) {
+    margin-top: v.$space-2;
+    width: 100%;
+    text-align: center;
   }
 }
