@@ -8,15 +8,15 @@
   right: 0;
   width: 100%;
   z-index: 1000;
-  background: transparent;
-  box-shadow: none;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition:
     background-color v.$transition-base,
     box-shadow v.$transition-base;
 
-  &.is-scrolled {
-    background: #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  &.is-home-top {
+    background: transparent;
+    box-shadow: none;
   }
 }
 
@@ -137,5 +137,13 @@
     margin-top: v.$space-2;
     width: 100%;
     text-align: center;
+  }
+}
+
+.header-bnb.is-home-top {
+  .nav-link:not(.active),
+  .dropdown-toggle-bnb,
+  .brand-text {
+    color: v.$neutral-100;
   }
 }
