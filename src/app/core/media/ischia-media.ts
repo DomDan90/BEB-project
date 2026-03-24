@@ -12,9 +12,12 @@ function unsplash(photoId: string, w: number, h: number): string {
 
 /** Logo in UI: componente `app-brand-logo` (SVG inline). File opzionale in `public/logo-beb-ischia.svg` per condivisione/stampa. */
 
-/** Hero + Open Graph. */
-export const ISCHIA_HERO_WIDE = unsplash('1559827260-dc66d52bef19', 1920, 900);
-export const ISCHIA_HERO_OG = unsplash('1559827260-dc66d52bef19', 1200, 630);
+/**
+ * Hero + Open Graph. Interno con finestra aperta su mare e costa (tono mediterraneo;
+ * foto da ricerca Unsplash “Ischia Italy”). Unsplash: cfJZzBRjFCA.
+ */
+export const ISCHIA_HERO_WIDE = unsplash('1755564662313-4e91d405001c', 1920, 900);
+export const ISCHIA_HERO_OG = unsplash('1755564662313-4e91d405001c', 1200, 630);
 
 /** Sfondo sezione servizi / facilities. */
 export const ISCHIA_FACILITIES_BG = unsplash('1540555700478-4be289fbecef', 1920, 600);
