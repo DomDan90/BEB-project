@@ -231,6 +231,10 @@
   @include m.btn-accent();
   font-size: v.$font-size-sm;
 
+  &.active {
+    box-shadow: 0 0 0 2px v.$neutral-100, 0 0 0 4px v.$accent-dark;
+  }
+
   @include m.respond-below(lg) {
     margin-top: v.$space-2;
     width: 100%;

@@ -7,8 +7,9 @@ import {
   HostListener,
   inject,
   PLATFORM_ID,
+  signal,
 } from '@angular/core';
-import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
 
 import { BrandLogoComponent } from '../brand-logo/brand-logo.component';
@@ -17,10 +18,27 @@ type BootstrapCollapse = {
   getOrCreateInstance(element: Element, options?: object): { hide(): void };
 };
 
+/** Chiave voce menu allineata a route o sezione home (scroll spy). */
+type NavRouteKey = 'home' | 'chi-siamo' | 'camere' | 'galleria' | 'blog' | 'contatti' | 'prenota';
+
+/** Sezioni home (ordine scroll): `nav: null` mantiene l’ultima voce esplicita (es. servizi → resta “Chi siamo”). */
+const HOME_SCROLL_SECTIONS: ReadonlyArray<{ id: string; nav: NavRouteKey | null }> = [
+  { id: 'home-hero', nav: 'home' },
+  { id: 'home-camere', nav: 'camere' },
+  { id: 'home-chi-siamo', nav: 'chi-siamo' },
+  { id: 'home-servizi', nav: null },
+  { id: 'home-galleria', nav: 'galleria' },
+  { id: 'home-recensioni', nav: null },
+  { id: 'home-dove-siamo', nav: 'contatti' },
+];
+
+/** Sotto la navbar fissa (~80px) + piccolo margine. */
+const HOME_SPY_OFFSET_PX = 88;
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, BrandLogoComponent],
+  imports: [RouterLink, BrandLogoComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
@@ -36,9 +54,20 @@ export class NavbarComponent {
   isHomeRoute = false;
   isMainNavOpen = false;
 
+  /** Voce evidenziata sulla home in base allo scroll (burger / desktop). */
+  private readonly activeHomeNavKey = signal<NavRouteKey>('home');
+  private spyRafId = 0;
+
   constructor() {
     this.updateRouteState();
     this.updateScrolledState();
+
+    this.destroyRef.onDestroy(() => {
+      if (this.spyRafId !== 0) {
+        cancelAnimationFrame(this.spyRafId);
+        this.spyRafId = 0;
+      }
+    });
 
     afterNextRender(() => {
       if (!isPlatformBrowser(this.platformId)) {
@@ -71,6 +100,7 @@ export class NavbarComponent {
 
       const onShown = (): void => {
         this.isMainNavOpen = true;
+        this.updateHomeScrollSpy();
         this.cdr.detectChanges();
       };
       const onHidden = (): void => {
@@ -87,6 +117,8 @@ export class NavbarComponent {
         mainNavEl.removeEventListener('shown.bs.collapse', onShown);
         mainNavEl.removeEventListener('hidden.bs.collapse', onHidden);
       });
+
+      this.updateHomeScrollSpy();
     });
 
     this.router.events
@@ -95,8 +127,78 @@ export class NavbarComponent {
         this.updateRouteState();
         this.updateScrolledState();
         // Chiudi il menu solo dopo la navigazione (evita race con routerLink su mobile)
-        queueMicrotask(() => this.closeMainNavIfOpen());
+        queueMicrotask(() => {
+          this.closeMainNavIfOpen();
+          this.updateHomeScrollSpy();
+        });
       });
+  }
+
+  /** Evidenziazione voce: su `/` usa scroll spy; sulle altre route l’URL. */
+  isNavActive(key: NavRouteKey): boolean {
+    const path = this.router.url.split('?')[0].split('#')[0];
+    const onHome = path === '/' || path === '';
+    if (onHome) {
+      return this.activeHomeNavKey() === key;
+    }
+    switch (key) {
+      case 'home':
+        return false;
+      case 'chi-siamo':
+        return path.startsWith('/chi-siamo');
+      case 'camere':
+        return path.startsWith('/camere');
+      case 'galleria':
+        return path.startsWith('/galleria');
+      case 'blog':
+        return path.startsWith('/blog');
+      case 'contatti':
+        return path.startsWith('/contatti');
+      case 'prenota':
+        return path.startsWith('/prenota');
+      default:
+        return false;
+    }
+  }
+
+  private scheduleHomeScrollSpy(): void {
+    if (!isPlatformBrowser(this.platformId) || !this.isHomeRoute) {
+      return;
+    }
+    if (this.spyRafId !== 0) {
+      return;
+    }
+    this.spyRafId = requestAnimationFrame(() => {
+      this.spyRafId = 0;
+      this.updateHomeScrollSpy();
+    });
+  }
+
+  private updateHomeScrollSpy(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    const path = this.router.url.split('?')[0].split('#')[0];
+    if (path !== '/' && path !== '') {
+      return;
+    }
+    const win = this.document.defaultView;
+    if (!win) {
+      return;
+    }
+    const probeY = win.scrollY + HOME_SPY_OFFSET_PX;
+    let key: NavRouteKey = 'home';
+    for (const row of HOME_SCROLL_SECTIONS) {
+      const el = this.document.getElementById(row.id);
+      if (!el) {
+        continue;
+      }
+      const top = el.getBoundingClientRect().top + win.scrollY;
+      if (top <= probeY + 1 && row.nav !== null) {
+        key = row.nav;
+      }
+    }
+    this.activeHomeNavKey.set(key);
   }
 
   private closeMainNavIfOpen(): void {
@@ -127,6 +229,12 @@ export class NavbarComponent {
   @HostListener('window:scroll')
   onWindowScroll(): void {
     this.updateScrolledState();
+    this.scheduleHomeScrollSpy();
+  }
+
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    this.scheduleHomeScrollSpy();
   }
 
   get isHomeTop(): boolean {

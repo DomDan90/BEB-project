@@ -23,25 +23,44 @@
             <a
               class="nav-link"
               routerLink="/"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
+              [class.active]="isNavActive('home')"
+              [attr.aria-current]="isNavActive('home') ? 'page' : null"
               >Home</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/chi-siamo" routerLinkActive="active">Chi siamo</a>
+            <a
+              class="nav-link"
+              routerLink="/chi-siamo"
+              [class.active]="isNavActive('chi-siamo')"
+              [attr.aria-current]="isNavActive('chi-siamo') ? 'page' : null"
+              >Chi siamo</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/camere" routerLinkActive="active">Camere</a>
+            <a
+              class="nav-link"
+              routerLink="/camere"
+              [class.active]="isNavActive('camere')"
+              [attr.aria-current]="isNavActive('camere') ? 'page' : null"
+              >Camere</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/galleria" routerLinkActive="active">Galleria</a>
+            <a
+              class="nav-link"
+              routerLink="/galleria"
+              [class.active]="isNavActive('galleria')"
+              [attr.aria-current]="isNavActive('galleria') ? 'page' : null"
+              >Galleria</a
+            >
           </li>
 
           <li class="nav-item dropdown">
             <button
               type="button"
               class="nav-link dropdown-toggle dropdown-toggle-bnb"
+              [class.active]="isNavActive('blog')"
               data-bs-toggle="dropdown"
               aria-expanded="false"
               aria-haspopup="true"
@@ -51,19 +70,39 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="navBlogDropdown">
               <li>
-                <a class="dropdown-item" routerLink="/blog">Tutti gli articoli</a>
+                <a
+                  class="dropdown-item"
+                  routerLink="/blog"
+                  [class.active]="isNavActive('blog')"
+                  [attr.aria-current]="isNavActive('blog') ? 'page' : null"
+                  >Tutti gli articoli</a
+                >
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/blog">Approfondimenti</a>
+                <a class="dropdown-item" routerLink="/blog" [class.active]="isNavActive('blog')"
+                  >Approfondimenti</a
+                >
               </li>
             </ul>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" routerLink="/contatti" routerLinkActive="active">Contatti</a>
+            <a
+              class="nav-link"
+              routerLink="/contatti"
+              [class.active]="isNavActive('contatti')"
+              [attr.aria-current]="isNavActive('contatti') ? 'page' : null"
+              >Contatti</a
+            >
           </li>
           <li class="nav-item ms-lg-2">
-            <a class="btn btn-prenota" routerLink="/prenota" routerLinkActive="active">Prenota</a>
+            <a
+              class="btn btn-prenota"
+              routerLink="/prenota"
+              [class.active]="isNavActive('prenota')"
+              [attr.aria-current]="isNavActive('prenota') ? 'page' : null"
+              >Prenota</a
+            >
           </li>
         </ul>
       </div>
