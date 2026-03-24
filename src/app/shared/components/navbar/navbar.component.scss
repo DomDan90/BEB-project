@@ -1,24 +1,253 @@
 @use 'variables' as v;
+@use 'mixins' as m;
 
-.navbar-bnb {
-  z-index: v.$z-sticky;
-  background-color: v.$neutral-100;
-  border-bottom: 1px solid v.$neutral-300;
+.header-bnb {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition:
+    background-color v.$transition-base,
+    box-shadow v.$transition-base;
+
+  &.is-home-top {
+    background: transparent;
+    box-shadow: none;
+  }
 }
 
-.navbar-brand {
+.navbar-bnb {
+  display: flex;
+  align-items: center;
+  min-height: v.$navbar-min-height;
+  padding-block: v.$space-2;
+  position: relative;
+
+  @include m.respond-below(md) {
+    padding-block: v.$space-1;
+    justify-content: space-between;
+  }
+}
+
+.logo-bnb {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  max-width: calc(100% - 56px);
+
+  &:focus-visible {
+    outline: v.$outline-width solid v.$input-focus-border;
+    outline-offset: v.$outline-offset;
+  }
+}
+
+/* Le dimensioni del logo sono in brand-logo.component.scss (encapsulation). */
+.logo-img {
+  border-radius: v.$border-radius-sm;
+  overflow: hidden;
+}
+
+.brand-text {
   font-family: v.$font-heading;
-  color: v.$primary;
-  letter-spacing: 0.02em;
+  font-size: v.$font-size-xl;
+  font-weight: v.$font-weight-bold;
+  color: v.$text-title;
+  letter-spacing: v.$letter-spacing-tight;
+
+  @include m.respond-below(md) {
+    font-size: 1.05rem;
+  }
+}
+
+.navbar-toggler-bnb {
+  border: 1px solid v.$border-subtle;
+  border-radius: v.$border-radius-md;
+  padding: v.$space-1 v.$space-2;
+  color: v.$nav-link-color;
+  background: v.$input-bg;
+
+  &:focus-visible {
+    box-shadow: 0 0 0 v.$space-1 v.$input-focus-ring;
+  }
+
+  .bi-list {
+    display: block;
+    font-size: v.$font-size-icon-toggle;
+    line-height: 1;
+  }
+
+  @include m.respond-below(md) {
+    min-height: v.$touch-target-min;
+    min-width: v.$touch-target-min;
+  }
+
+  // Mobile: niente box dietro l’icona; icone leggibili su chiaro e su hero scuro
+  @include m.respond-below(lg) {
+    background: transparent;
+    border: none;
+    padding: v.$space-1;
+    box-shadow: none;
+
+    .bi-list {
+      font-size: 1.65rem;
+      color: v.$primary-dark;
+      filter:
+        drop-shadow(0 0 1px rgba(v.$neutral-100, 0.95))
+        drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+    }
+  }
+}
+
+.header-bnb.is-home-top .navbar-toggler-bnb .bi-list {
+  @include m.respond-below(lg) {
+    color: v.$neutral-100;
+    filter:
+      drop-shadow(0 0 2px rgba(0, 0, 0, 0.85))
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
+  }
 }
 
 .nav-link {
-  color: v.$neutral-700;
-  font-weight: 500;
+  font-family: v.$font-body;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-semibold;
+  color: v.$nav-link-color;
   transition: color v.$transition-fast;
+  padding-inline: v.$space-2;
+  min-height: v.$touch-target-min;
+  display: inline-flex;
+  align-items: center;
 
   &:hover,
+  &:focus-visible {
+    color: v.$nav-link-hover;
+  }
+
   &.active {
-    color: v.$accent;
+    color: v.$nav-link-active;
+  }
+}
+
+.dropdown-toggle-bnb {
+  border: none;
+  background: transparent;
+  text-align: left;
+  width: 100%;
+  color: v.$nav-link-color;
+  min-height: v.$touch-target-min;
+  font-size: v.$font-size-sm;
+
+  @include m.respond-to(lg) {
+    width: auto;
+  }
+
+  &::after {
+    margin-left: 0.35em;
+    vertical-align: 0.15em;
+  }
+}
+
+#mainNav {
+  @include m.respond-below(lg) {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    /* Sopra al contenuto della pagina (es. hero/booking) così i tap non “passano” sotto dopo lo scroll */
+    z-index: 1020;
+    margin-top: 0;
+    padding: v.$space-2 v.$space-3;
+    border-radius: 0;
+    border-top: 1px solid v.$border-subtle;
+    background: rgba(v.$neutral-100, 0.98);
+    box-shadow: v.$shadow-sm;
+    max-height: calc(100vh - v.$navbar-min-height);
+    overflow: auto;
+
+    .navbar-nav {
+      width: 100%;
+      gap: 0;
+      align-items: stretch !important;
+    }
+
+    .nav-item {
+      width: 100%;
+    }
+
+    .nav-link,
+    .dropdown-toggle-bnb {
+      width: 100%;
+      justify-content: space-between;
+      padding-inline: v.$space-2;
+    }
+
+    .dropdown-menu {
+      position: static;
+      float: none;
+      width: 100%;
+      margin-top: 0;
+      box-shadow: none !important;
+      border-radius: v.$border-radius-sm;
+    }
+  }
+
+  @include m.respond-below(lg) {
+    &.collapse:not(.show) {
+      display: none !important;
+    }
+
+    &.collapse.show {
+      display: block;
+    }
+  }
+}
+
+.dropdown-menu {
+  border: 1px solid v.$border-subtle;
+  border-radius: v.$border-radius-md;
+  padding-block: v.$space-1;
+  margin-top: v.$space-1;
+}
+
+.dropdown-item {
+  font-size: v.$font-size-sm;
+  color: v.$text-body;
+  padding-block: v.$space-1;
+  padding-inline: v.$space-3;
+
+  &:hover,
+  &:focus {
+    color: v.$nav-link-hover;
+    background-color: v.$neutral-200;
+  }
+}
+
+.btn-prenota {
+  @include m.btn-accent();
+  font-size: v.$font-size-sm;
+
+  &.active {
+    box-shadow: 0 0 0 2px v.$neutral-100, 0 0 0 4px v.$accent-dark;
+  }
+
+  @include m.respond-below(lg) {
+    margin-top: v.$space-2;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.header-bnb.is-home-top {
+  @include m.respond-to(lg) {
+    .nav-link:not(.active),
+    .dropdown-toggle-bnb,
+    .brand-text {
+      color: v.$neutral-100;
+    }
   }
 }

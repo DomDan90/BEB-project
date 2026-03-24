@@ -3,3 +3,8 @@
 @use 'styles/typography';
 @use 'styles/animations';
 @use 'styles/utilities';
+@use 'styles/ngb-booking';
+
+body {
+  padding-top: 0;
+}

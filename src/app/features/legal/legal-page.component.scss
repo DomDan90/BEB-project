@@ -1,0 +1,12 @@
+@use 'variables' as v;
+
+.legal-page__title {
+  font-family: v.$font-heading;
+  color: v.$text-title;
+  font-weight: v.$font-weight-bold;
+}
+
+.legal-page__lead {
+  font-family: v.$font-body;
+  max-width: 40rem;
+}

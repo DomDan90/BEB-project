@@ -1,5 +1,20 @@
 @use 'variables' as v;
+@use 'mixins' as m;
 
 .rounded-3 {
   border-radius: v.$border-radius-lg;
+}
+
+.btn-primary-bnb,
+.btn-outline-bnb {
+  margin-top: v.$space-2;
+}
+
+@include m.respond-below(md) {
+  .btn-primary-bnb,
+  .btn-outline-bnb {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
 }

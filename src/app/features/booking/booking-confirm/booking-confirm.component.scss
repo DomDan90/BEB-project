@@ -1,1 +1,10 @@
-// Placeholder
+@use 'mixins' as m;
+
+@include m.respond-below(md) {
+  .btn-primary-bnb,
+  .btn-outline-bnb {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}

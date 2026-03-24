@@ -1,31 +1,55 @@
-<section class="section bg-soft" aria-labelledby="rooms-preview-title">
+<section id="home-camere" class="rooms-preview section-sm" aria-labelledby="rooms-preview-heading">
   <div class="container-bnb">
-    <h2 id="rooms-preview-title" class="section-title">Le nostre camere</h2>
-    <span class="accent-line" aria-hidden="true"></span>
-    <div class="row g-4 mt-2">
-      @for (room of rooms; track room.id) {
-        <div class="col-md-4">
-          <article class="card h-100 border-0 shadow-sm room-card">
-            <img
-              [src]="room.thumbnail"
-              class="card-img-top"
-              [alt]="'Anteprima ' + room.name"
-              appLazyImage
-            />
-            <div class="card-body">
-              <h3 class="h5 card-title">{{ room.name }}</h3>
-              <p class="small text-muted mb-2">{{ room.shortDescription }}</p>
-              <p class="fw-semibold mb-3">Da {{ room.pricePerNight | currencyEur }} / notte</p>
-              <a [routerLink]="['/camere', room.slug]" class="btn-outline-bnb btn-sm stretched-link"
-                >Scopri</a
-              >
+    <header class="rooms-preview__header">
+      <h2 id="rooms-preview-heading" class="section-title">Le nostre camere</h2>
+      <span class="accent-line rooms-preview__accent" aria-hidden="true"></span>
+      <p class="rooms-preview__lead text-body-secondary">
+        Scegli tra le nostre soluzioni: ogni camera è pensata per il massimo comfort durante il tuo soggiorno.
+      </p>
+    </header>
+
+    <div class="rooms-preview__grid" role="list">
+      @for (room of rooms; track room.id; let i = $index) {
+        <article
+          class="rooms-preview__card"
+          role="listitem"
+          data-aos="fade-up"
+          [attr.data-aos-delay]="i * 100"
+          data-aos-duration="700"
+        >
+          <a [routerLink]="['/camere', room.slug]" class="rooms-preview__media-link">
+            <div class="rooms-preview__media">
+              <img
+                [src]="room.thumbnail"
+                [alt]="imageAlt(room)"
+                width="800"
+                height="600"
+                loading="lazy"
+                decoding="async"
+                class="rooms-preview__img"
+              />
             </div>
-          </article>
-        </div>
+          </a>
+          <div class="rooms-preview__body">
+            <h3 class="rooms-preview__title">
+              <a [routerLink]="['/camere', room.slug]" class="rooms-preview__title-link">{{ room.name }}</a>
+            </h3>
+            <p class="rooms-preview__price">
+              <span class="rooms-preview__price-value">€ {{ room.pricePerNight }}</span>
+              <span class="rooms-preview__price-unit">/ notte</span>
+            </p>
+            <ul class="rooms-preview__amenities list-unstyled">
+              @for (a of previewAmenities(room); track a) {
+                <li class="rooms-preview__amenity">
+                  <i class="bi {{ amenityIcon(a) }}" aria-hidden="true"></i>
+                  <span>{{ a }}</span>
+                </li>
+              }
+            </ul>
+            <a [routerLink]="['/camere', room.slug]" class="rooms-preview__cta">Scopri di più</a>
+          </div>
+        </article>
       }
-    </div>
-    <div class="text-center mt-4">
-      <a routerLink="/camere" class="btn-primary-bnb">Vedi tutte le camere</a>
     </div>
   </div>
 </section>

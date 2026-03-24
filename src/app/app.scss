@@ -1,4 +1,5 @@
 @use 'variables' as v;
+@use 'mixins' as m;
 
 :host {
   display: flex;
@@ -7,6 +8,7 @@
   background-color: v.$neutral-100;
 }
 
-.main-content {
+/* Spinge il footer in fondo alla viewport quando il contenuto è corto */
+router-outlet + * {
   flex: 1 0 auto;
 }

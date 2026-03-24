@@ -1,0 +1,72 @@
+<section id="home-dove-siamo" class="location-section section-sm" aria-labelledby="location-section-heading">
+  <div class="container-bnb">
+    <header class="location-section__header text-center">
+      <h2 id="location-section-heading" class="section-title">Dove siamo</h2>
+      <span class="accent-line location-section__accent" aria-hidden="true"></span>
+      <p class="location-section__intro text-body-secondary">
+        A Ischia Porto, vicino al mare e ai collegamenti con il continente.
+      </p>
+    </header>
+
+    <div class="location-section__grid">
+      <div class="location-section__map-col" data-aos="fade-right" data-aos-duration="750">
+        <div
+          #mapHost
+          class="location-section__map"
+          role="application"
+          aria-label="Mappa interattiva con la posizione del bed and breakfast"
+        ></div>
+      </div>
+
+      <div class="location-section__info-col" data-aos="fade-left" data-aos-duration="750">
+        <div class="location-section__card">
+          <ul class="location-section__list list-unstyled">
+            <li class="location-section__row">
+              <i class="bi bi-geo-alt location-section__icon" aria-hidden="true"></i>
+              <div>
+                <span class="location-section__label">Indirizzo</span>
+                <p class="location-section__value">{{ addressLine }}</p>
+              </div>
+            </li>
+            <li class="location-section__row">
+              <i class="bi bi-clock location-section__icon" aria-hidden="true"></i>
+              <div>
+                <span class="location-section__label">Orari</span>
+                <p class="location-section__value">{{ checkInLine }}</p>
+                <p class="location-section__value location-section__value--sub">{{ checkOutLine }}</p>
+              </div>
+            </li>
+            <li class="location-section__row">
+              <i class="bi bi-telephone location-section__icon" aria-hidden="true"></i>
+              <div>
+                <span class="location-section__label">Telefono</span>
+                <p class="location-section__value">
+                  <a class="location-section__link" [href]="'tel:' + phoneTel">{{ phoneDisplay }}</a>
+                </p>
+              </div>
+            </li>
+            <li class="location-section__row">
+              <i class="bi bi-envelope location-section__icon" aria-hidden="true"></i>
+              <div>
+                <span class="location-section__label">Email</span>
+                <p class="location-section__value">
+                  <a class="location-section__link" [href]="'mailto:' + email">{{ email }}</a>
+                </p>
+              </div>
+            </li>
+          </ul>
+
+          <a
+            class="location-section__maps-link"
+            [href]="googleMapsUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Apri in Google Maps</span>
+            <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

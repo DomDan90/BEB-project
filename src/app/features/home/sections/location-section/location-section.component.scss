@@ -1,0 +1,201 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.location-section__header {
+  max-width: calc(v.$section-intro-max-width + 4rem);
+  margin-inline: auto;
+  margin-bottom: v.$space-8;
+}
+
+.location-section__accent {
+  display: block;
+  margin-inline: auto;
+  margin-top: v.$space-2;
+}
+
+.location-section__intro {
+  font-family: v.$font-body;
+  font-size: v.$font-size-md;
+  line-height: v.$line-height-relaxed;
+  color: v.$section-intro-color;
+  max-width: v.$section-intro-max-width;
+  margin: v.$space-4 auto 0;
+}
+
+.location-section__grid {
+  display: grid;
+  gap: v.$space-6;
+  align-items: stretch;
+
+  @include m.respond-to(lg-plus) {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: v.$space-8;
+    column-gap: v.$space-8;
+  }
+}
+
+.location-section__map-col,
+.location-section__info-col {
+  min-width: 0;
+}
+
+.location-section__map-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-section__info-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-section__map {
+  width: 100%;
+  min-height: 300px;
+  height: 300px;
+  border-radius: v.$border-radius-lg;
+  overflow: hidden;
+  border: 1px solid v.$border-subtle;
+  box-shadow: v.$shadow-md;
+  background: v.$neutral-300;
+  z-index: 0;
+
+  @include m.respond-to(md) {
+    min-height: 440px;
+    height: 440px;
+  }
+
+  /* Affiancata alla card: stessa altezza della colonna così la mappa “riempie” il blocco */
+  @include m.respond-to(lg-plus) {
+    flex: 1;
+    height: 100%;
+    min-height: 440px;
+  }
+}
+
+// Marker custom (Leaflet aggiunge la classe sul wrapper dell'icona)
+:host ::ng-deep .location-section__leaflet-marker {
+  background: none;
+  border: none;
+}
+
+:host ::ng-deep .location-section__leaflet-marker .location-section__marker-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, v.$accent, v.$accent-dark);
+  color: v.$neutral-100;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 14px rgba(v.$neutral-900, 0.25);
+  border: 2px solid v.$neutral-100;
+}
+
+.location-section__card {
+  height: 100%;
+  padding: v.$space-5 v.$space-4;
+  background: v.$location-card-bg;
+  border: 1px solid v.$border-subtle;
+  border-left: v.$location-info-border-left-width solid v.$location-accent-border;
+  border-radius: v.$border-radius-lg;
+  box-shadow: v.$shadow-sm;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+}
+
+.location-section__list {
+  margin: 0;
+  padding: 0;
+}
+
+.location-section__row {
+  display: flex;
+  gap: v.$space-3;
+  align-items: flex-start;
+  padding-bottom: v.$space-4;
+  margin-bottom: v.$space-4;
+  border-bottom: 1px solid v.$border-subtle;
+
+  &:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.location-section__icon {
+  flex-shrink: 0;
+  font-size: 1.35rem;
+  color: v.$accent-dark;
+  margin-top: 0.15rem;
+}
+
+.location-section__label {
+  display: block;
+  font-family: v.$font-body;
+  font-size: v.$font-size-xs;
+  font-weight: v.$font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: v.$letter-spacing-wide;
+  color: v.$text-muted;
+  margin-bottom: v.$space-1;
+}
+
+.location-section__value {
+  font-family: v.$font-body;
+  font-size: v.$font-size-md;
+  line-height: v.$line-height-relaxed;
+  color: v.$text-body;
+  margin: 0;
+
+  &--sub {
+    margin-top: v.$space-1;
+    font-size: v.$font-size-sm;
+    color: v.$text-muted;
+  }
+}
+
+.location-section__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: v.$touch-target-min;
+  color: v.$link-color;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+
+  &:hover {
+    color: v.$link-hover-color;
+  }
+}
+
+.location-section__maps-link {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  font-family: v.$font-body;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-semibold;
+  color: v.$accent-dark;
+  text-decoration: none;
+  margin-top: auto;
+  width: fit-content;
+
+  &:hover {
+    color: v.$accent;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  &:focus-visible {
+    outline: v.$outline-width solid v.$input-focus-border;
+    outline-offset: v.$outline-offset;
+    border-radius: v.$border-radius-sm;
+  }
+
+  .bi {
+    font-size: 1rem;
+  }
+}

@@ -1,25 +1,29 @@
-// Palette colori B&B (elegante, neutro, lusso)
-$primary: #2c3e50;
-$primary-light: #34495e;
-$accent: #c9a96e;
-$accent-light: #d4b896;
+// =============================================================================
+// Palette Royal Hotel / Colorlib (adattata al B&B)
+// =============================================================================
+$accent: #f8b600;
+$accent-light: #ffcc33;
+$accent-dark: #d9a000;
+
+$primary: #222222;
+$primary-light: #333333;
+$primary-dark: #111111;
+
 $neutral-100: #ffffff;
-$neutral-200: #f8f6f3;
-$neutral-300: #ede8e0;
-$neutral-400: #d5cfc4;
-$neutral-500: #9e9689;
-$neutral-700: #5c5550;
-$neutral-900: #1a1612;
+$neutral-200: #f9f9f9;
+$neutral-300: #eeeeee;
+$neutral-400: #dddddd;
+$neutral-500: #999999;
+$neutral-700: #666666;
+$neutral-900: #222222;
+
 $success: #27ae60;
 $error: #e74c3c;
 $warning: #f39c12;
 
-// Typography
-$font-heading: 'Playfair Display', Georgia, serif;
-$font-body: 'Poppins', system-ui, sans-serif;
-$font-size-base: 16px;
-
-// Spacing scale (8pt grid)
+// =============================================================================
+// Spacing (8pt grid)
+// =============================================================================
 $space-1: 8px;
 $space-2: 16px;
 $space-3: 24px;
@@ -31,26 +35,213 @@ $space-10: 80px;
 $space-12: 96px;
 $space-16: 128px;
 
-// Layout
-$max-width: 1320px;
+// Section vertical rhythm (tema: 50px mobile, 80px desktop)
+$section-padding-y-mobile: 50px;
+$section-padding-y-desktop: 80px;
+
+// Legacy aliases (usati in pochi punti)
+$section-gap-y: $section-padding-y-mobile;
+$section-gap-y-lg: $section-padding-y-desktop;
+
+// =============================================================================
+// Raggi e layout base
+// =============================================================================
 $border-radius-sm: 4px;
 $border-radius-md: 8px;
 $border-radius-lg: 16px;
 $border-radius-xl: 24px;
+$border-radius-pill: 999px;
 
-// Shadows
+// Pulsanti primari tema: stesso raggio di “Continua prenotazione” / campi booking (8px)
+$btn-accent-border-radius: $border-radius-md;
+
+$max-width: 1320px;
+$container-padding-x: $space-3;
+$container-padding-x-lg: $space-4;
+
+// Hero / parallax
+$hero-min-height: 85vh;
+$hero-min-height-mobile: 70vh;
+$hero-banner-min-height-desktop: 620px;
+$hero-banner-min-height-mobile: 380px;
+$hero-banner-min-height-mobile-xs: 300px;
+$hero-banner-height-desktop: 100vh;
+$hero-booking-overlap-offset: 110px;
+$hero-next-section-offset: 96px;
+$hero-booking-bottom-offset: 32px;
+$hero-booking-bottom-offset-mobile: 0px;
+$hero-title-size-max: 4.5rem;
+$hero-kicker-font-size: 0.8125rem;
+$hero-kicker-letter-spacing: 0.2em;
+$hero-cta-letter-spacing: 0.1em;
+$parallax-section-min-height: 420px;
+$touch-target-min: 44px;
+
+// =============================================================================
+// Typography
+// =============================================================================
+$font-heading: 'Playfair Display', Georgia, serif;
+$font-body: 'Poppins', system-ui, sans-serif;
+$font-size-base: 16px;
+
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-icon-toggle: 1.75rem;
+
+// Titoli sezione (h2 ~36px, peso 600, sans come nel tema)
+$section-title-font-family: $font-body;
+$section-title-font-size: 2.25rem;
+$section-title-font-weight: 600;
+$section-title-color: $primary;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-tight: 1.2;
+$line-height-body: 1.6;
+$line-height-relaxed: 1.75;
+
+$letter-spacing-wide: 0.06em;
+$letter-spacing-tight: -0.02em;
+
+// =============================================================================
+// Semantica UI
+// =============================================================================
+$text-title: $primary;
+$text-body: $neutral-700;
+$text-muted: $neutral-500;
+$text-on-dark: $neutral-100;
+$text-muted-on-dark: rgba($neutral-100, 0.72);
+
+$link-color: $accent-dark;
+$link-hover-color: $accent;
+
+$border-subtle: $neutral-300;
+$border-strong: $neutral-400;
+
+// Header / navbar
+$header-bg: $neutral-100;
+$header-border: $neutral-300;
+$navbar-min-height: 80px;
+$navbar-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+$nav-link-color: $primary;
+$nav-link-hover: $accent;
+$nav-link-active: $accent;
+
+// Hero / banner
+// Opacità overlay hero: più bassa = immagine più luminosa (testo resta su bianco/oro).
+$hero-overlay: rgba(0, 0, 0, 0.5);
+$hero-overlay-gradient-end-opacity: 0.58;
+$hero-subtitle-color: $accent;
+$hero-heading-color: $neutral-100;
+$hero-max-content-width: 42rem;
+// Allineare a src/app/core/media/ischia-media.ts → ISCHIA_HERO_WIDE
+$hero-image-url: 'https://images.unsplash.com/photo-1755564662313-4e91d405001c?auto=format&fit=crop&w=1920&h=900&q=80';
+
+$outline-width: 2px;
+$outline-offset: 4px;
+
+// Barra prenotazione (navy scuro tema)
+$booking-bar-bg: #1a1a2e;
+$booking-bar-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+$booking-bar-heading: $neutral-100;
+$booking-label-color: rgba(255, 255, 255, 0.7);
+$booking-field-bg: rgba(255, 255, 255, 0.08);
+$booking-field-border: rgba(248, 182, 0, 0.6);
+$booking-field-color: #ffffff;
+
+// Sezioni scure / facilities
+$section-dark-bg: #0a0a0a;
+$section-dark-overlay: rgba(0, 0, 0, 0.65);
+// Allineare a ischia-media.ts → ISCHIA_FACILITIES_BG
+$facilities-section-image-url: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&h=600&q=80';
+
+// Card camere
+$card-bg: $neutral-100;
+$card-border: #eeeeee;
+$card-title: $primary;
+$card-price: $accent;
+$rooms-card-hover-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+
+// Form generici (pagine chiare)
+$input-bg: $neutral-100;
+$input-border: $neutral-400;
+$input-placeholder: $neutral-500;
+$input-focus-border: $accent;
+$input-focus-ring: rgba($accent, 0.35);
+
+// Footer
+$footer-bg: #222222;
+$footer-text: #999999;
+$footer-heading: $neutral-100;
+$footer-link: #999999;
+$footer-link-hover: $accent;
+$footer-border: #333333;
+$footer-bottom-bg: #111111;
+$footer-column-heading-transform: uppercase;
+$footer-column-heading-letter-spacing: 0.08em;
+$footer-legal-sep-color: rgba(255, 255, 255, 0.35);
+
+// Testimonial / Swiper
+$testimonial-star: $accent;
+$testimonial-star-empty: $neutral-400;
+$swiper-bullet-active: $accent;
+$swiper-bullet: $neutral-400;
+$reviews-section-bg: #f9f9f9;
+$reviews-card-bg: $neutral-100;
+$reviews-card-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+// Gallery
+$gallery-gap: $space-2;
+$gallery-item-radius: $border-radius-md;
+
+// Location
+$location-card-bg: $neutral-100;
+$location-accent-border: $accent;
+$location-info-border-left-width: 3px;
+
+// Sezione: linea accent + intro
+$accent-line-width: 60px;
+$accent-line-height: 3px;
+$accent-line-color: $accent;
+$section-intro-max-width: 600px;
+$section-intro-color: $text-body;
+
+// Services: titoli card su sfondo scuro
+$services-card-heading-color: $accent;
+
+// Bottoni accent (hover scurito, testo bianco)
+$btn-accent-hover-background: $accent-dark;
+$btn-accent-text-on-primary: $neutral-100;
+$btn-accent-active-background: #b8860b;
+
+// =============================================================================
+// Shadows & elevation
+// =============================================================================
 $shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-$shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
-$shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.16);
+$shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
+$shadow-booking: $booking-bar-shadow;
 
+// =============================================================================
 // Transitions
+// =============================================================================
 $transition-fast: 0.2s ease;
 $transition-base: 0.3s ease;
 $transition-slow: 0.5s ease;
 
-// Z-index scale
+// =============================================================================
+// Z-index
+// =============================================================================
 $z-dropdown: 100;
 $z-sticky: 200;
+$z-fixed-booking: 250;
+$z-fixed-navbar: 260;
 $z-overlay: 300;
 $z-modal: 400;
 $z-toast: 500;

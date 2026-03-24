@@ -1,9 +1,212 @@
-<section class="hero section-sm position-relative overflow-hidden" aria-labelledby="hero-title">
-  <div class="hero-inner container-bnb position-relative text-center text-white py-5">
-    <h1 id="hero-title" class="text-white">Il tuo rifugio nel cuore della città</h1>
-    <p class="lead text-white-50 mx-auto hero-lead">
-      B&amp;B elegante, colazione italiana e prenotazione diretta.
-    </p>
-    <a routerLink="/prenota" class="btn-primary-bnb mt-3">Prenota ora</a>
+<section id="home-hero" class="hero-section" aria-labelledby="hero-title">
+  <div class="hero-banner" [class.hero-banner--parallax]="parallaxEnabled()">
+    <div class="hero-banner__overlay" aria-hidden="true"></div>
+    <div class="container-bnb hero-banner__inner text-center">
+      <p class="hero-banner__kicker" id="hero-kicker">Ischia, isola verde</p>
+      <h1 id="hero-title" class="hero-banner__title" data-aos="fade-down" data-aos-duration="800">
+        Mare, terme e dolce vita
+      </h1>
+      <p
+        class="hero-banner__lead"
+        data-aos="fade-up"
+        data-aos-duration="800"
+        data-aos-delay="200"
+      >
+        Il tuo B&amp;B a Ischia Porto: camere curate, colazione con sapori locali e prenotazione diretta,
+        a due passi dal mare e dai traghetti per il Golfo di Napoli.
+      </p>
+    </div>
+  </div>
+
+  <div class="container-bnb hero-booking-wrap">
+    <div
+      class="hero-booking card border-0 shadow-lg"
+      data-aos="fade-up"
+      data-aos-duration="800"
+      data-aos-delay="400"
+    >
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="hero-booking__form">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-2">
+            <h2 class="hero-booking__heading mb-0">
+              Prenota<br class="d-none d-md-inline" />
+              la tua camera
+            </h2>
+          </div>
+          <div class="col-lg-10">
+            <div class="row g-3 hero-booking__fields">
+              <div class="col-12 col-sm-6 col-xl-3 hero-booking__field--date">
+                <label class="form-label" for="hero-check-in">Arrivo</label>
+                <div class="input-group" #heroCheckInGroup>
+                  <input
+                    id="hero-check-in"
+                    class="form-control"
+                    formControlName="checkIn"
+                    autocomplete="off"
+                    ngbDatepicker
+                    #checkInDp="ngbDatepicker"
+                    [minDate]="todayStruct"
+                    [container]="'body'"
+                    [placement]="'bottom-start'"
+                    [positionTarget]="heroCheckInGroup"
+                    [datepickerClass]="'bnb-ngb-datepicker'"
+                    [autoClose]="'outside'"
+                    [popperOptions]="popperMatchReferenceWidth"
+                  />
+                  <button
+                    type="button"
+                    class="input-group-text input-group-text--picker"
+                    (click)="checkInDp.toggle()"
+                    aria-label="Apri calendario data di arrivo"
+                  >
+                    <i class="bi bi-calendar3"></i>
+                  </button>
+                </div>
+                @if (form.get('checkIn')?.invalid && form.get('checkIn')?.touched) {
+                  <p class="form-text text-danger small mb-0">Seleziona la data di arrivo.</p>
+                }
+              </div>
+              <div class="col-12 col-sm-6 col-xl-3 hero-booking__field--date">
+                <label class="form-label" for="hero-check-out">Partenza</label>
+                <div class="input-group" #heroCheckOutGroup>
+                  <input
+                    id="hero-check-out"
+                    class="form-control"
+                    formControlName="checkOut"
+                    autocomplete="off"
+                    ngbDatepicker
+                    #checkOutDp="ngbDatepicker"
+                    [minDate]="minCheckOutDate()"
+                    [container]="'body'"
+                    [placement]="'bottom-start'"
+                    [positionTarget]="heroCheckOutGroup"
+                    [datepickerClass]="'bnb-ngb-datepicker'"
+                    [autoClose]="'outside'"
+                    [popperOptions]="popperMatchReferenceWidth"
+                  />
+                  <button
+                    type="button"
+                    class="input-group-text input-group-text--picker"
+                    (click)="checkOutDp.toggle()"
+                    aria-label="Apri calendario data di partenza"
+                  >
+                    <i class="bi bi-calendar3"></i>
+                  </button>
+                </div>
+                @if (form.get('checkOut')?.invalid && form.get('checkOut')?.touched) {
+                  <p class="form-text text-danger small mb-0">Seleziona la data di partenza.</p>
+                }
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-xl-3 hero-booking__field--guest-count">
+                <label class="form-label" id="hero-adults-label">Adulti</label>
+                <div
+                  ngbDropdown
+                  placement="bottom-start"
+                  container="body"
+                  dropdownClass="bnb-dropdown-panel"
+                  class="hero-booking__dropdown"
+                  [popperOptions]="popperMatchReferenceWidth"
+                >
+                  <button
+                    type="button"
+                    class="hero-booking__dropdown-toggle"
+                    ngbDropdownToggle
+                    id="hero-adults"
+                    aria-labelledby="hero-adults-label"
+                  >
+                    {{ form.get('adults')?.value }}
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="hero-adults-label">
+                    @for (n of adultsOptions; track n) {
+                      <button type="button" ngbDropdownItem (click)="form.patchValue({ adults: n })">
+                        {{ n }}
+                      </button>
+                    }
+                  </div>
+                </div>
+                @if (form.get('adults')?.invalid && form.get('adults')?.touched) {
+                  <p class="form-text text-danger small mb-0">Indica almeno 1 adulto.</p>
+                }
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-xl-3 hero-booking__field--guest-count">
+                <label class="form-label" id="hero-children-label">Bambini</label>
+                <div
+                  ngbDropdown
+                  placement="bottom-start"
+                  container="body"
+                  dropdownClass="bnb-dropdown-panel"
+                  class="hero-booking__dropdown"
+                  [popperOptions]="popperMatchReferenceWidth"
+                >
+                  <button
+                    type="button"
+                    class="hero-booking__dropdown-toggle"
+                    ngbDropdownToggle
+                    id="hero-children"
+                    aria-labelledby="hero-children-label"
+                  >
+                    {{ form.get('children')?.value }}
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="hero-children-label">
+                    @for (n of childrenOptions; track n) {
+                      <button type="button" ngbDropdownItem (click)="form.patchValue({ children: n })">
+                        {{ n }}
+                      </button>
+                    }
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-8 col-xl-12 mt-2">
+                <label class="form-label" id="hero-room-label">Camera</label>
+                <div
+                  ngbDropdown
+                  placement="bottom-start"
+                  container="body"
+                  dropdownClass="bnb-dropdown-panel"
+                  class="hero-booking__dropdown"
+                  [popperOptions]="popperMatchReferenceWidth"
+                >
+                  <button
+                    type="button"
+                    class="hero-booking__dropdown-toggle"
+                    ngbDropdownToggle
+                    id="hero-room"
+                    aria-labelledby="hero-room-label"
+                  >
+                    {{ roomLabel() }}
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="hero-room-label">
+                    @for (room of rooms; track room.id) {
+                      <button
+                        type="button"
+                        ngbDropdownItem
+                        (click)="selectRoom(room.id)"
+                      >
+                        {{ room.name }}
+                      </button>
+                    }
+                  </div>
+                </div>
+                @if (form.get('roomId')?.invalid && form.get('roomId')?.touched) {
+                  <p class="form-text text-danger small mb-0">Scegli una camera.</p>
+                }
+              </div>
+            </div>
+            @if (showDateRangeError()) {
+              <p class="text-danger small mt-2 mb-0" role="alert">
+                Date non valide: check-out dopo l’arrivo, non nel passato, almeno {{ minStayNights }}
+                notti.
+              </p>
+            }
+            @if (guestCapacityError(); as msg) {
+              <p class="text-danger small mt-2 mb-0" role="alert">{{ msg }}</p>
+            }
+            <div class="mt-3 d-flex flex-wrap gap-2 justify-content-xl-end">
+              <button type="submit" class="btn btn-hero-submit">Continua prenotazione</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </section>

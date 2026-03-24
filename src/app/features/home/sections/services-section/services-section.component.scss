@@ -1,0 +1,132 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.services-section {
+  position: relative;
+}
+
+.services-section__bg {
+  position: relative;
+  overflow: hidden;
+  padding: v.$section-padding-y-mobile 0;
+  min-height: v.$parallax-section-min-height;
+
+  @include m.respond-to(md) {
+    padding-block: v.$section-padding-y-desktop;
+  }
+  background-color: v.$section-dark-bg;
+  background-image: url(v.$facilities-section-image-url);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: scroll;
+
+  &--parallax {
+    background-attachment: fixed;
+
+    @include m.respond-below(md) {
+      background-attachment: scroll;
+    }
+  }
+}
+
+.services-section__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    165deg,
+    rgba(v.$primary-dark, 0.78) 0%,
+    rgba(v.$neutral-900, 0.72) 50%,
+    rgba(v.$primary-dark, 0.85) 100%
+  );
+}
+
+.services-section__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.services-section__header {
+  max-width: 36rem;
+  margin-inline: auto;
+  margin-bottom: v.$space-10;
+}
+
+.services-section__title {
+  font-family: v.$section-title-font-family;
+  font-size: v.$section-title-font-size;
+  font-weight: v.$section-title-font-weight;
+  color: v.$text-on-dark;
+  margin: 0 0 v.$space-2;
+  line-height: v.$line-height-tight;
+  text-align: center;
+}
+
+.services-section__accent {
+  display: block;
+  width: v.$accent-line-width;
+  height: v.$accent-line-height;
+  margin: v.$space-2 auto v.$space-4;
+  background: v.$accent-line-color;
+  border-radius: 0;
+}
+
+.services-section__intro {
+  font-family: v.$font-body;
+  font-size: v.$font-size-md;
+  line-height: v.$line-height-relaxed;
+  color: v.$text-muted-on-dark;
+  max-width: v.$section-intro-max-width;
+  margin: 0 auto;
+}
+
+.services-section__grid {
+  display: grid;
+  gap: v.$space-5;
+  grid-template-columns: 1fr;
+
+  @include m.respond-to(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include m.respond-to(lg) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.services-section__card {
+  text-align: center;
+  padding: v.$space-5 v.$space-4;
+  border-radius: v.$border-radius-lg;
+  background: rgba(v.$neutral-100, 0.06);
+  border: 1px solid rgba(v.$neutral-100, 0.12);
+  backdrop-filter: blur(6px);
+}
+
+.services-section__icon-wrap {
+  margin-bottom: v.$space-3;
+}
+
+.services-section__icon {
+  font-size: 2.75rem;
+  line-height: 1;
+  color: v.$accent-light;
+}
+
+.services-section__card-title {
+  font-family: v.$font-body;
+  font-size: v.$font-size-xl;
+  font-weight: v.$font-weight-semibold;
+  color: v.$services-card-heading-color;
+  margin: 0 0 v.$space-2;
+  line-height: v.$line-height-tight;
+}
+
+.services-section__card-text {
+  font-family: v.$font-body;
+  font-size: v.$font-size-sm;
+  line-height: v.$line-height-relaxed;
+  color: v.$text-muted-on-dark;
+  margin: 0;
+}

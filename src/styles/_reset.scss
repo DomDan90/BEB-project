@@ -9,6 +9,8 @@
 html {
   font-size: v.$font-size-base;
   scroll-behavior: smooth;
+  overflow-y: auto;
+  overflow-x: clip;
 }
 
 body {
@@ -17,6 +19,8 @@ body {
   color: v.$neutral-900;
   background-color: v.$neutral-100;
   line-height: 1.6;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 img {

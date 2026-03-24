@@ -1,0 +1,36 @@
+<section id="home-chi-siamo" class="about-section section-sm" aria-labelledby="about-section-heading">
+  <div class="container-bnb">
+    <div class="about-section__grid">
+      <div class="about-section__text" data-aos="fade-left" data-aos-duration="750">
+        <h2 id="about-section-heading" class="about-section__title section-title">La nostra storia</h2>
+        <span class="accent-line about-section__accent" aria-hidden="true"></span>
+        <p class="about-section__lead">{{ lead }}</p>
+        <ul class="about-section__list list-unstyled">
+          @for (item of strengths; track item.text) {
+            <li class="about-section__list-item">
+              <i class="bi {{ item.icon }}" aria-hidden="true"></i>
+              <span>{{ item.text }}</span>
+            </li>
+          }
+        </ul>
+        <a routerLink="/chi-siamo" class="about-section__cta">Scopri di più</a>
+      </div>
+
+      <div class="about-section__media" data-aos="fade-right" data-aos-duration="750">
+        <figure class="about-section__figure">
+          <div class="about-section__frame">
+            <img
+              [src]="imageUrl"
+              [alt]="imageAlt()"
+              width="800"
+              height="600"
+              loading="lazy"
+              decoding="async"
+              class="about-section__img"
+            />
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>

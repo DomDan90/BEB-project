@@ -1,11 +1,168 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
+import {
+  afterNextRender,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgbDatepickerModule, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap/datepicker';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap/dropdown';
+import { minCheckoutStructFromCheckInIso, todayNgbStruct } from '../../../../core/booking-date/booking-date-struct.util';
+import { ngbPopperMatchReferenceWidth } from '../../../../core/booking-date/ngb-popper-match-reference';
+import { BookingService } from '../../../../core/services/booking.service';
+import { SeoService } from '../../../../core/services/seo.service';
+import { MOCK_ROOMS } from '../../../../mock/rooms.mock';
+import { ISCHIA_HERO_OG } from '../../../../core/media/ischia-media';
+import { BookingStore } from '../../../../store/booking.store';
+
+function createBookingDateRangeValidator(booking: BookingService): ValidatorFn {
+  return (group: AbstractControl): ValidationErrors | null => {
+    const g = group as FormGroup;
+    const checkIn = g.get('checkIn')?.value as string;
+    const checkOut = g.get('checkOut')?.value as string;
+    if (!checkIn || !checkOut) {
+      return null;
+    }
+    return booking.validateBookingDates(checkIn, checkOut) ? null : { bookingDatesInvalid: true };
+  };
+}
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [RouterLink],
+  imports: [ReactiveFormsModule, NgbDatepickerModule, NgbDropdownModule],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })
-export class HeroComponent {}
+export class HeroComponent implements OnInit {
+  private readonly fb = inject(FormBuilder);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly bookingService = inject(BookingService);
+  private readonly seo = inject(SeoService);
+  private readonly store = inject(BookingStore);
+  private readonly router = inject(Router);
+  private readonly platformId = inject(PLATFORM_ID);
+
+  readonly parallaxEnabled = signal(false);
+  readonly guestCapacityError = signal<string | null>(null);
+
+  readonly rooms = MOCK_ROOMS;
+  readonly minStayNights = this.bookingService.getMinimumStay();
+  readonly todayStruct: NgbDateStruct = todayNgbStruct();
+  readonly adultsOptions = Array.from({ length: 10 }, (_, i) => i + 1);
+  readonly childrenOptions = Array.from({ length: 11 }, (_, i) => i);
+
+  readonly popperMatchReferenceWidth = ngbPopperMatchReferenceWidth;
+
+  readonly form: FormGroup = this.fb.group(
+    {
+      checkIn: ['', Validators.required],
+      checkOut: ['', Validators.required],
+      adults: [2, [Validators.required, Validators.min(1), Validators.max(10)]],
+      children: [0, [Validators.min(0), Validators.max(10)]],
+      roomId: ['', Validators.required],
+    },
+    { validators: createBookingDateRangeValidator(this.bookingService) },
+  );
+
+  constructor() {
+    this.form
+      .get('checkIn')
+      ?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        const ci = this.form.get('checkIn')?.value as string;
+        const co = this.form.get('checkOut')?.value as string;
+        if (!co) {
+          return;
+        }
+        if (!ci || !this.bookingService.validateBookingDates(ci, co)) {
+          this.form.patchValue({ checkOut: '' }, { emitEvent: false });
+        }
+      });
+
+    afterNextRender(() => {
+      if (!isPlatformBrowser(this.platformId)) {
+        return;
+      }
+      this.parallaxEnabled.set(true);
+      void import('aos').then((mod) => mod.default.refresh());
+    });
+  }
+
+  ngOnInit(): void {
+    this.seo.updateMeta(
+      'B&B Ischia — Benvenuto',
+      'Prenota il tuo soggiorno a Ischia: B&B vicino al mare, colazione inclusa, terme e spiagge a portata di mano.',
+      ISCHIA_HERO_OG,
+    );
+  }
+
+  showDateRangeError(): boolean {
+    const c = this.form;
+    return (
+      !!c.errors?.['bookingDatesInvalid'] &&
+      (c.get('checkIn')?.touched ?? false) &&
+      (c.get('checkOut')?.touched ?? false)
+    );
+  }
+
+  minCheckOutDate(): NgbDateStruct {
+    const checkIn = this.form.get('checkIn')?.value as string;
+    return minCheckoutStructFromCheckInIso(checkIn, this.minStayNights);
+  }
+
+  roomLabel(): string {
+    const id = this.form.get('roomId')?.value as string;
+    if (!id) {
+      return 'Seleziona…';
+    }
+    const room = this.rooms.find((r) => r.id === Number(id));
+    return room?.name ?? 'Seleziona…';
+  }
+
+  selectRoom(roomId: number): void {
+    this.form.patchValue({ roomId: String(roomId) });
+  }
+
+  onSubmit(): void {
+    this.guestCapacityError.set(null);
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    const v = this.form.getRawValue() as {
+      checkIn: string;
+      checkOut: string;
+      adults: number;
+      children: number;
+      roomId: string;
+    };
+    const room = this.rooms.find((r) => r.id === Number(v.roomId));
+    const guests = Number(v.adults) + Number(v.children);
+    if (room && guests > room.maxGuests) {
+      this.guestCapacityError.set(
+        `Per ${room.name} il numero massimo di ospiti è ${room.maxGuests}.`,
+      );
+      return;
+    }
+    this.store.checkIn.set(v.checkIn);
+    this.store.checkOut.set(v.checkOut);
+    this.store.guests.set(guests);
+    this.store.selectedRoom.set(room ?? null);
+    void this.router.navigate(['/prenota']);
+  }
+}

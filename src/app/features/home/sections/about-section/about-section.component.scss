@@ -1,0 +1,125 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.about-section__grid {
+  display: grid;
+  gap: v.$space-8;
+  align-items: center;
+
+  @include m.respond-to(md) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: v.$space-10;
+    column-gap: v.$space-8;
+
+    .about-section__text {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .about-section__media {
+      grid-column: 1;
+      grid-row: 1;
+    }
+  }
+}
+
+.about-section__title {
+  margin: 0 0 v.$space-2;
+}
+
+.about-section__accent {
+  display: block;
+  margin-bottom: v.$space-4;
+}
+
+.about-section__lead {
+  font-family: v.$font-body;
+  font-size: v.$font-size-md;
+  line-height: v.$line-height-relaxed;
+  color: v.$section-intro-color;
+  max-width: v.$section-intro-max-width;
+  margin: 0 0 v.$space-5;
+}
+
+.about-section__list {
+  margin: 0 0 v.$space-5;
+  padding: 0;
+}
+
+.about-section__list-item {
+  display: flex;
+  gap: v.$space-3;
+  align-items: flex-start;
+  font-family: v.$font-body;
+  font-size: v.$font-size-sm;
+  line-height: v.$line-height-relaxed;
+  color: v.$text-body;
+  margin-bottom: v.$space-3;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .bi {
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    color: v.$accent-dark;
+    margin-top: 0.1em;
+  }
+}
+
+.about-section__cta {
+  @include m.btn-accent();
+  display: inline-flex;
+}
+
+.about-section__media {
+  padding: 0 v.$space-2 v.$space-4 0;
+
+  @include m.respond-to(md) {
+    padding: 0 v.$space-4 v.$space-6 0;
+  }
+}
+
+.about-section__figure {
+  margin: 0;
+}
+
+// Cornice accent offset (stile tema: bordo dorato “staccato” dall’immagine)
+.about-section__frame {
+  position: relative;
+  display: block;
+  border-radius: v.$border-radius-lg;
+  overflow: visible;
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: v.$space-4;
+    left: v.$space-4;
+    right: -1 * v.$space-4;
+    bottom: -1 * v.$space-4;
+    border: 2px solid v.$accent;
+    border-radius: v.$border-radius-lg;
+    pointer-events: none;
+  }
+
+  @include m.respond-below(md) {
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.about-section__img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 800 / 600;
+  object-fit: cover;
+  border-radius: v.$border-radius-lg;
+  box-shadow: v.$shadow-md;
+}
