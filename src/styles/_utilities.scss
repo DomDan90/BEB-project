@@ -2,24 +2,38 @@
 @use 'mixins' as m;
 
 .section {
-  padding: v.$space-10 0;
+  padding-block: v.$section-padding-y-mobile;
+  padding-inline: 0;
+
+  @include m.respond-to(md) {
+    padding-block: v.$section-padding-y-desktop;
+  }
 }
 
 .section-sm {
-  padding: v.$space-6 0;
+  padding-block: v.$section-padding-y-mobile;
+  padding-inline: 0;
+
+  @include m.respond-to(md) {
+    padding-block: v.$section-padding-y-desktop;
+  }
 }
 
 .section-title {
-  font-family: v.$font-heading;
-  color: v.$primary;
+  font-family: v.$section-title-font-family;
+  font-size: v.$section-title-font-size;
+  font-weight: v.$section-title-font-weight;
+  color: v.$section-title-color;
+  line-height: v.$line-height-tight;
+  margin: 0;
 }
 
 .accent-line {
   display: block;
-  width: 48px;
-  height: 3px;
-  background: linear-gradient(90deg, v.$accent, v.$accent-light);
-  border-radius: v.$border-radius-sm;
+  width: v.$accent-line-width;
+  height: v.$accent-line-height;
+  background: v.$accent-line-color;
+  border-radius: 0;
   margin-top: v.$space-2;
 }
 

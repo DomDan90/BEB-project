@@ -3,3 +3,7 @@
 @use 'styles/typography';
 @use 'styles/animations';
 @use 'styles/utilities';
+
+body {
+  padding-top: 0;
+}

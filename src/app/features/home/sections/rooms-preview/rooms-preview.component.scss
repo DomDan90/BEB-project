@@ -1,10 +1,14 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
+:host {
+  display: block;
+}
+
 .rooms-preview__header {
   text-align: center;
   margin-bottom: v.$space-8;
-  max-width: 40rem;
+  max-width: calc(v.$section-intro-max-width + 4rem);
   margin-inline: auto;
 }
 
@@ -17,7 +21,9 @@
   font-family: v.$font-body;
   font-size: v.$font-size-md;
   line-height: v.$line-height-relaxed;
-  margin: v.$space-4 0 0;
+  color: v.$section-intro-color;
+  max-width: v.$section-intro-max-width;
+  margin: v.$space-4 auto 0;
 }
 
 .rooms-preview__grid {
@@ -42,14 +48,14 @@
   border: 1px solid v.$card-border;
   border-radius: v.$border-radius-lg;
   overflow: hidden;
-  box-shadow: v.$shadow-md;
+  box-shadow: v.$shadow-sm;
   transition:
     transform v.$transition-base,
     box-shadow v.$transition-base;
 
   &:hover {
     transform: translateY(-6px);
-    box-shadow: 0 18px 48px rgba(v.$neutral-900, 0.16);
+    box-shadow: v.$rooms-card-hover-shadow;
   }
 }
 

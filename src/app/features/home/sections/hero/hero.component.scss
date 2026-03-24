@@ -3,11 +3,9 @@
 
 .hero-section {
   position: relative;
-  padding-bottom: v.$space-10;
-
-  @include m.respond-to(lg) {
-    padding-bottom: v.$space-12;
-  }
+  margin-top: calc(-1 * v.$navbar-min-height);
+  padding-top: v.$navbar-min-height;
+  padding-bottom: 0;
 }
 
 .hero-banner {
@@ -15,10 +13,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: v.$hero-min-height-mobile;
+  height: v.$hero-banner-height-desktop;
+  min-height: v.$hero-banner-min-height-desktop;
   padding: v.$space-10 v.$container-padding-x;
-  margin-inline: v.$space-2;
-  border-radius: v.$border-radius-lg;
+  margin-inline: 0;
+  border-radius: 0;
   overflow: hidden;
   background-color: v.$section-dark-bg;
   background-image:
@@ -29,9 +28,13 @@
   background-size: cover, cover;
   background-attachment: scroll, scroll;
 
-  @include m.respond-to(md) {
-    min-height: v.$hero-min-height;
-    margin-inline: v.$space-3;
+  @include m.respond-below(md) {
+    height: auto;
+    min-height: v.$hero-banner-min-height-mobile;
+  }
+
+  @include m.respond-below(sm) {
+    min-height: v.$hero-banner-min-height-mobile-xs;
   }
 
   &--parallax {
@@ -63,22 +66,27 @@
   z-index: 1;
   max-width: v.$hero-max-content-width;
   margin-inline: auto;
+  padding-bottom: v.$space-6;
+
+  @include m.respond-to(md) {
+    padding-bottom: v.$space-8;
+  }
 }
 
 .hero-banner__kicker {
   font-family: v.$font-body;
-  font-size: v.$font-size-sm;
-  font-weight: v.$font-weight-medium;
-  letter-spacing: v.$letter-spacing-wide;
+  font-size: v.$hero-kicker-font-size;
+  font-weight: v.$font-weight-semibold;
+  letter-spacing: v.$hero-kicker-letter-spacing;
   text-transform: uppercase;
-  color: v.$hero-subtitle-color;
+  color: rgba(v.$neutral-100, 0.86);
   margin-bottom: v.$space-2;
 }
 
 .hero-banner__title {
-  font-family: v.$font-heading;
+  font-family: v.$font-body;
   font-weight: v.$font-weight-bold;
-  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-size: clamp(2.2rem, 6.2vw, v.$hero-title-size-max);
   line-height: v.$line-height-tight;
   color: v.$hero-heading-color;
   margin: 0 0 v.$space-3;
@@ -89,21 +97,35 @@
   font-size: v.$font-size-lg;
   line-height: v.$line-height-relaxed;
   color: v.$text-muted-on-dark;
-  margin: 0;
+  margin: 0 0 v.$space-6;
+
+  @include m.respond-to(md) {
+    margin-bottom: v.$space-8;
+  }
 }
 
 .hero-booking-wrap {
-  position: relative;
-  margin-top: calc(-1 * v.$space-8);
-  z-index: v.$z-sticky;
+  position: absolute;
+  bottom: v.$hero-booking-bottom-offset;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90%, 1100px);
+  max-width: 1100px;
+  z-index: 10;
 
   @include m.respond-below(md) {
-    margin-top: calc(-1 * v.$space-4);
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    margin-top: -1px;
   }
 }
 
 .hero-booking {
-  border-radius: v.$border-radius-lg;
+  border-radius: 0;
   background-color: v.$booking-bar-bg;
   box-shadow: v.$shadow-booking;
   padding: v.$space-4 v.$space-3;
@@ -124,27 +146,38 @@
   .form-label {
     font-size: v.$font-size-sm;
     font-weight: v.$font-weight-medium;
-    color: v.$text-body;
+    color: v.$booking-label-color;
   }
 
   .form-control,
   .form-select {
-    border-color: v.$input-border;
+    background-color: v.$booking-field-bg;
+    color: v.$booking-field-color;
+    border-color: v.$booking-field-border;
     font-size: v.$font-size-sm;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
 
     &:focus {
       border-color: v.$input-focus-border;
       box-shadow: 0 0 0 v.$space-1 v.$input-focus-ring;
+      background-color: v.$booking-field-bg;
+      color: v.$booking-field-color;
     }
   }
 
   .input-group-text {
-    background-color: v.$neutral-200;
-    border-color: v.$input-border;
-    color: v.$primary;
+    background-color: v.$booking-field-bg;
+    border-color: v.$booking-field-border;
+    color: v.$accent;
   }
 }
 
 .btn-hero-submit {
   @include m.btn-accent();
+  text-transform: uppercase;
+  letter-spacing: v.$hero-cta-letter-spacing;
+  font-weight: v.$font-weight-bold;
 }

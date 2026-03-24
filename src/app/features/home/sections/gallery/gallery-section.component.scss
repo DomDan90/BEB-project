@@ -2,7 +2,7 @@
 @use 'mixins' as m;
 
 .gallery-section__header {
-  max-width: 40rem;
+  max-width: calc(v.$section-intro-max-width + 4rem);
   margin-inline: auto;
   margin-bottom: v.$space-8;
 }
@@ -17,7 +17,9 @@
   font-family: v.$font-body;
   font-size: v.$font-size-md;
   line-height: v.$line-height-relaxed;
-  margin: v.$space-4 0 0;
+  color: v.$section-intro-color;
+  max-width: v.$section-intro-max-width;
+  margin: v.$space-4 auto 0;
 }
 
 // Masonry-style: colonne CSS, altezze naturali dalle proporzioni delle immagini

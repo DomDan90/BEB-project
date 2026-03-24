@@ -1,27 +1,28 @@
 // =============================================================================
-// Palette B&B (base fissa — elegante, neutro, lusso)
+// Palette Royal Hotel / Colorlib (adattata al B&B)
 // =============================================================================
-$primary: #2c3e50;
-$primary-light: #34495e;
-$primary-dark: #1f2d3a;
-$accent: #c9a96e;
-$accent-light: #d4b896;
-$accent-dark: #b08d55;
+$accent: #f8b600;
+$accent-light: #ffcc33;
+$accent-dark: #d9a000;
+
+$primary: #222222;
+$primary-light: #333333;
+$primary-dark: #111111;
 
 $neutral-100: #ffffff;
-$neutral-200: #f8f6f3;
-$neutral-300: #ede8e0;
-$neutral-400: #d5cfc4;
-$neutral-500: #9e9689;
-$neutral-700: #5c5550;
-$neutral-900: #1a1612;
+$neutral-200: #f9f9f9;
+$neutral-300: #eeeeee;
+$neutral-400: #dddddd;
+$neutral-500: #999999;
+$neutral-700: #666666;
+$neutral-900: #222222;
 
 $success: #27ae60;
 $error: #e74c3c;
 $warning: #f39c12;
 
 // =============================================================================
-// Spacing (8pt grid) — prima dei token che li referenziano
+// Spacing (8pt grid)
 // =============================================================================
 $space-1: 8px;
 $space-2: 16px;
@@ -34,9 +35,13 @@ $space-10: 80px;
 $space-12: 96px;
 $space-16: 128px;
 
-// Equivalente “section_gap” del tema: respiro verticale tra blocchi principali
-$section-gap-y: $space-12;
-$section-gap-y-lg: $space-16;
+// Section vertical rhythm (tema: 50px mobile, 80px desktop)
+$section-padding-y-mobile: 50px;
+$section-padding-y-desktop: 80px;
+
+// Legacy aliases (usati in pochi punti)
+$section-gap-y: $section-padding-y-mobile;
+$section-gap-y-lg: $section-padding-y-desktop;
 
 // =============================================================================
 // Raggi e layout base
@@ -47,18 +52,31 @@ $border-radius-lg: 16px;
 $border-radius-xl: 24px;
 $border-radius-pill: 999px;
 
+// Pulsanti primari tema: quasi squadrati
+$btn-accent-border-radius: 2px;
+
 $max-width: 1320px;
 $container-padding-x: $space-3;
 $container-padding-x-lg: $space-4;
 
-// Altezze minime (hero, sezioni parallax solo CSS)
+// Hero / parallax
 $hero-min-height: 85vh;
 $hero-min-height-mobile: 70vh;
+$hero-banner-min-height-desktop: 620px;
+$hero-banner-min-height-mobile: 380px;
+$hero-banner-min-height-mobile-xs: 300px;
+$hero-banner-height-desktop: 100vh;
+$hero-booking-overlap-offset: 110px;
+$hero-next-section-offset: 96px;
+$hero-booking-bottom-offset: 32px;
+$hero-title-size-max: 4.5rem;
+$hero-kicker-font-size: 0.8125rem;
+$hero-kicker-letter-spacing: 0.2em;
+$hero-cta-letter-spacing: 0.1em;
 $parallax-section-min-height: 420px;
 
 // =============================================================================
 // Typography
-// (.banner_content h6 → sottotitolo; titoli sezione → .section_title)
 // =============================================================================
 $font-heading: 'Playfair Display', Georgia, serif;
 $font-body: 'Poppins', system-ui, sans-serif;
@@ -70,6 +88,12 @@ $font-size-md: 1rem;
 $font-size-lg: 1.125rem;
 $font-size-xl: 1.25rem;
 $font-size-icon-toggle: 1.75rem;
+
+// Titoli sezione (h2 ~36px, peso 600, sans come nel tema)
+$section-title-font-family: $font-body;
+$section-title-font-size: 2.25rem;
+$section-title-font-weight: 600;
+$section-title-color: $primary;
 
 $font-weight-normal: 400;
 $font-weight-medium: 500;
@@ -84,11 +108,10 @@ $letter-spacing-wide: 0.06em;
 $letter-spacing-tight: -0.02em;
 
 // =============================================================================
-// Semantica da classi del tema → uso nei componenti
-// .title_color / .title_w / .sec_h4 / .theme_btn / .section_gap / footer / overlay
+// Semantica UI
 // =============================================================================
 $text-title: $primary;
-$text-body: $neutral-900;
+$text-body: $neutral-700;
 $text-muted: $neutral-500;
 $text-on-dark: $neutral-100;
 $text-muted-on-dark: rgba($neutral-100, 0.72);
@@ -99,77 +122,104 @@ $link-hover-color: $accent;
 $border-subtle: $neutral-300;
 $border-strong: $neutral-400;
 
-// Header (.header_area / .navbar)
+// Header / navbar
 $header-bg: $neutral-100;
 $header-border: $neutral-300;
-$nav-link-color: $neutral-700;
+$navbar-min-height: 80px;
+$navbar-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+$nav-link-color: $primary;
 $nav-link-hover: $accent;
-$nav-link-active: $accent-dark;
+$nav-link-active: $accent;
 
-// Hero / banner (.banner_area, .booking_table)
-$hero-overlay: rgba($primary-dark, 0.55);
-$hero-subtitle-color: $accent-light;
+// Hero / banner
+$hero-overlay: rgba(0, 0, 0, 0.62);
+$hero-subtitle-color: $accent;
 $hero-heading-color: $neutral-100;
 $hero-max-content-width: 42rem;
-// Dev: sostituisci in pipeline prod se necessario
 $hero-image-url: 'https://picsum.photos/seed/bnb-hero/1920/900';
 
-// Focus outline riutilizzabile (logo, link decorativi)
 $outline-width: 2px;
 $outline-offset: 4px;
 
-// Barra prenotazione (.hotel_booking_area)
-$booking-bar-bg: $neutral-100;
-$booking-bar-shadow: 0 12px 40px rgba($neutral-900, 0.12);
-$booking-bar-heading: $primary;
+// Barra prenotazione (navy scuro tema)
+$booking-bar-bg: #1a1a2e;
+$booking-bar-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+$booking-bar-heading: $neutral-100;
+$booking-label-color: rgba(255, 255, 255, 0.7);
+$booking-field-bg: rgba(255, 255, 255, 0.08);
+$booking-field-border: rgba(248, 182, 0, 0.6);
+$booking-field-color: #ffffff;
 
-// Sezioni scure / parallax CSS (.facilities_area)
-$section-dark-bg: $primary;
-$section-dark-overlay: rgba($primary-dark, 0.82);
-// Dev: sostituisci in pipeline prod se necessario
+// Sezioni scure / facilities
+$section-dark-bg: #0a0a0a;
+$section-dark-overlay: rgba(0, 0, 0, 0.65);
 $facilities-section-image-url: 'https://picsum.photos/seed/bnb-facilities/1920/600';
 
-// Card camere (.accomodation_item)
+// Card camere
 $card-bg: $neutral-100;
-$card-border: $neutral-300;
+$card-border: #eeeeee;
 $card-title: $primary;
-$card-price: $accent-dark;
+$card-price: $accent;
+$rooms-card-hover-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
 
-// Form / input (booking, newsletter)
+// Form generici (pagine chiare)
 $input-bg: $neutral-100;
 $input-border: $neutral-400;
 $input-placeholder: $neutral-500;
 $input-focus-border: $accent;
-$input-focus-ring: rgba($accent, 0.25);
+$input-focus-ring: rgba($accent, 0.35);
 
-// Footer (.footer-area)
-$footer-bg: $primary-dark;
-$footer-text: rgba($neutral-100, 0.78);
+// Footer
+$footer-bg: #222222;
+$footer-text: #999999;
 $footer-heading: $neutral-100;
-$footer-link: $accent-light;
-$footer-link-hover: $neutral-100;
-$footer-border: rgba($neutral-100, 0.12);
+$footer-link: #999999;
+$footer-link-hover: $accent;
+$footer-border: #333333;
+$footer-bottom-bg: #111111;
+$footer-column-heading-transform: uppercase;
+$footer-column-heading-letter-spacing: 0.08em;
+$footer-legal-sep-color: rgba(255, 255, 255, 0.35);
 
 // Testimonial / Swiper
 $testimonial-star: $accent;
 $testimonial-star-empty: $neutral-400;
 $swiper-bullet-active: $accent;
 $swiper-bullet: $neutral-400;
+$reviews-section-bg: #f9f9f9;
+$reviews-card-bg: $neutral-100;
+$reviews-card-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 
-// Gallery masonry + lightbox (sezione ex-novo)
+// Gallery
 $gallery-gap: $space-2;
 $gallery-item-radius: $border-radius-md;
 
-// Location / Leaflet (sezione ex-novo)
-$location-card-bg: $neutral-200;
+// Location
+$location-card-bg: $neutral-100;
 $location-accent-border: $accent;
+$location-info-border-left-width: 3px;
+
+// Sezione: linea accent + intro
+$accent-line-width: 60px;
+$accent-line-height: 3px;
+$accent-line-color: $accent;
+$section-intro-max-width: 600px;
+$section-intro-color: $text-body;
+
+// Services: titoli card su sfondo scuro
+$services-card-heading-color: $accent;
+
+// Bottoni accent (hover scurito, testo bianco)
+$btn-accent-hover-background: $accent-dark;
+$btn-accent-text-on-primary: $neutral-100;
+$btn-accent-active-background: #b8860b;
 
 // =============================================================================
 // Shadows & elevation
 // =============================================================================
 $shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-$shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
-$shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.16);
+$shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
 $shadow-booking: $booking-bar-shadow;
 
 // =============================================================================
@@ -185,6 +235,7 @@ $transition-slow: 0.5s ease;
 $z-dropdown: 100;
 $z-sticky: 200;
 $z-fixed-booking: 250;
+$z-fixed-navbar: 260;
 $z-overlay: 300;
 $z-modal: 400;
 $z-toast: 500;

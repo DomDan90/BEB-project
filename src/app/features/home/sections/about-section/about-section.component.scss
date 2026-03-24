@@ -36,7 +36,8 @@
   font-family: v.$font-body;
   font-size: v.$font-size-md;
   line-height: v.$line-height-relaxed;
-  color: v.$text-body;
+  color: v.$section-intro-color;
+  max-width: v.$section-intro-max-width;
   margin: 0 0 v.$space-5;
 }
 

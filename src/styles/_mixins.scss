@@ -41,10 +41,10 @@ $breakpoints: (
   font-family: v.$font-body;
   font-size: v.$font-size-sm;
   font-weight: v.$font-weight-semibold;
-  color: v.$neutral-100;
+  color: v.$btn-accent-text-on-primary;
   background-color: v.$accent;
   border: none;
-  border-radius: v.$border-radius-md;
+  border-radius: v.$btn-accent-border-radius;
   padding: v.$space-2 v.$space-4;
   cursor: pointer;
   text-decoration: none;
@@ -54,8 +54,8 @@ $breakpoints: (
     transform v.$transition-fast;
 
   &:hover {
-    background-color: v.$accent-light;
-    color: v.$text-body;
+    background-color: v.$btn-accent-hover-background;
+    color: v.$btn-accent-text-on-primary;
   }
 
   &:focus-visible {
@@ -63,7 +63,7 @@ $breakpoints: (
   }
 
   &.active {
-    background-color: v.$accent-dark;
-    color: v.$neutral-100;
+    background-color: v.$btn-accent-active-background;
+    color: v.$btn-accent-text-on-primary;
   }
 }

@@ -2,15 +2,28 @@
 @use 'mixins' as m;
 
 .header-bnb {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: v.$z-sticky;
-  background-color: v.$header-bg;
-  border-bottom: 1px solid v.$header-border;
-  box-shadow: v.$shadow-sm;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  background: transparent;
+  box-shadow: none;
+  transition:
+    background-color v.$transition-base,
+    box-shadow v.$transition-base;
+
+  &.is-scrolled {
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
 }
 
 .navbar-bnb {
+  display: flex;
+  align-items: center;
+  min-height: v.$navbar-min-height;
   padding-block: v.$space-2;
 }
 

@@ -2,7 +2,7 @@
 @use 'mixins' as m;
 
 .location-section__header {
-  max-width: 40rem;
+  max-width: calc(v.$section-intro-max-width + 4rem);
   margin-inline: auto;
   margin-bottom: v.$space-8;
 }
@@ -17,7 +17,9 @@
   font-family: v.$font-body;
   font-size: v.$font-size-md;
   line-height: v.$line-height-relaxed;
-  margin: v.$space-4 0 0;
+  color: v.$section-intro-color;
+  max-width: v.$section-intro-max-width;
+  margin: v.$space-4 auto 0;
 }
 
 .location-section__grid {
@@ -76,8 +78,9 @@
 .location-section__card {
   height: 100%;
   padding: v.$space-5 v.$space-4;
-  background: v.$neutral-100;
+  background: v.$location-card-bg;
   border: 1px solid v.$border-subtle;
+  border-left: v.$location-info-border-left-width solid v.$location-accent-border;
   border-radius: v.$border-radius-lg;
   box-shadow: v.$shadow-sm;
   display: flex;

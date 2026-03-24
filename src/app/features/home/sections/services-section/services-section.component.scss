@@ -8,8 +8,12 @@
 .services-section__bg {
   position: relative;
   overflow: hidden;
-  padding: v.$space-12 0;
+  padding: v.$section-padding-y-mobile 0;
   min-height: v.$parallax-section-min-height;
+
+  @include m.respond-to(md) {
+    padding-block: v.$section-padding-y-desktop;
+  }
   background-color: v.$section-dark-bg;
   background-image: url(v.$facilities-section-image-url);
   background-repeat: no-repeat;
@@ -54,21 +58,22 @@
 }
 
 .services-section__title {
-  font-family: v.$font-heading;
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
-  font-weight: v.$font-weight-bold;
+  font-family: v.$section-title-font-family;
+  font-size: v.$section-title-font-size;
+  font-weight: v.$section-title-font-weight;
   color: v.$text-on-dark;
   margin: 0 0 v.$space-2;
   line-height: v.$line-height-tight;
+  text-align: center;
 }
 
 .services-section__accent {
   display: block;
-  width: 48px;
-  height: 3px;
+  width: v.$accent-line-width;
+  height: v.$accent-line-height;
   margin: v.$space-2 auto v.$space-4;
-  background: linear-gradient(90deg, v.$accent, v.$accent-light);
-  border-radius: v.$border-radius-sm;
+  background: v.$accent-line-color;
+  border-radius: 0;
 }
 
 .services-section__intro {
@@ -76,7 +81,8 @@
   font-size: v.$font-size-md;
   line-height: v.$line-height-relaxed;
   color: v.$text-muted-on-dark;
-  margin: 0;
+  max-width: v.$section-intro-max-width;
+  margin: 0 auto;
 }
 
 .services-section__grid {
@@ -113,10 +119,10 @@
 }
 
 .services-section__card-title {
-  font-family: v.$font-heading;
+  font-family: v.$font-body;
   font-size: v.$font-size-xl;
-  font-weight: v.$font-weight-bold;
-  color: v.$text-on-dark;
+  font-weight: v.$font-weight-semibold;
+  color: v.$services-card-heading-color;
   margin: 0 0 v.$space-2;
   line-height: v.$line-height-tight;
 }
