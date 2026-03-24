@@ -32,6 +32,7 @@ export class LocationSectionComponent implements OnDestroy {
   private readonly mapHost = viewChild<ElementRef<HTMLElement>>('mapHost');
 
   private map: LeafletMap | null = null;
+  private mapResizeObserver: ResizeObserver | null = null;
 
   readonly lat = MOCK_LAT;
   readonly lng = MOCK_LNG;
@@ -42,7 +43,7 @@ export class LocationSectionComponent implements OnDestroy {
   readonly phoneTel = MOCK_PHONE_TEL;
   readonly email = MOCK_EMAIL;
 
-  /** Link esterno Google Maps (coordinate mock Napoli). */
+  /** Link esterno Google Maps (coordinate mock Ischia). */
   readonly googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${MOCK_LAT},${MOCK_LNG}`;
 
   constructor() {
@@ -55,6 +56,8 @@ export class LocationSectionComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.mapResizeObserver?.disconnect();
+    this.mapResizeObserver = null;
     this.map?.remove();
     this.map = null;
   }
@@ -88,6 +91,13 @@ export class LocationSectionComponent implements OnDestroy {
     L.marker([MOCK_LAT, MOCK_LNG], { icon: customIcon })
       .addTo(this.map)
       .bindPopup('Il nostro B&B a Ischia');
+
+    if (typeof ResizeObserver !== 'undefined') {
+      this.mapResizeObserver = new ResizeObserver(() => {
+        this.map?.invalidateSize();
+      });
+      this.mapResizeObserver.observe(el);
+    }
 
     requestAnimationFrame(() => {
       this.map?.invalidateSize();

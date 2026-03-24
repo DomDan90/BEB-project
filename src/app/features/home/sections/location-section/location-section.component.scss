@@ -34,14 +34,25 @@
   }
 }
 
-.location-section__map-col {
+.location-section__map-col,
+.location-section__info-col {
   min-width: 0;
+}
+
+.location-section__map-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-section__info-col {
+  display: flex;
+  flex-direction: column;
 }
 
 .location-section__map {
   width: 100%;
-  min-height: 280px;
-  height: 280px;
+  min-height: 300px;
+  height: 300px;
   border-radius: v.$border-radius-lg;
   overflow: hidden;
   border: 1px solid v.$border-subtle;
@@ -50,8 +61,15 @@
   z-index: 0;
 
   @include m.respond-to(md) {
-    min-height: 400px;
-    height: 400px;
+    min-height: 440px;
+    height: 440px;
+  }
+
+  /* Affiancata alla card: stessa altezza della colonna così la mappa “riempie” il blocco */
+  @include m.respond-to(lg-plus) {
+    flex: 1;
+    height: 100%;
+    min-height: 440px;
   }
 }
 
