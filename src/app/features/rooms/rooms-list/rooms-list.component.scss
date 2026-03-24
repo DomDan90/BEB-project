@@ -1,0 +1,6 @@
+@use 'variables' as v;
+
+.room-card {
+  border-radius: v.$border-radius-md;
+  overflow: hidden;
+}

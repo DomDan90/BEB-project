@@ -1,0 +1,31 @@
+<section class="section bg-soft" aria-labelledby="rooms-preview-title">
+  <div class="container-bnb">
+    <h2 id="rooms-preview-title" class="section-title">Le nostre camere</h2>
+    <span class="accent-line" aria-hidden="true"></span>
+    <div class="row g-4 mt-2">
+      @for (room of rooms; track room.id) {
+        <div class="col-md-4">
+          <article class="card h-100 border-0 shadow-sm room-card">
+            <img
+              [src]="room.thumbnail"
+              class="card-img-top"
+              [alt]="'Anteprima ' + room.name"
+              appLazyImage
+            />
+            <div class="card-body">
+              <h3 class="h5 card-title">{{ room.name }}</h3>
+              <p class="small text-muted mb-2">{{ room.shortDescription }}</p>
+              <p class="fw-semibold mb-3">Da {{ room.pricePerNight | currencyEur }} / notte</p>
+              <a [routerLink]="['/camere', room.slug]" class="btn-outline-bnb btn-sm stretched-link"
+                >Scopri</a
+              >
+            </div>
+          </article>
+        </div>
+      }
+    </div>
+    <div class="text-center mt-4">
+      <a routerLink="/camere" class="btn-primary-bnb">Vedi tutte le camere</a>
+    </div>
+  </div>
+</section>

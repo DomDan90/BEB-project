@@ -1,0 +1,27 @@
+@use 'variables' as v;
+
+.footer-bnb {
+  background-color: v.$primary;
+}
+
+.text-muted-custom {
+  color: v.$neutral-300;
+}
+
+.letter-spacing {
+  letter-spacing: 0.08em;
+}
+
+a {
+  color: v.$neutral-200;
+  text-decoration: none;
+  transition: color v.$transition-fast;
+
+  &:hover {
+    color: v.$accent-light;
+  }
+}
+
+.copyright {
+  color: v.$neutral-400;
+}

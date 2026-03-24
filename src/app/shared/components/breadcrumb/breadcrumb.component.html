@@ -1,0 +1,15 @@
+@if (items().length) {
+  <nav aria-label="Percorso di navigazione">
+    <ol class="breadcrumb mb-0">
+      @for (item of items(); track $index) {
+        <li class="breadcrumb-item" [class.active]="!item.link">
+          @if (item.link) {
+            <a [routerLink]="item.link">{{ item.label }}</a>
+          } @else {
+            {{ item.label }}
+          }
+        </li>
+      }
+    </ol>
+  </nav>
+}

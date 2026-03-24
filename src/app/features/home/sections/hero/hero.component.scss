@@ -1,0 +1,22 @@
+@use 'variables' as v;
+
+.hero {
+  background:
+    linear-gradient(120deg, rgba(v.$primary, 0.85), rgba(v.$neutral-900, 0.75)),
+    url('https://picsum.photos/id/164/1600/900') center / cover no-repeat;
+  border-radius: v.$border-radius-lg;
+  margin-inline: v.$space-3;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-lead {
+  max-width: 36rem;
+}
+
+.overlay-dark {
+  border-radius: inherit;
+}

@@ -1,0 +1,13 @@
+<div class="container-bnb section text-center">
+  <app-breadcrumb [items]="crumbs" />
+  <h1 class="section-title mt-3">Richiesta inviata</h1>
+  <span class="accent-line mx-auto" aria-hidden="true"></span>
+
+  @if (store.lastConfirmation(); as c) {
+    <p class="lead mt-4">Codice di riferimento: <strong>{{ c.confirmationCode }}</strong></p>
+    <p class="small text-muted">Stato: {{ c.status }} · Totale {{ c.totalPrice | currencyEur }}</p>
+    <p class="small">Dal {{ c.checkIn | dateIta }} al {{ c.checkOut | dateIta }}</p>
+  }
+
+  <a routerLink="/" class="btn-primary-bnb mt-4 d-inline-block">Torna alla home</a>
+</div>

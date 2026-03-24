@@ -1,0 +1,25 @@
+@use 'variables' as v;
+
+.btn-scroll {
+  position: fixed;
+  right: v.$space-3;
+  bottom: v.$space-3;
+  z-index: v.$z-sticky;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background-color: v.$accent;
+  color: v.$neutral-100;
+  box-shadow: v.$shadow-md;
+  cursor: pointer;
+  transition:
+    transform v.$transition-fast,
+    background-color v.$transition-base;
+
+  &:hover {
+    transform: translateY(-2px);
+    background-color: v.$accent-light;
+    color: v.$neutral-900;
+  }
+}

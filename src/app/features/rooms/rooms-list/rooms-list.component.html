@@ -1,0 +1,20 @@
+<div class="container-bnb section-sm">
+  <app-breadcrumb [items]="crumbs" />
+  <h1 class="section-title mt-3">Camere e suite</h1>
+  <span class="accent-line" aria-hidden="true"></span>
+  <div class="row g-4 mt-2">
+    @for (room of rooms; track room.id) {
+      <div class="col-md-6 col-xl-4">
+        <article class="card h-100 border-0 shadow-sm room-card">
+          <img [src]="room.thumbnail" class="card-img-top" [alt]="room.name" appLazyImage />
+          <div class="card-body d-flex flex-column">
+            <h2 class="h5">{{ room.name }}</h2>
+            <p class="small text-muted flex-grow-1">{{ room.shortDescription }}</p>
+            <p class="fw-semibold">{{ room.pricePerNight | currencyEur }} / notte</p>
+            <a [routerLink]="['/camere', room.slug]" class="btn-primary-bnb align-self-start">Dettagli</a>
+          </div>
+        </article>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,9 @@
+@use 'variables' as v;
+
+.text-accent-custom {
+  color: v.$accent;
+}
+
+.label-text {
+  color: v.$neutral-700;
+}

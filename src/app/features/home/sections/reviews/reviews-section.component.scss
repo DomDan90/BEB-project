@@ -1,0 +1,12 @@
+@use 'variables' as v;
+
+.review-card {
+  background: v.$neutral-100;
+  border-radius: v.$border-radius-md;
+  box-shadow: v.$shadow-sm;
+}
+
+blockquote {
+  font-size: 0.95rem;
+  margin: 0;
+}

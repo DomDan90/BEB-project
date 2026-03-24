@@ -1,0 +1,76 @@
+@use 'variables' as v;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+h1,
+.h1 {
+  font-family: v.$font-heading;
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 v.$space-3;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+h2,
+.h2 {
+  font-family: v.$font-heading;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 v.$space-2;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+h3,
+.h3 {
+  font-family: v.$font-heading;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  margin: 0 0 v.$space-2;
+}
+
+h4,
+.h4 {
+  font-family: v.$font-body;
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0 0 v.$space-2;
+}
+
+h5,
+.h5 {
+  font-family: v.$font-body;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0 0 v.$space-1;
+}
+
+h6,
+.h6 {
+  font-family: v.$font-body;
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0 0 v.$space-1;
+}
+
+p {
+  margin: 0 0 v.$space-2;
+  font-size: 1rem;
+}
+
+.lead {
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: v.$neutral-700;
+}
+
+small,
+.small {
+  font-size: 0.875rem;
+  color: v.$neutral-500;
+}
+
+label,
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: v.$neutral-700;
+}

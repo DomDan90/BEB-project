@@ -1,0 +1,14 @@
+@use 'variables' as v;
+
+.breadcrumb {
+  font-size: 0.875rem;
+}
+
+a {
+  color: v.$accent;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

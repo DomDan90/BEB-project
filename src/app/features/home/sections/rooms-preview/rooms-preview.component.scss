@@ -1,0 +1,11 @@
+@use 'variables' as v;
+
+.room-card {
+  border-radius: v.$border-radius-md;
+  overflow: hidden;
+}
+
+.btn-sm {
+  padding: v.$space-1 v.$space-2;
+  font-size: 0.875rem;
+}

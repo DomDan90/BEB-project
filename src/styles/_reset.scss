@@ -1,0 +1,26 @@
+@use 'variables' as v;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: v.$font-size-base;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: v.$font-body;
+  color: v.$neutral-900;
+  background-color: v.$neutral-100;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

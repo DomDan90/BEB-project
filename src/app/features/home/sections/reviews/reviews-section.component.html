@@ -1,0 +1,18 @@
+<section class="section bg-soft" aria-labelledby="reviews-title">
+  <div class="container-bnb">
+    <h2 id="reviews-title" class="section-title">Dicono di noi</h2>
+    <span class="accent-line" aria-hidden="true"></span>
+    <div class="row g-4 mt-2">
+      @for (r of reviews; track r.id) {
+        <div class="col-md-4">
+          <figure class="review-card p-3 h-100">
+            <blockquote class="mb-2">“{{ r.comment }}”</blockquote>
+            <figcaption class="small text-muted">
+              <strong>{{ r.author }}</strong> · {{ r.rating }}★ · {{ r.source }}
+            </figcaption>
+          </figure>
+        </div>
+      }
+    </div>
+  </div>
+</section>

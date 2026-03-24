@@ -1,0 +1,32 @@
+<div class="container-bnb section-sm">
+  @if (room(); as r) {
+    <app-breadcrumb [items]="crumbs()" />
+    <div class="row g-4 mt-2">
+      <div class="col-lg-7">
+        <img
+          [src]="r.images.length ? r.images[0] : r.thumbnail"
+          class="img-fluid rounded-3 w-100"
+          [alt]="r.name"
+          appLazyImage
+        />
+      </div>
+      <div class="col-lg-5">
+        <h1 class="section-title">{{ r.name }}</h1>
+        <span class="accent-line" aria-hidden="true"></span>
+        <p class="lead mt-3">{{ r.shortDescription }}</p>
+        <p>{{ r.description }}</p>
+        <p class="fw-semibold">{{ r.pricePerNight | currencyEur }} / notte · max {{ r.maxGuests }} ospiti</p>
+        <ul class="small text-muted">
+          @for (a of r.amenities; track a) {
+            <li>{{ a }}</li>
+          }
+        </ul>
+        <a routerLink="/prenota" class="btn-primary-bnb me-2" (click)="selectForBooking()">Prenota</a>
+        <a routerLink="/camere" class="btn-outline-bnb">Torna alle camere</a>
+      </div>
+    </div>
+  } @else {
+    <p>Camera non trovata.</p>
+    <a routerLink="/camere" class="btn-outline-bnb">Elenco camere</a>
+  }
+</div>
