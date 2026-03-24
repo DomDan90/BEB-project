@@ -1,7 +1,18 @@
 import type { Options } from '@popperjs/core';
 
-/** Larghezza da usare: tutto l’input-group (data + icona) se c’è, altrimenti il reference Popper. */
+/**
+ * Elemento di cui usare la larghezza per il floating Popper:
+ * 1) host `ngbDropdown` (`.hero-booking__dropdown` / `.booking-form-page__dropdown`) — allineato al box visibile (es. 90% colonna ospiti)
+ * 2) `.input-group` per le date (campo + icona)
+ * 3) il reference Popper
+ */
 function referenceWidthEl(ref: HTMLElement): HTMLElement {
+  const dropdownHost =
+    (ref.closest('.hero-booking__dropdown') as HTMLElement | null) ??
+    (ref.closest('.booking-form-page__dropdown') as HTMLElement | null);
+  if (dropdownHost) {
+    return dropdownHost;
+  }
   return (ref.closest('.input-group') as HTMLElement | null) ?? ref;
 }
 
@@ -13,6 +24,7 @@ function measureWidth(ref: HTMLElement): number {
 /**
  * Allinea larghezza del floating element al trigger (stessa larghezza del campo visibile).
  * Per le date combinare con `[positionTarget]="inputGroupRef"` sull’input così Popper usa tutto il gruppo.
+ * Per i `ngbDropdown` con host `.hero-booking__dropdown` (o booking-form) la larghezza segue l’host, non solo il toggle.
  */
 export function ngbPopperMatchReferenceWidth(options: Partial<Options>): Partial<Options> {
   const modifiers = options.modifiers ?? [];

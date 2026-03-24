@@ -102,8 +102,8 @@
   }
 }
 
-// Più largo del container sito (1320px) così datepicker e campi respirano meglio
-$hero-booking-card-max: 1540px;
+// 1232px × 1,1 ≈ +10% larghezza card
+$hero-booking-card-max: 1355px;
 
 .hero-booking-wrap {
   position: absolute;
@@ -230,6 +230,12 @@ $hero-booking-card-max: 1540px;
     }
   }
 
+  // Adulti / bambini: 90% colonna (= 75% × 1,2)
+  .hero-booking__field--guest-count .hero-booking__dropdown {
+    width: 100%;
+    max-width: 100%;
+  }
+
   .input-group-text {
     height: 46px;
     background-color: v.$booking-field-bg;
@@ -267,6 +273,19 @@ $hero-booking-card-max: 1540px;
   .hero-booking__fields {
     @include m.respond-to(xl) {
       --bs-gutter-x: 1rem;
+
+      // Date: 25% × 1,1 × 1,2 = 33%; adulti/bambini: 17% ciascuno (riga al 100%)
+      > .hero-booking__field--date {
+        flex: 0 0 33%;
+        max-width: 33%;
+        width: 33%;
+      }
+
+      > .hero-booking__field--guest-count {
+        flex: 0 0 17%;
+        max-width: 17%;
+        width: 17%;
+      }
     }
   }
 
@@ -279,8 +298,16 @@ $hero-booking-card-max: 1540px;
       min-width: 11.5rem;
     }
 
+    .hero-booking__field--date .input-group .form-control {
+      min-width: 15.18rem; // ~+20% rispetto a 12.65rem (stesso fattore sulle colonne xl)
+    }
+
     .hero-booking__dropdown-toggle {
       min-width: 9rem;
+    }
+
+    .hero-booking__field--guest-count .hero-booking__dropdown-toggle {
+      min-width: 0 !important;
     }
   }
 
