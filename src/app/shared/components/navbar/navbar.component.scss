@@ -242,6 +242,10 @@
   border-radius: v.$border-radius-md;
   padding-block: v.$space-1;
   margin-top: v.$space-1;
+  /* Sfondo pannello sempre chiaro (Bootstrap .dropdown-item.active usa il blu primario) */
+  --bs-dropdown-bg: #{v.$neutral-100};
+  --bs-dropdown-link-active-color: #{v.$text-body};
+  --bs-dropdown-link-active-bg: #{v.$neutral-200};
 }
 
 .dropdown-item {
@@ -252,6 +256,18 @@
 
   &:hover,
   &:focus {
+    color: v.$nav-link-hover;
+    background-color: v.$neutral-200;
+  }
+
+  &.active {
+    color: v.$nav-link-active;
+    font-weight: v.$font-weight-semibold;
+    background-color: v.$neutral-200;
+  }
+
+  &.active:hover,
+  &.active:focus {
     color: v.$nav-link-hover;
     background-color: v.$neutral-200;
   }
@@ -287,6 +303,19 @@
 }
 
 .lang-switcher {
+  /* Come Blog: solo margin-left sul ::after del toggle, niente flex-gap verso la freccia */
+  &__toggle {
+    gap: 0;
+
+    .bi-translate {
+      margin-inline-end: 0.35em;
+    }
+
+    .lang-switcher__code {
+      min-width: auto;
+    }
+  }
+
   &__code {
     font-weight: v.$font-weight-semibold;
     letter-spacing: 0.04em;

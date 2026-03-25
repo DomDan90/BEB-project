@@ -100,7 +100,6 @@
                   class="dropdown-item"
                   routerLink="/blog"
                   (click)="onNavLinkClick($event, null, 'blog')"
-                  [class.active]="isNavActive('blog')"
                   >{{ 'nav.blogInsights' | translate }}</a
                 >
               </li>
@@ -110,7 +109,7 @@
           <li class="nav-item dropdown ms-lg-2">
             <button
               type="button"
-              class="nav-link dropdown-toggle dropdown-toggle-bnb lang-switcher__toggle d-inline-flex align-items-center gap-1"
+              class="nav-link dropdown-toggle dropdown-toggle-bnb lang-switcher__toggle d-inline-flex align-items-center"
               data-bs-toggle="dropdown"
               aria-expanded="false"
               id="navLangDropdown"
