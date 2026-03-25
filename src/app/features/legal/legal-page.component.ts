@@ -6,6 +6,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   standalone: true,
   imports: [TranslatePipe],
   templateUrl: './legal-page.component.html',
+  styleUrl: './legal-page.component.scss',
 })
 export class LegalPageComponent {
   private readonly route = inject(ActivatedRoute);

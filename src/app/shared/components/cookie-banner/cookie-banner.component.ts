@@ -53,6 +53,12 @@ export class CookieBannerComponent {
         .subscribe(() => {
           this.syncVisibilityByRoute();
         });
+
+      // Permette al contenuto delle pagine legali di aprire il pannello preferenze
+      // senza dover ri-mostrare tutto il banner in modo intrusivo.
+      window.addEventListener('beb-open-cookie-preferences', () => {
+        this.openPreferencesFromOutside();
+      });
     });
   }
 
@@ -62,7 +68,7 @@ export class CookieBannerComponent {
     }
 
     const onLegalPage = this.isOnLegalPage();
-    const nextVisible = this.shouldShowBanner && !onLegalPage;
+    const nextVisible = (this.shouldShowBanner && !onLegalPage) || this.preferencesOpen();
 
     this.isVisible.set(nextVisible);
     if (!nextVisible) {
@@ -100,6 +106,13 @@ export class CookieBannerComponent {
     this.draftAnalytics = this.storedAnalytics;
     this.draftMarketing = this.storedMarketing;
     this.preferencesOpen.set(true);
+  }
+
+  private openPreferencesFromOutside(): void {
+    this.draftAnalytics = this.storedAnalytics;
+    this.draftMarketing = this.storedMarketing;
+    this.preferencesOpen.set(true);
+    this.isVisible.set(true);
   }
 
   closePreferences(): void {

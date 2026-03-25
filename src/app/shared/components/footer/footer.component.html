@@ -62,6 +62,14 @@
         <a routerLink="/privacy-policy" class="footer-bnb__legal-link">{{ 'footer.privacy' | translate }}</a>
         <span class="footer-bnb__legal-sep" aria-hidden="true">·</span>
         <a routerLink="/cookie-policy" class="footer-bnb__legal-link">{{ 'footer.cookies' | translate }}</a>
+        <span class="footer-bnb__legal-sep" aria-hidden="true">·</span>
+        <a
+          href="#"
+          class="footer-bnb__legal-link"
+          (click)="openCookiePreferences(); $event.preventDefault()"
+        >
+          {{ 'legal.manageCookiePreferences' | translate }}
+        </a>
       </nav>
     </div>
   </div>

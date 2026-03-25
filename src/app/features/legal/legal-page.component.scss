@@ -1,0 +1,28 @@
+@use 'variables' as v;
+
+.legal-cookie-prefs {
+  margin-top: v.$space-4;
+  text-align: center;
+}
+
+.legal-cookie-prefs__link {
+  font-family: v.$font-body;
+  font-size: v.$font-size-sm;
+  font-weight: 600;
+  color: v.$accent-dark;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color v.$transition-fast, border-color v.$transition-fast;
+
+  &:hover {
+    color: v.$accent;
+    border-bottom-color: v.$accent;
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$accent-dark;
+    outline-offset: 3px;
+    border-radius: v.$border-radius-sm;
+  }
+}
+

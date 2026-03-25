@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -18,6 +19,8 @@ const EMAIL = 'info@beb-ischia-esempio.it';
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
+  private readonly platformId = inject(PLATFORM_ID);
+
   readonly addressLine = ADDRESS_LINE;
   readonly phoneDisplay = PHONE_DISPLAY;
   readonly phoneTel = PHONE_TEL;
@@ -36,4 +39,12 @@ export class FooterComponent {
     { icon: 'bi-facebook', labelKey: 'footer.socialFacebook', href: '#' },
     { icon: 'bi-whatsapp', labelKey: 'footer.socialWhatsapp', href: '#' },
   ];
+
+  openCookiePreferences(event?: MouseEvent): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    event?.preventDefault();
+    window.dispatchEvent(new CustomEvent('beb-open-cookie-preferences'));
+  }
 }
