@@ -76,9 +76,11 @@
     @include hero-banner-compact-layout;
   }
 
-  // ≥1200px ma altezza “tablet/laptop” (iPad Pro 12.9" landscape 1366×1024, fold aperti bassi, ecc.)
+  // ≥1200px ma altezza “tablet/laptop” (1366×768, iPad Pro landscape, ecc.): il mixin da solo lascia
+  // il copy troppo in alto; padding-top generoso (center sposta solo ~metà del delta).
   @media (min-width: 1200px) and (max-height: 1050px) {
     @include hero-banner-compact-layout;
+    padding-top: clamp(5.5rem, 14vmin, 9rem);
   }
 
   // Tablet portrait: più respiro sotto navbar / notch
@@ -111,6 +113,22 @@
     @media (min-width: 1200px) and (min-height: 1051px) {
       height: 100dvh;
       min-height: max(#{v.$hero-banner-min-height-desktop}, 100dvh);
+    }
+  }
+
+  // Desktop largo e alto: più spazio sopra il copy (sotto navbar/menu full)
+  @media (min-width: 1200px) and (min-height: 1051px) {
+    padding-top: clamp(7.5rem, 11vh, 11rem);
+  }
+
+  // Desktop (≥1200px): meno fascia vuota tra copy e card (la regola md usa fino ~42vh + token)
+  @media (min-width: 1200px) {
+    padding-bottom: calc(
+      var(--hero-booking-offset) + max(265px, min(34vh, 400px))
+    );
+
+    .hero-banner__inner {
+      margin-top: clamp(1.25rem, 3.5vh, 3.25rem);
     }
   }
 
@@ -204,6 +222,7 @@
 
     .hero-banner__inner {
       z-index: 2;
+      margin-top: 0;
     }
 
     .hero-banner__title {
