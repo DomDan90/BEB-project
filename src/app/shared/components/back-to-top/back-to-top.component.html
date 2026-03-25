@@ -1,0 +1,11 @@
+<button
+  type="button"
+  class="back-to-top"
+  [class.back-to-top--visible]="visible()"
+  [attr.tabindex]="visible() ? 0 : -1"
+  [attr.aria-hidden]="!visible()"
+  (click)="scrollToTop()"
+  [attr.aria-label]="'scrollTop.aria' | translate"
+>
+  <i class="bi bi-arrow-up" aria-hidden="true"></i>
+</button>

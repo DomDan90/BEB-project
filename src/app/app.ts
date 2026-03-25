@@ -2,12 +2,13 @@ import { isPlatformBrowser } from '@angular/common';
 import { afterNextRender, Component, inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LanguageService } from './core/services/language.service';
+import { BackToTopComponent } from './shared/components/back-to-top/back-to-top.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, FooterComponent],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent, BackToTopComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
