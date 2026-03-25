@@ -160,6 +160,13 @@
     width: auto;
     max-width: 100%;
   }
+
+  /* Menu Blog e lingua centrati sotto il rispettivo toggle (navbar espansa) */
+  .navbar-bnb__dropdown--centered .dropdown-menu {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
 }
 
 .dropdown-toggle-bnb {
