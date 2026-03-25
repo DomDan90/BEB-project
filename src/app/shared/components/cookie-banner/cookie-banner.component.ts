@@ -1,7 +1,8 @@
 import { isPlatformBrowser } from '@angular/common';
 import { afterNextRender, Component, HostListener, inject, PLATFORM_ID, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { filter } from 'rxjs';
 
 type CookieConsentStatus = 'accepted' | 'rejected' | 'customized';
 
@@ -23,9 +24,12 @@ const COOKIE_CONSENT_KEY = 'beb_cookie_consent_v1';
 })
 export class CookieBannerComponent {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly router = inject(Router);
 
   readonly isVisible = signal(false);
   readonly preferencesOpen = signal(false);
+
+  private shouldShowBanner = false; // true = nessuna scelta fatta (o dati locali corrotti)
 
   private storedAnalytics = false;
   private storedMarketing = false;
@@ -40,7 +44,35 @@ export class CookieBannerComponent {
         return;
       }
       this.initFromLocalStorage();
+      this.syncVisibilityByRoute();
+
+      // Nascondi il banner solo sulle pagine legali, così l'utente può leggere senza ostacoli.
+      // Lo ri-mostri quando l’utente esce da /privacy-policy e /cookie-policy (finché non sceglie).
+      this.router.events
+        .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+        .subscribe(() => {
+          this.syncVisibilityByRoute();
+        });
     });
+  }
+
+  private syncVisibilityByRoute(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    const onLegalPage = this.isOnLegalPage();
+    const nextVisible = this.shouldShowBanner && !onLegalPage;
+
+    this.isVisible.set(nextVisible);
+    if (!nextVisible) {
+      this.preferencesOpen.set(false);
+    }
+  }
+
+  private isOnLegalPage(): boolean {
+    const path = this.router.url.split('?')[0].split('#')[0];
+    return path === '/privacy-policy' || path === '/cookie-policy';
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -93,8 +125,8 @@ export class CookieBannerComponent {
   private initFromLocalStorage(): void {
     const raw = window.localStorage.getItem(COOKIE_CONSENT_KEY);
     if (!raw) {
-      // Nessuna preferenza salvata: mostriamo il banner completo.
-      this.isVisible.set(true);
+      // Nessuna preferenza salvata: mostriamo il banner completo (ma lo nascondiamo sulle pagine legali).
+      this.shouldShowBanner = true;
       this.storedAnalytics = false;
       this.storedMarketing = false;
       this.draftAnalytics = false;
@@ -108,12 +140,12 @@ export class CookieBannerComponent {
       const marketing = typeof parsed.marketing === 'boolean' ? parsed.marketing : false;
       this.storedAnalytics = analytics;
       this.storedMarketing = marketing;
-      // Preferenze presenti: banner nascosto.
-      this.isVisible.set(false);
+      // Preferenze presenti: banner nascosto (utente ha già scelto).
+      this.shouldShowBanner = false;
       this.preferencesOpen.set(false);
     } catch {
-      // Se i dati sono corrotti, evitiamo blocchi: mostriamo il banner.
-      this.isVisible.set(true);
+      // Se i dati sono corrotti, evitiamo blocchi: mostriamo il banner (ma lo nascondiamo sulle pagine legali).
+      this.shouldShowBanner = true;
       this.storedAnalytics = false;
       this.storedMarketing = false;
       this.draftAnalytics = false;
@@ -127,6 +159,7 @@ export class CookieBannerComponent {
       updatedAt: new Date().toISOString(),
     };
     window.localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(next));
+    this.shouldShowBanner = false;
   }
 }
 
