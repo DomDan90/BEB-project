@@ -66,7 +66,8 @@ $hero-banner-min-height-desktop: 620px;
 $hero-banner-min-height-mobile: 380px;
 $hero-banner-min-height-mobile-xs: 300px;
 $hero-banner-height-desktop: 100vh;
-$hero-booking-overlap-offset: 110px;
+// Fascia sotto il copy prima della card absolute (titolo + 3 righe campi + camera + CTA su tablet)
+$hero-banner-safe-bottom-for-booking: 340px;
 $hero-next-section-offset: 96px;
 $hero-booking-bottom-offset: 32px;
 $hero-booking-bottom-offset-mobile: 0px;
@@ -134,9 +135,9 @@ $nav-link-hover: $accent;
 $nav-link-active: $accent;
 
 // Hero / banner
-// Opacità overlay hero: più bassa = immagine più luminosa (testo resta su bianco/oro).
-$hero-overlay: rgba(0, 0, 0, 0.5);
-$hero-overlay-gradient-end-opacity: 0.58;
+// Overlay: leggermente più scuro per contrasto su tende/chiari (leggibilità testo bianco).
+$hero-overlay: rgba(0, 0, 0, 0.56);
+$hero-overlay-gradient-end-opacity: 0.66;
 $hero-subtitle-color: $accent;
 $hero-heading-color: $neutral-100;
 $hero-max-content-width: 42rem;
