@@ -215,21 +215,6 @@
     "socialWhatsapp": "WhatsApp"
   },
   "pages": {
-    "about": {
-      "title": "Quiénes somos",
-      "lead": "Contenido de la página próximamente.",
-      "body": "Encontrarás nuestra historia, los valores del B&B y nuestro enfoque de hospitalidad."
-    },
-    "contact": {
-      "title": "Contacto",
-      "lead": "Formulario y mapa Leaflet — próxima iteración.",
-      "body": "Mientras tanto, contáctanos por teléfono o correo desde el pie de página."
-    },
-    "gallery": {
-      "title": "Galería",
-      "lead": "Integración ngx-lightbox y swiper en la próxima iteración.",
-      "body": "La página usará la misma biblioteca de imágenes que el inicio."
-    },
     "blog": {
       "title": "Blog",
       "lead": "Artículos próximamente.",
@@ -255,14 +240,8 @@
     "successTitle": "Reserva recibida | B&B",
     "successDesc": "Gracias: hemos registrado tu solicitud.",
     "roomTitle": "{{name}} | B&B",
-    "aboutTitle": "Quiénes somos | B&B",
-    "aboutDesc": "Nuestra historia, valores y hospitalidad.",
     "blogTitle": "Blog | B&B",
-    "blogDesc": "Noticias, eventos y consejos de viaje.",
-    "contactTitle": "Contacto | B&B",
-    "contactDesc": "Cómo llegar, teléfono, correo y formulario de contacto.",
-    "galleryPageTitle": "Galería | B&B",
-    "galleryPageDesc": "Fotos de habitaciones, zonas comunes y detalles."
+    "blogDesc": "Noticias, eventos y consejos de viaje."
   },
   "scrollTop": {
     "aria": "Volver arriba"

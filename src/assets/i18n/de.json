@@ -215,21 +215,6 @@
     "socialWhatsapp": "WhatsApp"
   },
   "pages": {
-    "about": {
-      "title": "Über uns",
-      "lead": "Inhalt der Seite folgt in Kürze.",
-      "body": "Hier finden Sie unsere Geschichte, die Werte des B&B und unsere Gastfreundschaft."
-    },
-    "contact": {
-      "title": "Kontakt",
-      "lead": "Formular und Leaflet-Karte — nächste Ausbaustufe.",
-      "body": "Vorläufig erreichen Sie uns per Telefon oder E-Mail über die Fußzeile."
-    },
-    "gallery": {
-      "title": "Galerie",
-      "lead": "Integration von ngx-lightbox und Swiper in der nächsten Iteration.",
-      "body": "Die Seite nutzt dieselbe Bildbibliothek wie die Startseite."
-    },
     "blog": {
       "title": "Blog",
       "lead": "Artikel folgen in Kürze.",
@@ -255,14 +240,8 @@
     "successTitle": "Buchung eingegangen | B&B",
     "successDesc": "Vielen Dank — wir haben Ihre Anfrage erhalten.",
     "roomTitle": "{{name}} | B&B",
-    "aboutTitle": "Über uns | B&B",
-    "aboutDesc": "Unsere Geschichte, Werte und Gastfreundschaft.",
     "blogTitle": "Blog | B&B",
-    "blogDesc": "Neuigkeiten, Events und Reisetipps.",
-    "contactTitle": "Kontakt | B&B",
-    "contactDesc": "Anfahrt, Telefon, E-Mail und Kontaktformular.",
-    "galleryPageTitle": "Galerie | B&B",
-    "galleryPageDesc": "Fotos von Zimmern, Gemeinschaftsbereichen und Details."
+    "blogDesc": "Neuigkeiten, Events und Reisetipps."
   },
   "scrollTop": {
     "aria": "Nach oben"
