@@ -167,13 +167,75 @@
 }
 
 @include m.respond-below(md) {
+  .cookie-banner {
+    left: v.$space-2;
+    right: v.$space-2;
+    bottom: v.$space-2;
+    padding: v.$space-3;
+    border-radius: v.$border-radius-lg;
+
+    // Sul mobile vogliamo un pannello “staccato” dall’edge.
+    border-top: none;
+    box-shadow: 0 -18px 60px rgba(0, 0, 0, 0.28);
+  }
+
+  .cookie-banner__inner {
+    gap: v.$space-1;
+  }
+
   .cookie-banner__row {
     flex-direction: column;
     align-items: stretch;
   }
 
+  .cookie-banner__topline {
+    gap: v.$space-2;
+  }
+
+  .cookie-banner__accent {
+    width: 44px;
+  }
+
   .cookie-banner__actions {
+    // Serie compatta di CTA in colonna (come nello screenshot).
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     justify-content: flex-start;
+    gap: v.$space-2;
+  }
+
+  .cookie-banner__title {
+    font-size: 1.35rem;
+  }
+
+  .cookie-banner__text {
+    font-size: v.$font-size-xs;
+  }
+
+  .cookie-banner__btn {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: v.$font-size-sm;
+    border-width: 2px;
+  }
+
+  .cookie-banner__link {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+  }
+
+  .cookie-banner__prefs {
+    padding: v.$space-3;
+  }
+
+  .cookie-banner__prefs-title {
+    font-size: 1.1rem;
+  }
+
+  .cookie-banner__pref {
+    font-size: v.$font-size-xs;
   }
 }
 
