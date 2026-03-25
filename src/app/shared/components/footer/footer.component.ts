@@ -4,12 +4,7 @@ import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { BrandLogoComponent } from '../brand-logo/brand-logo.component';
-
-/** Allineato ai mock della LocationSection (Ischia). */
-const ADDRESS_LINE = 'Via Roma 42, 80077 Ischia (NA)';
-const PHONE_DISPLAY = '+39 081 333 0142';
-const PHONE_TEL = '+390813330142';
-const EMAIL = 'info@beb-ischia-esempio.it';
+import { BnbConfigService } from '../../../core/services/bnb-config.service';
 
 @Component({
   selector: 'app-footer',
@@ -20,11 +15,15 @@ const EMAIL = 'info@beb-ischia-esempio.it';
 })
 export class FooterComponent {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly bnb = inject(BnbConfigService);
 
-  readonly addressLine = ADDRESS_LINE;
-  readonly phoneDisplay = PHONE_DISPLAY;
-  readonly phoneTel = PHONE_TEL;
-  readonly email = EMAIL;
+  readonly addressLine = `${this.bnb.contacts.address.street}, ${this.bnb.contacts.address.postalCode} ${this.bnb.contacts.address.city} (${this.bnb.contacts.address.region})`;
+  readonly phoneDisplay = this.bnb.contacts.phone.general.display;
+  readonly phoneTel = this.bnb.contacts.phone.general.tel;
+  readonly email = this.bnb.contacts.email.general;
+  readonly tagline = this.bnb.identity.tagline;
+  readonly legalName = this.bnb.identity.legalName;
+  readonly copyrightYear = this.bnb.identity.foundationYear;
 
   readonly quickLinks: ReadonlyArray<{ labelKey: string; path: string; fragment?: string }> = [
     { labelKey: 'nav.home', path: '/' },
@@ -35,9 +34,10 @@ export class FooterComponent {
   ];
 
   readonly socialLinks: ReadonlyArray<{ icon: string; labelKey: string; href: string }> = [
-    { icon: 'bi-instagram', labelKey: 'footer.socialInstagram', href: '#' },
-    { icon: 'bi-facebook', labelKey: 'footer.socialFacebook', href: '#' },
-    { icon: 'bi-whatsapp', labelKey: 'footer.socialWhatsapp', href: '#' },
+    { icon: 'bi-instagram', labelKey: 'footer.socialInstagram', href: this.bnb.social.instagramUrl },
+    { icon: 'bi-facebook', labelKey: 'footer.socialFacebook', href: this.bnb.social.facebookUrl },
+    { icon: 'bi-whatsapp', labelKey: 'footer.socialWhatsapp', href: this.bnb.social.whatsappUrl },
+    { icon: 'bi-tripadvisor', labelKey: 'footer.socialTripAdvisor', href: this.bnb.social.tripAdvisorUrl },
   ];
 
   openCookiePreferences(event?: MouseEvent): void {

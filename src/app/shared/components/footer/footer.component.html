@@ -3,9 +3,9 @@
     <div class="footer-bnb__grid">
       <div class="footer-bnb__col">
         <a routerLink="/" class="footer-bnb__logo-link">
-          <app-brand-logo class="footer-bnb__logo" [ariaLabel]="'brand.logoAltFooter' | translate" />
+          <app-brand-logo class="footer-bnb__logo" />
         </a>
-        <p class="footer-bnb__desc">{{ 'footer.tagline' | translate }}</p>
+        <p class="footer-bnb__desc">{{ tagline }}</p>
         <div class="footer-bnb__social" [attr.aria-label]="'footer.socialAria' | translate">
           @for (s of socialLinks; track s.labelKey) {
             <a
@@ -56,7 +56,7 @@
 
     <div class="footer-bnb__bottom">
       <p class="footer-bnb__copyright">
-        {{ 'footer.copyright' | translate }}
+        {{ 'footer.copyright' | translate: { year: copyrightYear, legalName: legalName } }}
       </p>
       <nav class="footer-bnb__legal" [attr.aria-label]="'common.legalNote' | translate">
         <a routerLink="/privacy-policy" class="footer-bnb__legal-link">{{ 'footer.privacy' | translate }}</a>

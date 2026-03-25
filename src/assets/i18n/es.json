@@ -141,6 +141,7 @@
       "mapAria": "Mapa interactivo con la ubicación del bed and breakfast",
       "address": "Dirección",
       "hours": "Horario",
+      "reception": "Recepcion",
       "phone": "Teléfono",
       "email": "Correo",
       "openMaps": "Abrir en Google Maps",
@@ -207,12 +208,13 @@
     "socialAria": "Redes sociales",
     "quickLinks": "Enlaces rápidos",
     "contacts": "Contacto",
-    "copyright": "© 2026 B&B Nombre — Todos los derechos reservados",
+    "copyright": "© {{year}} {{legalName}} — Todos los derechos reservados",
     "privacy": "Política de privacidad",
     "cookies": "Política de cookies",
     "socialInstagram": "Instagram",
     "socialFacebook": "Facebook",
-    "socialWhatsapp": "WhatsApp"
+    "socialWhatsapp": "WhatsApp",
+    "socialTripAdvisor": "TripAdvisor"
   },
   "pages": {
     "blog": {
@@ -229,7 +231,7 @@
     "manageCookiePreferences": "Gestionar preferencias de cookies",
     "privacy": {
       "section1Title": "1. Responsable del tratamiento",
-      "section1Text": "El responsable del tratamiento de los datos personales es B&B Ischia (en adelante, el «Responsable»). Los datos de contacto del Responsable se indican en la sección Contacto del sitio web.",
+      "section1Text": "El responsable del tratamiento de los datos personales es {{legalName}} (en adelante, el «Responsable»). Los datos de contacto del Responsable se indican en la sección Contacto del sitio web.",
       "section2Title": "2. Datos personales tratados",
       "liNavigationData": "Datos de navegación: dirección IP u otros identificadores, tipo de navegador, páginas visitadas, fecha y hora de acceso e información técnica necesaria para el funcionamiento del sitio web.",
       "liUserProvidedData": "Datos facilitados por el usuario: información introducida mediante formularios de contacto o solicitudes de reserva (p. ej., nombre, datos de contacto, fechas de estancia, solicitudes específicas).",

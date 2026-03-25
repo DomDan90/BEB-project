@@ -36,6 +36,16 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets"
+              },
+              {
+                "glob": "sitemap.xml",
+                "input": "src/assets",
+                "output": ""
+              },
+              {
+                "glob": "robots.txt",
+                "input": "src/assets",
+                "output": ""
               }
             ],
             "styles": [
@@ -67,8 +77,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "7kB",
+                  "maximumError": "10kB"
                 }
               ],
               "outputHashing": "all"

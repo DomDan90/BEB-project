@@ -15,7 +15,7 @@
     padding-block: v.$section-padding-y-desktop;
   }
   background-color: v.$section-dark-bg;
-  background-image: url(v.$facilities-section-image-url);
+  background-image: v.$facilities-section-image-url;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

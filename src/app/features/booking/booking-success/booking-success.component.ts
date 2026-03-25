@@ -1,8 +1,8 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { SeoService } from '../../../core/services/seo.service';
+import { pagesSeoConfig } from '../../../core/config/pages-seo.config';
 import { BookingStore } from '../../../store/booking.store';
 import { CurrencyEurPipe } from '../../../shared/pipes/currency-eur.pipe';
 import { DateItaPipe } from '../../../shared/pipes/date-ita.pipe';
@@ -17,8 +17,6 @@ import { BreadcrumbComponent, BreadcrumbItem } from '../../../shared/components/
 })
 export class BookingSuccessComponent implements OnInit {
   private readonly seo = inject(SeoService);
-  private readonly translate = inject(TranslateService);
-  private readonly destroyRef = inject(DestroyRef);
   readonly store = inject(BookingStore);
 
   readonly crumbs: BreadcrumbItem[] = [
@@ -27,17 +25,7 @@ export class BookingSuccessComponent implements OnInit {
     { label: 'booking.crumbSuccess' },
   ];
 
-  constructor() {
-    this.translate.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.updateSeo());
-  }
-
   ngOnInit(): void {
-    this.updateSeo();
-  }
-
-  private updateSeo(): void {
-    this.translate.get(['seo.successTitle', 'seo.successDesc']).subscribe((t) => {
-      this.seo.updateMeta(t['seo.successTitle'], t['seo.successDesc']);
-    });
+    this.seo.updateSeoForPage(pagesSeoConfig['booking.success']);
   }
 }

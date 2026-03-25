@@ -141,8 +141,9 @@ $hero-overlay-gradient-end-opacity: 0.66;
 $hero-subtitle-color: $accent;
 $hero-heading-color: $neutral-100;
 $hero-max-content-width: 42rem;
-// Allineare a src/app/core/media/ischia-media.ts → ISCHIA_HERO_WIDE
-$hero-image-url: 'https://ilmonasterocastelloaragoneseischia.com/img/IlMonastero-Ischia-camere-000@2x.webp';
+// Valore runtime impostato dai componenti tramite CSS variables.
+// In template è gestito da `BnbConfigService` (white-label).
+$hero-image-url: var(--bnb-hero-image-url);
 
 $outline-width: 2px;
 $outline-offset: 4px;
@@ -159,8 +160,9 @@ $booking-field-color: #ffffff;
 // Sezioni scure / facilities
 $section-dark-bg: #0a0a0a;
 $section-dark-overlay: rgba(0, 0, 0, 0.65);
-// Allineare a ischia-media.ts → ISCHIA_FACILITIES_BG
-$facilities-section-image-url: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&h=600&q=80';
+// Valore runtime impostato dai componenti tramite CSS variables.
+// In template è gestito da `BnbConfigService` (white-label).
+$facilities-section-image-url: var(--bnb-facilities-section-image-url);
 
 // Card camere
 $card-bg: $neutral-100;

@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+
+import { BnbConfigService } from './bnb-config.service';
 
 @Injectable({ providedIn: 'root' })
 export class BookingService {
-  private readonly minimumStayNights = 2;
+  private readonly bnb = inject(BnbConfigService);
 
   calculateNights(checkIn: string, checkOut: string): number {
     const start = new Date(checkIn);
@@ -36,10 +38,10 @@ export class BookingService {
     if (end <= start) {
       return false;
     }
-    return this.calculateNights(checkIn, checkOut) >= this.minimumStayNights;
+    return this.calculateNights(checkIn, checkOut) >= this.getMinimumStay();
   }
 
   getMinimumStay(): number {
-    return this.minimumStayNights;
+    return this.bnb.booking.minimumStayNights;
   }
 }

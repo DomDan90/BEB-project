@@ -13,14 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import type { Map as LeafletMap } from 'leaflet';
 import type { Marker } from 'leaflet';
-
-/** Ischia Porto (centro, zona porto/traghetti). */
-const MOCK_LAT = 40.7389;
-const MOCK_LNG = 13.951;
-
-const MOCK_PHONE_DISPLAY = '+39 081 333 0142';
-const MOCK_PHONE_TEL = '+390813330142';
-const MOCK_EMAIL = 'info@beb-ischia-esempio.it';
+import { BnbConfigService } from '../../../../core/services/bnb-config.service';
 
 @Component({
   selector: 'app-location-section',
@@ -34,19 +27,25 @@ export class LocationSectionComponent implements OnDestroy {
   private readonly mapHost = viewChild<ElementRef<HTMLElement>>('mapHost');
   private readonly translate = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly bnb = inject(BnbConfigService);
 
   private map: LeafletMap | null = null;
   private mapMarker: Marker | null = null;
   private mapResizeObserver: ResizeObserver | null = null;
 
-  readonly lat = MOCK_LAT;
-  readonly lng = MOCK_LNG;
-  readonly phoneDisplay = MOCK_PHONE_DISPLAY;
-  readonly phoneTel = MOCK_PHONE_TEL;
-  readonly email = MOCK_EMAIL;
+  readonly lat = this.bnb.geo.latitude;
+  readonly lng = this.bnb.geo.longitude;
+  readonly phoneDisplay = this.bnb.contacts.phone.general.display;
+  readonly phoneTel = this.bnb.contacts.phone.general.tel;
+  readonly email = this.bnb.contacts.email.general;
 
-  /** Link esterno Google Maps (coordinate mock Ischia). */
-  readonly googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${MOCK_LAT},${MOCK_LNG}`;
+  readonly addressLine = `${this.bnb.contacts.address.street}, ${this.bnb.contacts.address.postalCode} ${this.bnb.contacts.address.city} (${this.bnb.contacts.address.region})`;
+  readonly checkInDisplay = `${this.bnb.hours.checkIn.from} - ${this.bnb.hours.checkIn.to}`;
+  readonly checkOutDisplay = `Entro ${this.bnb.hours.checkOutBy}`;
+  readonly receptionHoursDisplay = this.bnb.hours.reception;
+
+  /** Link esterno Google Maps. */
+  readonly googleMapsUrl = this.bnb.geo.googleMapsUrl;
 
   constructor() {
     this.translate.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
@@ -89,7 +88,7 @@ export class LocationSectionComponent implements OnDestroy {
     this.map = L.map(el, {
       scrollWheelZoom: false,
       attributionControl: true,
-    }).setView([MOCK_LAT, MOCK_LNG], 15);
+    }).setView([this.lat, this.lng], 15);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -97,7 +96,7 @@ export class LocationSectionComponent implements OnDestroy {
     }).addTo(this.map);
 
     const popupText = this.translate.instant('home.location.mapPopup');
-    this.mapMarker = L.marker([MOCK_LAT, MOCK_LNG], { icon: customIcon })
+    this.mapMarker = L.marker([this.lat, this.lng], { icon: customIcon })
       .addTo(this.map)
       .bindPopup(popupText);
 

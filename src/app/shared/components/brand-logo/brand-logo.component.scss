@@ -16,14 +16,57 @@
   max-width: 132px;
 }
 
+::host(.logo-img) img {
+  display: block;
+  width: auto;
+  height: 32px;
+  aspect-ratio: 200 / 56;
+  max-width: 132px;
+}
+
+::host(.logo-img) img {
+  display: block;
+  width: auto;
+  height: 32px;
+  aspect-ratio: 200 / 56;
+  max-width: 132px;
+}
+
 @include m.respond-to(md) {
   :host(.logo-img) svg {
+    height: 48px;
+    max-width: none;
+  }
+
+  :host(.logo-img) img {
     height: 48px;
     max-width: none;
   }
 }
 
 :host(.footer-bnb__logo) svg {
+  display: block;
+  width: auto;
+  height: 48px;
+  aspect-ratio: 200 / 56;
+}
+
+:host(.logo-img) img {
+  display: block;
+  width: auto;
+  height: 32px;
+  aspect-ratio: 200 / 56;
+  max-width: 132px;
+}
+
+:host(.footer-bnb__logo) img {
+  display: block;
+  width: auto;
+  height: 48px;
+  aspect-ratio: 200 / 56;
+}
+
+::host(.footer-bnb__logo) img {
   display: block;
   width: auto;
   height: 48px;

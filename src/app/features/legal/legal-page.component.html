@@ -7,7 +7,7 @@
     @if (isPrivacy) {
       <div class="mt-4 legal-content">
         <h2 class="h2">{{ 'legal.privacy.section1Title' | translate }}</h2>
-        <p>{{ 'legal.privacy.section1Text' | translate }}</p>
+        <p>{{ 'legal.privacy.section1Text' | translate: { legalName: legalName } }}</p>
 
         <h2 class="h2">{{ 'legal.privacy.section2Title' | translate }}</h2>
         <ul class="list-unstyled">

@@ -4,6 +4,8 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 
+import { AnalyticsService } from '../../../core/services/analytics.service';
+
 type CookieConsentStatus = 'accepted' | 'rejected' | 'customized';
 
 type CookieConsent = {
@@ -25,6 +27,7 @@ const COOKIE_CONSENT_KEY = 'beb_cookie_consent_v1';
 export class CookieBannerComponent {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly router = inject(Router);
+  private readonly analytics = inject(AnalyticsService);
 
   readonly isVisible = signal(false);
   readonly preferencesOpen = signal(false);
@@ -90,12 +93,14 @@ export class CookieBannerComponent {
 
   acceptAll(): void {
     this.persistConsent({ status: 'accepted', analytics: true, marketing: true });
+    this.analytics.setTrackingEnabled(true);
     this.isVisible.set(false);
     this.preferencesOpen.set(false);
   }
 
   rejectAll(): void {
     this.persistConsent({ status: 'rejected', analytics: false, marketing: false });
+    this.analytics.setTrackingEnabled(false);
     this.isVisible.set(false);
     this.preferencesOpen.set(false);
   }
@@ -121,6 +126,7 @@ export class CookieBannerComponent {
 
   savePreferences(): void {
     this.persistConsent({ status: 'customized', analytics: this.draftAnalytics, marketing: this.draftMarketing });
+    this.analytics.setTrackingEnabled(this.draftAnalytics);
     this.isVisible.set(false);
     this.preferencesOpen.set(false);
   }
@@ -144,6 +150,7 @@ export class CookieBannerComponent {
       this.storedMarketing = false;
       this.draftAnalytics = false;
       this.draftMarketing = false;
+      this.analytics.setTrackingEnabled(false);
       return;
     }
 
@@ -156,6 +163,7 @@ export class CookieBannerComponent {
       // Preferenze presenti: banner nascosto (utente ha già scelto).
       this.shouldShowBanner = false;
       this.preferencesOpen.set(false);
+      this.analytics.setTrackingEnabled(this.storedAnalytics);
     } catch {
       // Se i dati sono corrotti, evitiamo blocchi: mostriamo il banner (ma lo nascondiamo sulle pagine legali).
       this.shouldShowBanner = true;
@@ -163,6 +171,7 @@ export class CookieBannerComponent {
       this.storedMarketing = false;
       this.draftAnalytics = false;
       this.draftMarketing = false;
+      this.analytics.setTrackingEnabled(false);
     }
   }
 

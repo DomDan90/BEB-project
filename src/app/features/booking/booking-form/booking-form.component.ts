@@ -1,6 +1,5 @@
 import { formatNumber } from '@angular/common';
-import { Component, DestroyRef, effect, inject, LOCALE_ID, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, effect, inject, LOCALE_ID, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgbDatepickerModule, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap/datepicker';
@@ -14,6 +13,7 @@ import { BookingStore } from '../../../store/booking.store';
 import { MOCK_ROOMS } from '../../../mock/rooms.mock';
 import { CurrencyEurPipe } from '../../../shared/pipes/currency-eur.pipe';
 import { BreadcrumbComponent, BreadcrumbItem } from '../../../shared/components/breadcrumb/breadcrumb.component';
+import { pagesSeoConfig } from '../../../core/config/pages-seo.config';
 
 @Component({
   selector: 'app-booking-form',
@@ -34,7 +34,6 @@ export class BookingFormComponent implements OnInit {
   private readonly seo = inject(SeoService);
   private readonly locale = inject(LOCALE_ID);
   private readonly translate = inject(TranslateService);
-  private readonly destroyRef = inject(DestroyRef);
   readonly store = inject(BookingStore);
   private readonly bookingService = inject(BookingService);
 
@@ -61,17 +60,10 @@ export class BookingFormComponent implements OnInit {
       }
     });
 
-    this.translate.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.updateSeo());
   }
 
   ngOnInit(): void {
-    this.updateSeo();
-  }
-
-  private updateSeo(): void {
-    this.translate.get(['seo.bookTitle', 'seo.bookDesc']).subscribe((t) => {
-      this.seo.updateMeta(t['seo.bookTitle'], t['seo.bookDesc']);
-    });
+    this.seo.updateSeoForPage(pagesSeoConfig['booking.form']);
   }
 
   minCheckOutDate(): NgbDateStruct {

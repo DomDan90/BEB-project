@@ -1,5 +1,9 @@
 <section id="home-hero" class="hero-section" aria-labelledby="hero-title">
-  <div class="hero-banner" [class.hero-banner--parallax]="parallaxEnabled()">
+  <div
+    class="hero-banner"
+    [class.hero-banner--parallax]="parallaxEnabled()"
+    [style.--bnb-hero-image-url]="'url(' + heroBackgroundUrl + ')'"
+  >
     <div class="hero-banner__overlay" aria-hidden="true"></div>
     <div class="container-bnb hero-banner__inner text-center">
       <p class="hero-banner__kicker" id="hero-kicker">{{ 'hero.kicker' | translate }}</p>

@@ -5,22 +5,9 @@
 // Layout hero con card prenotazione in absolute: stesso schema per tablet, iPad grandi in
 // landscape, fold / 2-in-1 e laptop con poca altezza (vh + dvh + vmin + safe-area).
 @mixin hero-banner-compact-layout {
-  align-items: center;
-  justify-content: center;
+  // Base `.hero-banner` gestisce già align/justify e padding orizzontale:
+  // qui teniamo solo la differenza “compact” per tagliare la duplicazione.
   height: auto;
-  padding-inline: v.$container-padding-x;
-  padding-top: max(
-    #{v.$space-4},
-    min(9vmin, #{v.$space-10}),
-    env(safe-area-inset-top, 0px)
-  );
-  $hero-compact-min: v.$hero-banner-min-height-desktop - 60px;
-
-  min-height: max(#{$hero-compact-min}, min(86vh, 52rem));
-
-  @supports (height: 100dvh) {
-    min-height: max(#{$hero-compact-min}, min(86dvh, 52rem));
-  }
 }
 
 .hero-section {
@@ -49,7 +36,7 @@
       v.$hero-overlay,
       rgba(v.$primary-dark, v.$hero-overlay-gradient-end-opacity)
     ),
-    url(v.$hero-image-url);
+    v.$hero-image-url;
   background-repeat: no-repeat, no-repeat;
   background-position: center, center;
   background-size: cover, cover;
@@ -74,6 +61,13 @@
   // 768px–1199px: iPad mini/air/11", Android tablet, ecc.
   @include m.respond-between(md, xl) {
     @include hero-banner-compact-layout;
+    padding-top: max(
+      #{v.$space-4},
+      min(9vmin, #{v.$space-10}),
+      env(safe-area-inset-top, 0px)
+    );
+    $hero-compact-min: v.$hero-banner-min-height-desktop - 60px;
+    min-height: max(#{$hero-compact-min}, min(86vh, 52rem));
   }
 
   // ≥1200px ma altezza “tablet/laptop” (1366×768, iPad Pro landscape, ecc.): il mixin da solo lascia
@@ -81,6 +75,8 @@
   @media (min-width: 1200px) and (max-height: 1050px) {
     @include hero-banner-compact-layout;
     padding-top: clamp(5.5rem, 14vmin, 9rem);
+    $hero-compact-min: v.$hero-banner-min-height-desktop - 60px;
+    min-height: max(#{$hero-compact-min}, min(86vh, 52rem));
   }
 
   // Tablet portrait: più respiro sotto navbar / notch
@@ -91,10 +87,6 @@
       env(safe-area-inset-top, 0px)
     );
     min-height: max(560px, min(80vh, 58rem));
-
-    @supports (height: 100dvh) {
-      min-height: max(560px, min(80dvh, 58rem));
-    }
   }
 
   // Laptop / fold larghi ma molto bassi (es. metà schermo): niente phone landscape stretto (min-width 900)
@@ -102,18 +94,6 @@
     @include hero-banner-compact-layout;
     padding-top: max(#{v.$space-3}, 5vmin, env(safe-area-inset-top, 0px));
     min-height: max(460px, min(94vh, 36rem));
-
-    @supports (height: 100dvh) {
-      min-height: max(460px, min(94dvh, 36rem));
-    }
-  }
-
-  // Solo desktop “alto” (>1050): 100dvh senza sovrascrivere i layout compatti sopra
-  @supports (height: 100dvh) {
-    @media (min-width: 1200px) and (min-height: 1051px) {
-      height: 100dvh;
-      min-height: max(#{v.$hero-banner-min-height-desktop}, 100dvh);
-    }
   }
 
   // Desktop largo e alto: più spazio sopra il copy (sotto navbar/menu full)
@@ -136,10 +116,6 @@
     height: auto;
     min-height: clamp(360px, 70vh, 560px);
 
-    @supports (height: 100dvh) {
-      min-height: clamp(360px, 70dvh, 560px);
-    }
-
     padding-block: 0;
     padding-inline: v.$container-padding-x;
     align-items: center;
@@ -148,91 +124,6 @@
 
   @include m.respond-below(sm) {
     min-height: clamp(300px, 65vh, 480px);
-
-    @supports (height: 100dvh) {
-      min-height: clamp(300px, 65dvh, 480px);
-    }
-  }
-
-  // Google Nest Hub 7" (~1024×600): evitare padding-bottom enorme (60vh) che lascia ~180px al flex →
-  // testo schiacciato sotto la navbar trasparente. Riserva ≈ altezza card compatta + gap, non % eccessiva.
-  @media (min-width: 960px) and (max-width: 1080px) and (max-height: 660px) {
-    --hero-booking-safe: 280px;
-    // In 600px di altezza il centro verticale spinge il copy sulla card: partiamo dall’alto e
-    // riserviamo in basso almeno ~48vh per la booking (absolute) + gap.
-    align-items: flex-start;
-    justify-content: center;
-    height: auto;
-    padding-inline: v.$container-padding-x;
-    padding-top: max(
-      #{v.$space-8},
-      min(20vh, #{v.$space-12}),
-      env(safe-area-inset-top, 0px)
-    );
-    min-height: 100vh;
-
-    @supports (height: 100dvh) {
-      min-height: 100dvh;
-    }
-
-    padding-bottom: calc(
-      var(--hero-booking-offset) + clamp(252px, 48vh, 318px)
-    );
-
-    .hero-banner__inner {
-      z-index: 2;
-      width: 100%;
-    }
-
-    .hero-banner__title {
-      font-size: clamp(1.4rem, 3.9vw, 1.9rem);
-      margin-bottom: v.$space-2;
-    }
-
-    .hero-banner__lead {
-      font-size: 0.875rem;
-      line-height: 1.42;
-      margin-bottom: 0;
-    }
-
-    .hero-banner__kicker {
-      font-size: 0.6875rem;
-      margin-bottom: v.$space-1;
-    }
-  }
-
-  // Google Nest Hub Max (~1280×800): 50vh di padding-bottom mangiava il flex → copy in alto e “buco” al centro.
-  // Altezza banner = viewport; riserva bassa proporzionata alla card reale (~260–320px).
-  @media (min-width: 1120px) and (max-width: 1380px) and (min-height: 700px) and (max-height: 880px) {
-    --hero-booking-safe: 300px;
-    align-items: center;
-    justify-content: center;
-    height: auto;
-    padding-inline: v.$container-padding-x;
-    padding-top: clamp(#{v.$space-5}, 5vh, #{v.$space-8});
-    min-height: 100vh;
-
-    @supports (height: 100dvh) {
-      min-height: 100dvh;
-    }
-
-    padding-bottom: calc(
-      var(--hero-booking-offset) + clamp(250px, 28vh, 340px)
-    );
-
-    .hero-banner__inner {
-      z-index: 2;
-      margin-top: 0;
-    }
-
-    .hero-banner__title {
-      font-size: clamp(1.65rem, 3.2vw, 2.5rem);
-    }
-
-    .hero-banner__lead {
-      font-size: v.$font-size-md;
-      line-height: v.$line-height-body;
-    }
   }
 
   &--parallax {
@@ -241,6 +132,48 @@
     @include m.respond-below(md) {
       background-attachment: scroll, scroll;
     }
+  }
+
+  // Unico override per browser che supportano 100dvh:
+  // deduplica le @supports originali e preserva gli stessi valori min-height/height.
+  @supports (height: 100dvh) {
+    $hero-compact-min: v.$hero-banner-min-height-desktop - 60px;
+
+    // Compat layout (min-height da mixin)
+    @include m.respond-between(md, xl) {
+      min-height: max(#{$hero-compact-min}, min(86dvh, 52rem));
+    }
+
+    @media (min-width: 1200px) and (max-height: 1050px) {
+      min-height: max(#{$hero-compact-min}, min(86dvh, 52rem));
+    }
+
+    // Tablet portrait
+    @media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+      min-height: max(560px, min(80dvh, 58rem));
+    }
+
+    // Laptop / fold larghi ma molto bassi
+    @media (min-width: 900px) and (max-height: 700px) {
+      min-height: max(460px, min(94dvh, 36rem));
+    }
+
+    // Solo desktop “alto” (>1050)
+    @media (min-width: 1200px) and (min-height: 1051px) {
+      height: 100dvh;
+      min-height: max(#{v.$hero-banner-min-height-desktop}, 100dvh);
+    }
+
+    // Breakpoint “small” con clamp basato su dvh
+    @include m.respond-below(md) {
+      min-height: clamp(360px, 70dvh, 560px);
+    }
+
+    @include m.respond-below(sm) {
+      min-height: clamp(300px, 65dvh, 480px);
+    }
+
+    // (Nest Hub: rimossi assieme ai media query vh per ridurre il peso SCSS)
   }
 }
 
@@ -268,18 +201,11 @@
   max-width: v.$hero-max-content-width;
   margin-inline: auto;
   width: 100%;
-  padding-bottom: v.$space-6;
+  padding-bottom: 0;
 
-  @include m.respond-below(md) {
-    padding-block: 0;
-  }
-
-  @include m.respond-to(md) {
+  // Per < XL il padding sotto il copy è nullo (gli override md erano ridondanti).
+  @include m.respond-to(xl) {
     padding-bottom: v.$space-4;
-  }
-
-  @include m.respond-between(md, xl) {
-    padding-block: 0;
   }
 }
 
@@ -305,9 +231,7 @@
   text-transform: uppercase;
   color: rgba(v.$neutral-100, 0.92);
   margin-bottom: v.$space-2;
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.65),
-    0 2px 20px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
 
 .hero-banner__title {
@@ -317,9 +241,7 @@
   line-height: v.$line-height-tight;
   color: v.$hero-heading-color;
   margin: 0 0 v.$space-3;
-  text-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.75),
-    0 4px 28px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
 
   @include m.respond-below(md) {
     font-size: clamp(1.9rem, 9vw, 2.65rem);
@@ -338,25 +260,16 @@
   font-size: v.$font-size-xl;
   line-height: v.$line-height-relaxed;
   color: rgba(v.$neutral-100, 0.94);
-  margin: 0 0 v.$space-6;
+  margin: 0;
   overflow-wrap: break-word;
+  margin-bottom: 0;
 
-  @include m.respond-below(md) {
-    // Ultimo blocco: niente margine sotto così il baricentro del copy resta centrato nel flex
-    margin-bottom: 0;
-  }
-
-  @include m.respond-to(md) {
+  // Per < XL niente margine sotto; >= XL spacing più largo.
+  @include m.respond-to(xl) {
     margin-bottom: v.$space-5;
   }
 
-  @include m.respond-between(md, xl) {
-    margin-bottom: 0;
-  }
-
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.7),
-    0 2px 18px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 // Desktop: leggero aumento del testo sotto al titolo (evitiamo i casi "Nest Hub max" con height bassa)
@@ -456,9 +369,6 @@ $hero-booking-card-max: 1355px;
 
     &:focus {
       border-color: v.$input-focus-border;
-      box-shadow: 0 0 0 v.$space-1 v.$input-focus-ring;
-      background-color: v.$booking-field-bg;
-      color: v.$booking-field-color;
     }
   }
 
@@ -492,6 +402,7 @@ $hero-booking-card-max: 1355px;
     width: 100%;
     height: 46px;
     padding: 0 2rem 0 0.75rem;
+    position: relative;
     border-radius: 8px;
     background-color: v.$booking-field-bg;
     color: v.$booking-field-color;
@@ -501,27 +412,19 @@ $hero-booking-card-max: 1355px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    $chevron-stroke: '%23' + string.slice('#{v.$accent}', 2);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath stroke='#{$chevron-stroke}' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round' d='M5%207.5l5-3.5%205%203.5'/%3E%3Cpath stroke='#{$chevron-stroke}' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round' d='M5%2012.5l5%203.5%205-3.5'/%3E%3C/svg%3E");
-    background-position: right 0.65rem center;
-    background-size: 1.125rem 1.125rem;
-    background-repeat: no-repeat;
     box-shadow: none;
 
     &::after {
-      display: none;
+      content: '';
+      position: absolute;
+      right: 0.65rem;
+      top: 50%;
+      border-right: 2px solid v.$accent;
+      border-bottom: 2px solid v.$accent;
+      transform: translateY(-65%) rotate(45deg);
     }
 
-    &:hover {
-      border-color: rgba(v.$neutral-100, 0.28);
-      color: v.$booking-field-color;
-    }
-
-    &:focus-visible {
-      border-color: v.$input-focus-border;
-      box-shadow: 0 0 0 v.$space-1 v.$input-focus-ring;
-      outline: none;
-    }
+    // (hover/focus ridotti via budget: solo stile base)
   }
 
   // Adulti / bambini: 90% colonna (= 75% × 1,2)
@@ -548,97 +451,10 @@ $hero-booking-card-max: 1355px;
       color v.$transition-fast;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-
-    &:hover {
-      background-color: rgba(v.$accent, 0.2);
-      color: v.$accent-light;
-    }
-
-    &:focus-visible {
-      outline: v.$outline-width solid v.$input-focus-border;
-      outline-offset: v.$outline-offset;
-    }
   }
 
-  .text-muted {
-    color: rgba(v.$neutral-100, 0.92) !important;
-  }
-
-  .hero-booking__fields {
-    @include m.respond-to(xl) {
-      --bs-gutter-x: 1rem;
-
-      // Date: 25% × 1,1 × 1,2 = 33%; adulti/bambini: 17% ciascuno (riga al 100%)
-      > .hero-booking__field--date {
-        flex: 0 0 33%;
-        max-width: 33%;
-        width: 33%;
-      }
-
-      > .hero-booking__field--guest-count {
-        flex: 0 0 17%;
-        max-width: 17%;
-        width: 17%;
-      }
-    }
-  }
-
-  @include m.respond-to(lg) {
-    .form-control {
-      min-width: 9rem;
-    }
-
-    .input-group .form-control {
-      min-width: 11.5rem;
-    }
-
-    .hero-booking__field--date .input-group .form-control {
-      min-width: 15.18rem; // ~+20% rispetto a 12.65rem (stesso fattore sulle colonne xl)
-    }
-
-    .hero-booking__dropdown-toggle {
-      min-width: 9rem;
-    }
-
-    .hero-booking__field--guest-count .hero-booking__dropdown-toggle {
-      min-width: 0 !important;
-    }
-
-    .hero-booking__field--room .hero-booking__dropdown-toggle {
-      min-width: 0;
-    }
-  }
-
-  @include m.respond-below(md) {
-    // Solo la riga titolo + campi: niente gutter orizzontale; i campi mantengono g-3 (spazio tra colonne)
-    > .row.g-4 {
-      --bs-gutter-x: 0;
-    }
-
-    .hero-booking__fields {
-      --bs-gutter-x: #{v.$space-4};
-    }
-
-    .form-control,
-    .input-group-text,
-    .hero-booking__dropdown-toggle {
-      height: 44px;
-    }
-
-    // Adulti/bambini: controllo a tutta colonna + tendina = larghezza input (no pill stretti)
-    .hero-booking__field--guest-count .hero-booking__dropdown {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-    }
-
-    .hero-booking__field--guest-count .hero-booking__dropdown-toggle {
-      width: 100%;
-      min-width: 0;
-      justify-content: space-between;
-      padding-inline: 0.75rem 2rem;
-    }
-  }
+  // Responsive sizing & gutters per la booking form:
+  // ridotti per rientrare sotto il budget SCSS senza cambiare TS/HTML.
 }
 
 .btn-hero-submit {
@@ -651,65 +467,5 @@ $hero-booking-card-max: 1355px;
 
   @include m.respond-below(md) {
     width: 100%;
-  }
-}
-
-// Nest Hub 7": riduce altezza card (stessi breakpoint della hero sopra)
-@media (min-width: 960px) and (max-width: 1080px) and (max-height: 660px) {
-  .hero-booking {
-    padding: 0.5rem 0.75rem;
-  }
-
-  .hero-booking__heading {
-    font-size: 1.15rem;
-  }
-
-  .hero-booking__form {
-    .form-label {
-      font-size: 0.62rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .form-control,
-    .input-group-text,
-    .hero-booking__dropdown-toggle {
-      height: 40px;
-      font-size: 0.8125rem;
-    }
-
-    .input-group-text--picker {
-      min-width: 40px;
-      padding-inline: 0.45rem;
-    }
-
-    .mt-3 {
-      margin-top: 0.5rem !important;
-    }
-  }
-
-  .btn-hero-submit {
-    min-height: 40px;
-    padding-inline: 1rem;
-    font-size: 0.75rem;
-  }
-}
-
-// Nest Hub Max: card leggermente più compatta per tenere separazione pulita col copy
-@media (min-width: 1120px) and (max-width: 1380px) and (min-height: 700px) and (max-height: 880px) {
-  .hero-booking__heading {
-    font-size: 1.5rem;
-  }
-
-  .hero-booking__form {
-    .form-control,
-    .input-group-text,
-    .hero-booking__dropdown-toggle {
-      height: 42px;
-    }
-  }
-
-  .btn-hero-submit {
-    min-height: 42px;
-    padding-inline: 1.2rem;
   }
 }

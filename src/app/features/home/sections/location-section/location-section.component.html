@@ -25,17 +25,22 @@
               <i class="bi bi-geo-alt location-section__icon" aria-hidden="true"></i>
               <div>
                 <span class="location-section__label">{{ 'home.location.address' | translate }}</span>
-                <p class="location-section__value">{{ 'home.location.addressLine' | translate }}</p>
+                <p class="location-section__value">{{ addressLine }}</p>
               </div>
             </li>
             <li class="location-section__row">
               <i class="bi bi-clock location-section__icon" aria-hidden="true"></i>
               <div>
                 <span class="location-section__label">{{ 'home.location.hours' | translate }}</span>
-                <p class="location-section__value">{{ 'home.location.checkIn' | translate }}</p>
-                <p class="location-section__value location-section__value--sub">
-                  {{ 'home.location.checkOut' | translate }}
-                </p>
+                <p class="location-section__value">{{ checkInDisplay }}</p>
+                <p class="location-section__value location-section__value--sub">{{ checkOutDisplay }}</p>
+              </div>
+            </li>
+            <li class="location-section__row">
+              <i class="bi bi-people-fill location-section__icon" aria-hidden="true"></i>
+              <div>
+                <span class="location-section__label">{{ 'home.location.reception' | translate }}</span>
+                <p class="location-section__value">{{ receptionHoursDisplay }}</p>
               </div>
             </li>
             <li class="location-section__row">

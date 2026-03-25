@@ -3,23 +3,19 @@
 
 /* Icone burger / lingua su mobile: stesso contrasto (pagina vs hero in cima) */
 @mixin bnb-mobile-nav-glyph-page {
-  @include m.respond-below(lg) {
-    font-size: 1.65rem;
-    color: v.$primary-dark;
-    filter:
-      drop-shadow(0 0 1px rgba(v.$neutral-100, 0.95))
-      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
-  }
+  font-size: 1.65rem;
+  color: v.$primary-dark;
+  filter:
+    drop-shadow(0 0 1px rgba(v.$neutral-100, 0.95))
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
 }
 
 @mixin bnb-mobile-nav-glyph-hero {
-  @include m.respond-below(lg) {
-    font-size: 1.65rem;
-    color: v.$neutral-100;
-    filter:
-      drop-shadow(0 0 2px rgba(0, 0, 0, 0.85))
-      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
-  }
+  font-size: 1.65rem;
+  color: v.$neutral-100;
+  filter:
+    drop-shadow(0 0 2px rgba(0, 0, 0, 0.85))
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
 }
 
 .header-bnb {
@@ -90,18 +86,6 @@
   overflow: hidden;
 }
 
-.brand-text {
-  font-family: v.$font-heading;
-  font-size: v.$font-size-xl;
-  font-weight: v.$font-weight-bold;
-  color: v.$text-title;
-  letter-spacing: v.$letter-spacing-tight;
-
-  @include m.respond-below(md) {
-    font-size: 1.05rem;
-  }
-}
-
 .navbar-toggler-bnb {
   border: 1px solid v.$border-subtle;
   border-radius: v.$border-radius-md;
@@ -138,7 +122,9 @@
 }
 
 .header-bnb.is-home-top .navbar-toggler-bnb .bi-list {
-  @include bnb-mobile-nav-glyph-hero;
+  @include m.respond-below(lg) {
+    @include bnb-mobile-nav-glyph-hero;
+  }
 }
 
 /* Sotto lg: lingua accanto al burger, fuori dal collapse */
@@ -282,9 +268,7 @@
       box-shadow: none !important;
       border-radius: v.$border-radius-sm;
     }
-  }
 
-  @include m.respond-below(lg) {
     &.collapse:not(.show) {
       display: none !important;
     }

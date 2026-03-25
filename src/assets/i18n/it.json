@@ -141,6 +141,7 @@
       "mapAria": "Mappa interattiva con la posizione del bed and breakfast",
       "address": "Indirizzo",
       "hours": "Orari",
+      "reception": "Reception",
       "phone": "Telefono",
       "email": "Email",
       "openMaps": "Apri in Google Maps",
@@ -207,12 +208,13 @@
     "socialAria": "Social",
     "quickLinks": "Link rapidi",
     "contacts": "Contatti",
-    "copyright": "© 2026 B&B Nome — Tutti i diritti riservati",
+    "copyright": "© {{year}} {{legalName}} — Tutti i diritti riservati",
     "privacy": "Privacy Policy",
     "cookies": "Cookie Policy",
     "socialInstagram": "Instagram",
     "socialFacebook": "Facebook",
-    "socialWhatsapp": "WhatsApp"
+    "socialWhatsapp": "WhatsApp",
+    "socialTripAdvisor": "TripAdvisor"
   },
   "pages": {
     "blog": {
@@ -229,7 +231,7 @@
     "manageCookiePreferences": "Gestisci preferenze dei cookie",
     "privacy": {
       "section1Title": "1. Titolare del trattamento",
-      "section1Text": "Il titolare del trattamento dei dati personali è B&B Ischia (di seguito “Titolare”). I recapiti del Titolare sono indicati nella sezione Contatti del sito.",
+      "section1Text": "Il titolare del trattamento dei dati personali e' {{legalName}} (di seguito “Titolare”). I recapiti del Titolare sono indicati nella sezione Contatti del sito.",
       "section2Title": "2. Dati personali trattati",
       "liNavigationData": "Dati di navigazione: indirizzo IP o altri identificativi, tipo di browser, pagine visitate, data e ora dell’accesso, informazioni tecniche necessarie al funzionamento del sito.",
       "liUserProvidedData": "Dati forniti dall’utente: informazioni inserite tramite form di contatto o richieste di prenotazione (es. nome, contatti, date di soggiorno, richieste specifiche).",

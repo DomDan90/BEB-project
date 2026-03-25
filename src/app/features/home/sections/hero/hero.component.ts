@@ -25,9 +25,10 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap/dropdown';
 import { minCheckoutStructFromCheckInIso, todayNgbStruct } from '../../../../core/booking-date/booking-date-struct.util';
 import { ngbPopperMatchReferenceWidth } from '../../../../core/booking-date/ngb-popper-match-reference';
 import { BookingService } from '../../../../core/services/booking.service';
+import { BnbConfigService } from '../../../../core/services/bnb-config.service';
 import { SeoService } from '../../../../core/services/seo.service';
+import { pagesSeoConfig } from '../../../../core/config/pages-seo.config';
 import { MOCK_ROOMS } from '../../../../mock/rooms.mock';
-import { ISCHIA_HERO_OG } from '../../../../core/media/ischia-media';
 import { BookingStore } from '../../../../store/booking.store';
 
 function createBookingDateRangeValidator(booking: BookingService): ValidatorFn {
@@ -53,6 +54,7 @@ export class HeroComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly destroyRef = inject(DestroyRef);
   private readonly bookingService = inject(BookingService);
+  private readonly bnb = inject(BnbConfigService);
   private readonly seo = inject(SeoService);
   private readonly store = inject(BookingStore);
   private readonly router = inject(Router);
@@ -63,6 +65,7 @@ export class HeroComponent implements OnInit {
   readonly guestCapacityError = signal<string | null>(null);
 
   readonly rooms = MOCK_ROOMS;
+  readonly heroBackgroundUrl = this.bnb.theme.images.heroBackground;
   readonly minStayNights = this.bookingService.getMinimumStay();
   readonly todayStruct: NgbDateStruct = todayNgbStruct();
   readonly adultsOptions = Array.from({ length: 10 }, (_, i) => i + 1);
@@ -104,17 +107,11 @@ export class HeroComponent implements OnInit {
       void import('aos').then((mod) => mod.default.refresh());
     });
 
-    this.translate.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.updateSeo());
+    // SEO: configurazione centralizzata (non dipende dalla lingua).
   }
 
   ngOnInit(): void {
-    this.updateSeo();
-  }
-
-  private updateSeo(): void {
-    this.translate.get(['seo.homeTitle', 'seo.homeDesc']).subscribe((t) => {
-      this.seo.updateMeta(t['seo.homeTitle'], t['seo.homeDesc'], ISCHIA_HERO_OG);
-    });
+    this.seo.updateSeoForPage(pagesSeoConfig.home);
   }
 
   showDateRangeError(): boolean {

@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { afterNextRender, Component, inject, PLATFORM_ID, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { BnbConfigService } from '../../../../core/services/bnb-config.service';
 
 export interface ServiceItem {
   icon: string;
@@ -50,9 +51,11 @@ const MOCK_SERVICES: ReadonlyArray<ServiceItem> = [
 })
 export class ServicesSectionComponent {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly bnb = inject(BnbConfigService);
 
   readonly parallaxEnabled = signal(false);
   readonly services = MOCK_SERVICES;
+  readonly facilitiesBgUrl = this.bnb.theme.images.facilitiesBackground;
 
   constructor() {
     afterNextRender(() => {
