@@ -1,6 +1,27 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
+/* Icone burger / lingua su mobile: stesso contrasto (pagina vs hero in cima) */
+@mixin bnb-mobile-nav-glyph-page {
+  @include m.respond-below(lg) {
+    font-size: 1.65rem;
+    color: v.$primary-dark;
+    filter:
+      drop-shadow(0 0 1px rgba(v.$neutral-100, 0.95))
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+  }
+}
+
+@mixin bnb-mobile-nav-glyph-hero {
+  @include m.respond-below(lg) {
+    font-size: 1.65rem;
+    color: v.$neutral-100;
+    filter:
+      drop-shadow(0 0 2px rgba(0, 0, 0, 0.85))
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
+  }
+}
+
 .header-bnb {
   position: fixed;
   top: 0;
@@ -47,7 +68,8 @@
   padding: 0;
   margin: 0;
   text-decoration: none;
-  max-width: calc(100% - 56px);
+  /* Spazio per toolbar mobile: lingua + burger */
+  max-width: calc(100% - 7.5rem);
 
   @include m.respond-to(lg) {
     max-width: none;
@@ -109,21 +131,49 @@
     box-shadow: none;
 
     .bi-list {
-      font-size: 1.65rem;
-      color: v.$primary-dark;
-      filter:
-        drop-shadow(0 0 1px rgba(v.$neutral-100, 0.95))
-        drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+      @include bnb-mobile-nav-glyph-page;
     }
   }
 }
 
 .header-bnb.is-home-top .navbar-toggler-bnb .bi-list {
-  @include m.respond-below(lg) {
-    color: v.$neutral-100;
-    filter:
-      drop-shadow(0 0 2px rgba(0, 0, 0, 0.85))
-      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
+  @include bnb-mobile-nav-glyph-hero;
+}
+
+/* Sotto lg: lingua accanto al burger, fuori dal collapse */
+.navbar-bnb__toolbar {
+  flex-shrink: 0;
+}
+
+.navbar-bnb__lang-toolbar {
+  position: relative;
+
+  .lang-switcher__toggle {
+    min-height: v.$touch-target-min;
+    min-width: v.$touch-target-min;
+    padding: v.$space-1;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+
+    @include m.respond-below(lg) {
+      color: v.$primary-dark;
+
+      .bi-translate {
+        @include bnb-mobile-nav-glyph-page;
+      }
+    }
+  }
+
+  .dropdown-menu {
+    z-index: 1030;
+
+    @include m.respond-below(lg) {
+      left: 50% !important;
+      right: auto !important;
+      transform: translateX(-50%);
+    }
   }
 }
 
@@ -296,6 +346,16 @@
 }
 
 .header-bnb.is-home-top {
+  @include m.respond-below(lg) {
+    .navbar-bnb__lang-toolbar .lang-switcher__toggle:not(.show) {
+      color: v.$neutral-100;
+
+      .bi-translate {
+        @include bnb-mobile-nav-glyph-hero;
+      }
+    }
+  }
+
   @include m.respond-to(lg) {
     .nav-link:not(.active),
     .dropdown-toggle-bnb,

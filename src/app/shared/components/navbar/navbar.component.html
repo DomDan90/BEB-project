@@ -5,17 +5,47 @@
         <app-brand-logo class="logo-img" [ariaLabel]="'brand.logoAltNavbar' | translate" />
       </a>
 
-      <button
-        class="navbar-toggler navbar-toggler-bnb"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#mainNav"
-        aria-controls="mainNav"
-        aria-expanded="false"
-        [attr.aria-label]="'nav.toggleMenu' | translate"
-      >
-        <i class="bi bi-list" aria-hidden="true"></i>
-      </button>
+      <div class="navbar-bnb__toolbar d-flex d-lg-none align-items-center gap-1 ms-auto">
+        <div class="dropdown navbar-bnb__lang-toolbar navbar-bnb__dropdown--centered">
+          <button
+            type="button"
+            class="nav-link dropdown-toggle dropdown-toggle-bnb lang-switcher__toggle d-inline-flex align-items-center"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            id="navLangDropdownMobile"
+            [attr.aria-label]="'lang.menu' | translate"
+          >
+            <i class="bi bi-translate" aria-hidden="true"></i>
+            <span class="lang-switcher__code">{{ language.currentLang() | uppercase }}</span>
+          </button>
+          <ul class="dropdown-menu shadow-sm lang-switcher__menu" aria-labelledby="navLangDropdownMobile">
+            @for (opt of langMenu; track opt.code) {
+              <li>
+                <button
+                  type="button"
+                  class="dropdown-item lang-switcher__item d-flex align-items-center gap-2 w-100 text-start border-0 bg-transparent"
+                  [class.active]="language.currentLang() === opt.code"
+                  (click)="language.setLanguage(opt.code)"
+                >
+                  <span class="lang-switcher__flag" aria-hidden="true">{{ opt.flag }}</span>
+                  <span>{{ opt.labelKey | translate }}</span>
+                </button>
+              </li>
+            }
+          </ul>
+        </div>
+        <button
+          class="navbar-toggler navbar-toggler-bnb"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mainNav"
+          aria-controls="mainNav"
+          aria-expanded="false"
+          [attr.aria-label]="'nav.toggleMenu' | translate"
+        >
+          <i class="bi bi-list" aria-hidden="true"></i>
+        </button>
+      </div>
 
       <div class="collapse navbar-collapse" id="mainNav">
         <ul
@@ -106,7 +136,9 @@
             </ul>
           </li>
 
-          <li class="nav-item dropdown ms-lg-2 navbar-bnb__dropdown--centered">
+          <li
+            class="nav-item dropdown ms-lg-2 navbar-bnb__dropdown--centered d-none d-lg-flex align-items-lg-center"
+          >
             <button
               type="button"
               class="nav-link dropdown-toggle dropdown-toggle-bnb lang-switcher__toggle d-inline-flex align-items-center"
