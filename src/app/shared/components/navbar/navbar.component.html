@@ -44,8 +44,8 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              routerLink="/camere"
-              (click)="onNavLinkClick($event, 'home-camere', 'camere')"
+              href="/#home-camere"
+              (click)="onHomeSectionLinkClick($event, 'home-camere', { whenOnRoomsRouteScrollTop: true })"
               [class.active]="isNavActive('camere')"
               [attr.aria-current]="isNavActive('camere') ? 'page' : null"
               >{{ 'nav.rooms' | translate }}</a

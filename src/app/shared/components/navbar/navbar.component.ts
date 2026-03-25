@@ -211,10 +211,14 @@ export class NavbarComponent {
   }
 
   /**
-   * Chi siamo / Galleria / Contatti: niente `routerLink` su `/` (evita navigate ridondante che azzera lo scroll).
-   * Solo scroll sulla home; da altre route → navigate con fragment + scroll dopo il paint.
+   * Chi siamo / Galleria / Contatti / Camere: niente `routerLink` verso `/` che resetta lo scroll.
+   * Opzione `whenOnRoomsRouteScrollTop`: già su `/camere` o dettaglio → scroll in cima (come il vecchio tab Camere).
    */
-  onHomeSectionLinkClick(event: MouseEvent, sectionId: string): void {
+  onHomeSectionLinkClick(
+    event: MouseEvent,
+    sectionId: string,
+    opts?: { whenOnRoomsRouteScrollTop?: boolean },
+  ): void {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
@@ -226,6 +230,13 @@ export class NavbarComponent {
     event.preventDefault();
     const path = this.router.url.split('?')[0].split('#')[0];
     const onHome = path === '/' || path === '';
+
+    if (opts?.whenOnRoomsRouteScrollTop && path.startsWith('/camere')) {
+      this.document.defaultView?.scrollTo({ top: 0, behavior: 'smooth' });
+      scheduleClose();
+      return;
+    }
+
     if (onHome) {
       this.scrollToSectionById(sectionId);
     } else {
@@ -251,7 +262,7 @@ export class NavbarComponent {
       case 'home':
         return null;
       case 'camere':
-        return '/camere';
+        return null;
       case 'chi-siamo':
       case 'galleria':
       case 'contatti':
