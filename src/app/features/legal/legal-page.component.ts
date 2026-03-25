@@ -11,4 +11,6 @@ export class LegalPageComponent {
   private readonly route = inject(ActivatedRoute);
 
   readonly titleKey = (this.route.snapshot.data['titleKey'] as string) ?? 'legal.defaultTitle';
+  readonly isPrivacy = this.titleKey === 'legal.privacyTitle';
+  readonly isCookie = this.titleKey === 'legal.cookieTitle';
 }

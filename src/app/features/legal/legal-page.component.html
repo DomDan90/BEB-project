@@ -3,5 +3,111 @@
   <span class="accent-line" aria-hidden="true"></span>
   <div class="page-placeholder__panel">
     <p class="mb-0">{{ 'legal.lead' | translate }}</p>
+
+    @if (isPrivacy) {
+      <div class="mt-4 legal-content">
+        <h2 class="h2">{{ 'legal.privacy.section1Title' | translate }}</h2>
+        <p>{{ 'legal.privacy.section1Text' | translate }}</p>
+
+        <h2 class="h2">{{ 'legal.privacy.section2Title' | translate }}</h2>
+        <ul class="list-unstyled">
+          <li class="mb-2">{{ 'legal.privacy.liNavigationData' | translate }}</li>
+          <li class="mb-2">{{ 'legal.privacy.liUserProvidedData' | translate }}</li>
+          <li class="mb-0">{{ 'legal.privacy.liCookieRelatedData' | translate }}</li>
+        </ul>
+
+        <h2 class="h2">{{ 'legal.privacy.section3Title' | translate }}</h2>
+        <ul class="list-unstyled">
+          <li class="mb-2">{{ 'legal.privacy.liPurpose1' | translate }}</li>
+          <li class="mb-2">{{ 'legal.privacy.liPurpose2' | translate }}</li>
+          <li class="mb-0">{{ 'legal.privacy.liPurpose3' | translate }}</li>
+        </ul>
+
+        <h2 class="h2">{{ 'legal.privacy.section4Title' | translate }}</h2>
+        <ul class="list-unstyled">
+          <li class="mb-2">{{ 'legal.privacy.liLegalBasis1' | translate }}</li>
+          <li class="mb-2">{{ 'legal.privacy.liLegalBasis2' | translate }}</li>
+          <li class="mb-0">{{ 'legal.privacy.liLegalBasis3' | translate }}</li>
+        </ul>
+
+        <h2 class="h2">{{ 'legal.privacy.section5Title' | translate }}</h2>
+        <p>{{ 'legal.privacy.section5Text' | translate }}</p>
+
+        <h2 class="h2">{{ 'legal.privacy.section6Title' | translate }}</h2>
+        <ul class="list-unstyled">
+          <li class="mb-2">{{ 'legal.privacy.liRecipients1' | translate }}</li>
+          <li class="mb-2">{{ 'legal.privacy.liRecipients2' | translate }}</li>
+          <li class="mb-2">{{ 'legal.privacy.liRecipients3' | translate }}</li>
+          <li class="mb-0">{{ 'legal.privacy.liRecipients4' | translate }}</li>
+        </ul>
+
+        <h2 class="h2">{{ 'legal.privacy.section7Title' | translate }}</h2>
+        <p>{{ 'legal.privacy.section7Text' | translate }}</p>
+
+        <h2 class="h2">{{ 'legal.privacy.section8Title' | translate }}</h2>
+        <p>{{ 'legal.privacy.section8Text' | translate }}</p>
+
+        <h2 class="h2">{{ 'legal.privacy.section9Title' | translate }}</h2>
+        <ul class="list-unstyled">
+          <li class="mb-2">{{ 'legal.privacy.liRights1' | translate }}</li>
+          <li class="mb-2">{{ 'legal.privacy.liRights2' | translate }}</li>
+          <li class="mb-2">{{ 'legal.privacy.liRights3' | translate }}</li>
+          <li class="mb-2">{{ 'legal.privacy.liRights4' | translate }}</li>
+          <li class="mb-2">{{ 'legal.privacy.liRights5' | translate }}</li>
+          <li class="mb-2">{{ 'legal.privacy.liRights6' | translate }}</li>
+          <li class="mb-0">{{ 'legal.privacy.liRights7' | translate }}</li>
+        </ul>
+
+        <h2 class="h2">{{ 'legal.privacy.section10Title' | translate }}</h2>
+        <p>{{ 'legal.privacy.section10Text' | translate }}</p>
+
+        <p class="mb-0">
+          <small>
+            {{ 'legal.privacy.note' | translate }}
+          </small>
+        </p>
+      </div>
+    } @else if (isCookie) {
+      <div class="mt-4 legal-content">
+        <h2 class="h2">{{ 'legal.cookie.section1Title' | translate }}</h2>
+        <p>{{ 'legal.cookie.section1Text' | translate }}</p>
+
+        <h2 class="h2">{{ 'legal.cookie.section2Title' | translate }}</h2>
+        <ul class="list-unstyled">
+          <li class="mb-2">{{ 'legal.cookie.liTypes1' | translate }}</li>
+          <li class="mb-2">{{ 'legal.cookie.liTypes2' | translate }}</li>
+          <li class="mb-0">{{ 'legal.cookie.liTypes3' | translate }}</li>
+        </ul>
+
+        <h2 class="h2">{{ 'legal.cookie.section3Title' | translate }}</h2>
+        <p>{{ 'legal.cookie.section3Text' | translate }}</p>
+
+        <h2 class="h2">{{ 'legal.cookie.section4Title' | translate }}</h2>
+        <p>{{ 'legal.cookie.section4Text' | translate }}</p>
+        <ul class="list-unstyled">
+          <li class="mb-2">{{ 'legal.cookie.liControl1' | translate }}</li>
+          <li class="mb-2">{{ 'legal.cookie.liControl2' | translate }}</li>
+          <li class="mb-0">{{ 'legal.cookie.liControl3' | translate }}</li>
+        </ul>
+
+        <h2 class="h2">{{ 'legal.cookie.section5Title' | translate }}</h2>
+        <p>{{ 'legal.cookie.section5Text' | translate }}</p>
+
+        <h2 class="h2">{{ 'legal.cookie.section6Title' | translate }}</h2>
+        <p>{{ 'legal.cookie.section6Text' | translate }}</p>
+
+        <h2 class="h2">{{ 'legal.cookie.section7Title' | translate }}</h2>
+        <p>{{ 'legal.cookie.section7Text' | translate }}</p>
+
+        <h2 class="h2">{{ 'legal.cookie.section8Title' | translate }}</h2>
+        <p>{{ 'legal.cookie.section8Text' | translate }}</p>
+
+        <p class="mb-0">
+          <small>
+            {{ 'legal.cookie.note' | translate }}
+          </small>
+        </p>
+      </div>
+    }
   </div>
 </main>

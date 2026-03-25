@@ -1,0 +1,68 @@
+@if (isVisible()) {
+  <section class="cookie-banner" role="region" aria-label="{{ 'cookieBanner.ariaLabel' | translate }}">
+    <div class="container-bnb cookie-banner__inner">
+      <div class="cookie-banner__row">
+        <div class="cookie-banner__copy">
+          <div class="cookie-banner__topline">
+            <span class="cookie-banner__accent" aria-hidden="true"></span>
+            <h3 class="cookie-banner__title">{{ 'cookieBanner.title' | translate }}</h3>
+          </div>
+
+          <p class="cookie-banner__text">
+            {{ 'cookieBanner.text' | translate }}
+            <a routerLink="/privacy-policy" class="cookie-banner__link">{{ 'cookieBanner.privacyPolicy' | translate }}</a>
+            {{ 'cookieBanner.and' | translate }}
+            <a routerLink="/cookie-policy" class="cookie-banner__link">{{ 'cookieBanner.cookiePolicy' | translate }}</a>.
+          </p>
+        </div>
+
+        <div class="cookie-banner__actions">
+          <button type="button" class="btn-primary-bnb cookie-banner__btn" (click)="acceptAll()">
+            {{ 'cookieBanner.acceptAll' | translate }}
+          </button>
+          <button type="button" class="btn-outline-bnb cookie-banner__btn" (click)="rejectAll()">
+            {{ 'cookieBanner.reject' | translate }}
+          </button>
+          <button type="button" class="btn-outline-bnb cookie-banner__btn" (click)="openPreferences()">
+            {{ 'cookieBanner.manage' | translate }}
+          </button>
+        </div>
+      </div>
+
+      @if (preferencesOpen()) {
+        <div class="cookie-banner__prefs" role="dialog" aria-modal="false" aria-label="{{ 'cookieBanner.prefsAriaLabel' | translate }}">
+          <h4 class="cookie-banner__prefs-title">{{ 'cookieBanner.prefsTitle' | translate }}</h4>
+
+          <div class="cookie-banner__prefs-grid">
+            <label class="cookie-banner__pref">
+              <input type="checkbox" checked disabled />
+              <span>{{ 'cookieBanner.essential' | translate }}</span>
+            </label>
+
+            <label class="cookie-banner__pref">
+              <input type="checkbox" [checked]="draftAnalytics" (change)="onAnalyticsChange($event)" />
+              <span>{{ 'cookieBanner.analytics' | translate }}</span>
+            </label>
+
+            <label class="cookie-banner__pref">
+              <input type="checkbox" [checked]="draftMarketing" (change)="onMarketingChange($event)" />
+              <span>{{ 'cookieBanner.marketing' | translate }}</span>
+            </label>
+          </div>
+
+          <div class="cookie-banner__prefs-actions">
+            <button type="button" class="btn-primary-bnb cookie-banner__btn" (click)="savePreferences()">
+              {{ 'cookieBanner.save' | translate }}
+            </button>
+            <button type="button" class="btn-outline-bnb cookie-banner__btn" (click)="closePreferences()">
+              {{ 'cookieBanner.close' | translate }}
+            </button>
+          </div>
+
+          <p class="cookie-banner__fineprint">{{ 'cookieBanner.note' | translate }}</p>
+        </div>
+      }
+    </div>
+  </section>
+}
+

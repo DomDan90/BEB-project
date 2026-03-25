@@ -5,10 +5,11 @@ import { LanguageService } from './core/services/language.service';
 import { BackToTopComponent } from './shared/components/back-to-top/back-to-top.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { CookieBannerComponent } from './shared/components/cookie-banner/cookie-banner.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, FooterComponent, BackToTopComponent],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent, BackToTopComponent, CookieBannerComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
