@@ -23,12 +23,12 @@ export class FooterComponent {
   readonly phoneTel = PHONE_TEL;
   readonly email = EMAIL;
 
-  readonly quickLinks: ReadonlyArray<{ labelKey: string; path: string }> = [
+  readonly quickLinks: ReadonlyArray<{ labelKey: string; path: string; fragment?: string }> = [
     { labelKey: 'nav.home', path: '/' },
-    { labelKey: 'nav.about', path: '/chi-siamo' },
+    { labelKey: 'nav.about', path: '/', fragment: 'home-chi-siamo' },
     { labelKey: 'nav.rooms', path: '/camere' },
-    { labelKey: 'nav.gallery', path: '/galleria' },
-    { labelKey: 'nav.contacts', path: '/contatti' },
+    { labelKey: 'nav.gallery', path: '/', fragment: 'home-galleria' },
+    { labelKey: 'nav.contacts', path: '/', fragment: 'home-dove-siamo' },
   ];
 
   readonly socialLinks: ReadonlyArray<{ icon: string; labelKey: string; href: string }> = [

@@ -98,6 +98,11 @@
   }
 }
 
+/* Sezioni home: offset per hash / anchorScrolling (allineato a HOME_SPY_OFFSET_PX nella navbar) */
+[id^='home-'] {
+  scroll-margin-top: 88px;
+}
+
 /* Layout base coerente per pagine placeholder/informative */
 .page-placeholder {
   max-width: 52rem;

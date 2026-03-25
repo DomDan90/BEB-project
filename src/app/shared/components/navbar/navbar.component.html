@@ -34,8 +34,8 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              routerLink="/chi-siamo"
-              (click)="onNavLinkClick($event, 'home-chi-siamo', 'chi-siamo')"
+              href="/#home-chi-siamo"
+              (click)="onHomeSectionLinkClick($event, 'home-chi-siamo')"
               [class.active]="isNavActive('chi-siamo')"
               [attr.aria-current]="isNavActive('chi-siamo') ? 'page' : null"
               >{{ 'nav.about' | translate }}</a
@@ -54,8 +54,8 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              routerLink="/galleria"
-              (click)="onNavLinkClick($event, 'home-galleria', 'galleria')"
+              href="/#home-galleria"
+              (click)="onHomeSectionLinkClick($event, 'home-galleria')"
               [class.active]="isNavActive('galleria')"
               [attr.aria-current]="isNavActive('galleria') ? 'page' : null"
               >{{ 'nav.gallery' | translate }}</a
@@ -64,8 +64,8 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              routerLink="/contatti"
-              (click)="onNavLinkClick($event, 'home-dove-siamo', 'contatti')"
+              href="/#home-dove-siamo"
+              (click)="onHomeSectionLinkClick($event, 'home-dove-siamo')"
               [class.active]="isNavActive('contatti')"
               [attr.aria-current]="isNavActive('contatti') ? 'page' : null"
               >{{ 'nav.contacts' | translate }}</a

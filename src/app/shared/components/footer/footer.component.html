@@ -24,7 +24,12 @@
         <ul class="footer-bnb__list list-unstyled">
           @for (link of quickLinks; track link.path) {
             <li>
-              <a class="footer-bnb__link" [routerLink]="link.path">{{ link.labelKey | translate }}</a>
+              <a
+                class="footer-bnb__link"
+                [routerLink]="link.path"
+                [fragment]="link.fragment ?? undefined"
+                >{{ link.labelKey | translate }}</a
+              >
             </li>
           }
         </ul>

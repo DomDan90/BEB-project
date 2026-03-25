@@ -44,24 +44,13 @@ export const routes: Routes = [
       },
     ],
   },
-  {
-    path: 'chi-siamo',
-    loadComponent: () => import('./features/about/about.component').then((m) => m.AboutComponent),
-  },
-  {
-    path: 'galleria',
-    loadComponent: () =>
-      import('./features/gallery/gallery.component').then((m) => m.GalleryComponent),
-  },
+  { path: 'chi-siamo', redirectTo: '', pathMatch: 'full' },
+  { path: 'galleria', redirectTo: '', pathMatch: 'full' },
   {
     path: 'blog',
     loadComponent: () => import('./features/blog/blog.component').then((m) => m.BlogComponent),
   },
-  {
-    path: 'contatti',
-    loadComponent: () =>
-      import('./features/contact/contact.component').then((m) => m.ContactComponent),
-  },
+  { path: 'contatti', redirectTo: '', pathMatch: 'full' },
   {
     path: 'privacy-policy',
     loadComponent: () =>

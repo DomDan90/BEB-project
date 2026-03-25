@@ -154,15 +154,13 @@ export class NavbarComponent {
       case 'home':
         return false;
       case 'chi-siamo':
-        return path.startsWith('/chi-siamo');
+      case 'galleria':
+      case 'contatti':
+        return false;
       case 'camere':
         return path.startsWith('/camere');
-      case 'galleria':
-        return path.startsWith('/galleria');
       case 'blog':
         return path.startsWith('/blog');
-      case 'contatti':
-        return path.startsWith('/contatti');
       case 'prenota':
         return path.startsWith('/prenota');
       default:
@@ -212,6 +210,38 @@ export class NavbarComponent {
     scheduleClose();
   }
 
+  /**
+   * Chi siamo / Galleria / Contatti: niente `routerLink` su `/` (evita navigate ridondante che azzera lo scroll).
+   * Solo scroll sulla home; da altre route → navigate con fragment + scroll dopo il paint.
+   */
+  onHomeSectionLinkClick(event: MouseEvent, sectionId: string): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    const scheduleClose = (): void => queueMicrotask(() => this.closeMainNavIfOpen());
+    if (!this.isPlainLeftClick(event)) {
+      scheduleClose();
+      return;
+    }
+    event.preventDefault();
+    const path = this.router.url.split('?')[0].split('#')[0];
+    const onHome = path === '/' || path === '';
+    if (onHome) {
+      this.scrollToSectionById(sectionId);
+    } else {
+      void this.router.navigate(['/'], { fragment: sectionId }).then(() => {
+        queueMicrotask(() => {
+          requestAnimationFrame(() => {
+            this.scrollToSectionById(sectionId);
+            this.updateHomeScrollSpy();
+            this.cdr.markForCheck();
+          });
+        });
+      });
+    }
+    scheduleClose();
+  }
+
   private isPlainLeftClick(event: MouseEvent): boolean {
     return event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey;
   }
@@ -223,11 +253,9 @@ export class NavbarComponent {
       case 'camere':
         return '/camere';
       case 'chi-siamo':
-        return '/chi-siamo';
       case 'galleria':
-        return '/galleria';
       case 'contatti':
-        return '/contatti';
+        return null;
       case 'blog':
         return '/blog';
       case 'prenota':
