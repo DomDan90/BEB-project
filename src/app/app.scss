@@ -11,4 +11,6 @@
 /* Spinge il footer in fondo alla viewport quando il contenuto è corto */
 router-outlet + * {
   flex: 1 0 auto;
+  display: block;
+  min-width: 0;
 }
