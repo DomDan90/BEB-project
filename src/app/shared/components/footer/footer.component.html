@@ -22,7 +22,7 @@
       <div class="footer-bnb__col">
         <h2 class="footer-bnb__heading">{{ 'footer.quickLinks' | translate }}</h2>
         <ul class="footer-bnb__list list-unstyled">
-          @for (link of quickLinks; track link.path) {
+          @for (link of quickLinks; track link.labelKey) {
             <li>
               <a
                 class="footer-bnb__link"
