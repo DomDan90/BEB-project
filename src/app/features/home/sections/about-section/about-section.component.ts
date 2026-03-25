@@ -1,6 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
 import { afterNextRender, Component, inject, PLATFORM_ID } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { ISCHIA_ABOUT } from '../../../../core/media/ischia-media';
@@ -15,7 +14,7 @@ const ABOUT_STRENGTHS: ReadonlyArray<{ icon: string; textKey: string }> = [
 @Component({
   selector: 'app-about-section',
   standalone: true,
-  imports: [RouterLink, TranslatePipe],
+  imports: [TranslatePipe],
   templateUrl: './about-section.component.html',
   styleUrl: './about-section.component.scss',
 })

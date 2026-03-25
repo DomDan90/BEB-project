@@ -68,11 +68,6 @@
   }
 }
 
-.about-section__cta {
-  @include m.btn-accent();
-  display: inline-flex;
-}
-
 .about-section__media {
   padding: 0 v.$space-2 v.$space-4 0;
 
