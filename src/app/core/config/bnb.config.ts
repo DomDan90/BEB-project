@@ -102,8 +102,9 @@ export const bnbConfig: BnbConfig = {
     tagline: 'Ospitalita a Ischia, tra mare e terme: camere curate, colazione con prodotti dell’isola e consigli per spiagge e borghi.',
     legalName: 'B&B Ischia',
     foundationYear: 2026,
-    logoPath: '/logo-beb-ischia.svg',
-    faviconPath: '/favicon.ico',
+    // Branding white-label (file locali in src/assets)
+    logoPath: '/assets/bEb-esempio/logo/logo.png',
+    faviconPath: '/assets/bEb-esempio/logo/logo-icon.png',
     logoAlt: 'B&B Ischia - logo',
     logoSubtitle: 'MARE \u00b7 TERME \u00b7 RELAX',
   },
@@ -159,12 +160,11 @@ export const bnbConfig: BnbConfig = {
       accent: '#f8b600',
     },
     images: {
-      heroBackground:
-        'https://ilmonasterocastelloaragoneseischia.com/img/IlMonastero-Ischia-camere-000@2x.webp',
-      facilitiesBackground:
-        'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&h=600&q=80',
-      heroOgImage:
-        'https://ilmonasterocastelloaragoneseischia.com/img/IlMonastero-Ischia-camere-000@2x.webp',
+      // Home / hero: bEb-home-esempio
+      heroBackground: '/assets/bEb-esempio/bEb-home-esempio.jpg',
+      heroOgImage: '/assets/bEb-esempio/bEb-home-esempio.jpg',
+      // Servizi / facilities: tra le 3 foto disponibili
+      facilitiesBackground: '/assets/bEb-esempio/bEb-esempio-2.jpg',
     },
   },
   seo: {
@@ -181,7 +181,7 @@ export const bnbConfig: BnbConfig = {
       'terme e spiagge',
     ],
     urlSite: 'https://www.beb-ischia-esempio.it',
-    ogImage: 'https://ilmonasterocastelloaragoneseischia.com/img/IlMonastero-Ischia-camere-000@2x.webp',
+    ogImage: '/assets/bEb-esempio/bEb-home-esempio.jpg',
     twitterHandle: '@bebischia',
     locale: 'it_IT',
     schemaType: 'BedAndBreakfast',

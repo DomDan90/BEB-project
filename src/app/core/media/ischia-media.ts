@@ -1,63 +1,42 @@
 /**
- * Immagini stock (Unsplash) in tema isola / ospitalità.
- * Gli ID foto sono verificati (URL che rispondono 200); alcuni ID generici online risultano 404.
- * Logo: file locale `public/logo-beb-ischia.svg`.
- * Da sostituire con foto reali del cliente in `public/` quando disponibili.
- *
- * Licenza Unsplash: https://unsplash.com/license
+ * Immagini locali (white-label) in tema isola / ospitalità.
+ * Tutte le foto sono in `src/assets/bEb-esempio/` e vengono riutilizzate/duplicate
+ * per mantenere solo 3 immagini diverse (bEb-esempio-1/-2/-3) + 1 hero (bEb-home-esempio).
  */
-function unsplash(photoId: string, w: number, h: number): string {
-  return `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=${w}&h=${h}&q=80`;
-}
 
-/** Logo in UI: componente `app-brand-logo` (SVG inline). File opzionale in `public/logo-beb-ischia.svg` per condivisione/stampa. */
+const ASSET_BASE = '/assets/bEb-esempio';
+const HERO_IMG = `${ASSET_BASE}/bEb-home-esempio.jpg`;
+const IMG_1 = `${ASSET_BASE}/bEb-esempio-1.jpg`;
+const IMG_2 = `${ASSET_BASE}/bEb-esempio-2.jpg`;
+const IMG_3 = `${ASSET_BASE}/bEb-esempio-3.jpg`;
 
-/** Foto reale hero / Open Graph (camere, Ischia). Se il dominio esterno blocca il hotlink, copia in `public/` e aggiorna qui. */
-const ISCHIA_HERO_IMAGE_SRC =
-  'https://ilmonasterocastelloaragoneseischia.com/img/IlMonastero-Ischia-camere-000@2x.webp';
-
-export const ISCHIA_HERO_WIDE = ISCHIA_HERO_IMAGE_SRC;
-export const ISCHIA_HERO_OG = ISCHIA_HERO_IMAGE_SRC;
+/** Foto reale hero / Open Graph (camere, Ischia). */
+export const ISCHIA_HERO_WIDE = HERO_IMG;
+export const ISCHIA_HERO_OG = HERO_IMG;
 
 /** Sfondo sezione servizi / facilities. */
-export const ISCHIA_FACILITIES_BG = unsplash('1540555700478-4be289fbecef', 1920, 600);
+export const ISCHIA_FACILITIES_BG = IMG_2;
 
 /** Sezione Chi siamo. */
-export const ISCHIA_ABOUT = unsplash('1564013799919-ab600027ffc6', 800, 600);
+export const ISCHIA_ABOUT = IMG_1;
 
-/** Camere: anteprima + tre scatti per galleria stanza. */
+/** Camere: anteprima + tre scatti per galleria stanza (solo 3 foto distinte, duplicate ok). */
 export const ISCHIA_ROOM_IMAGES = {
   standard: {
-    thumb: unsplash('1590490360182-c33d57733427', 800, 600),
-    gallery: [
-      unsplash('1590490360182-c33d57733427', 1200, 800),
-      unsplash('1582719478250-c89cae4dc85b', 1200, 800),
-      unsplash('1631049307264-da0ec9d70304', 1200, 800),
-    ],
+    thumb: IMG_1,
+    gallery: [IMG_1, IMG_2, IMG_3],
   },
   deluxe: {
-    thumb: unsplash('1506905925346-21bda4d32df4', 800, 600),
-    gallery: [
-      unsplash('1506905925346-21bda4d32df4', 1200, 800),
-      unsplash('1598928506311-c55ded91a20c', 1200, 800),
-      unsplash('1582719478250-c89cae4dc85b', 1200, 800),
-    ],
+    thumb: IMG_2,
+    gallery: [IMG_2, IMG_3, IMG_1],
   },
   suite: {
-    thumb: unsplash('1512917774080-9991f1c4c750', 800, 600),
-    gallery: [
-      unsplash('1512917774080-9991f1c4c750', 1200, 800),
-      unsplash('1564013799919-ab600027ffc6', 1200, 800),
-      unsplash('1631049307264-da0ec9d70304', 1200, 800),
-    ],
+    thumb: IMG_3,
+    gallery: [IMG_3, IMG_1, IMG_2],
   },
   family: {
-    thumb: unsplash('1598928506311-c55ded91a20c', 800, 600),
-    gallery: [
-      unsplash('1598928506311-c55ded91a20c', 1200, 800),
-      unsplash('1506905925346-21bda4d32df4', 1200, 800),
-      unsplash('1522771739844-6a9f6d5f14af', 1200, 800),
-    ],
+    thumb: IMG_1,
+    gallery: [IMG_1, IMG_3, IMG_2],
   },
 } as const;
 
@@ -70,20 +49,11 @@ export interface IschiaGalleryItem {
   thumbH: number;
 }
 
-function galleryItem(photoId: string, thumbW: number, thumbH: number, altKey: string): IschiaGalleryItem {
-  const maxEdge = 1600;
-  let fullW: number;
-  let fullH: number;
-  if (thumbW >= thumbH) {
-    fullW = maxEdge;
-    fullH = Math.round((maxEdge * thumbH) / thumbW);
-  } else {
-    fullH = maxEdge;
-    fullW = Math.round((maxEdge * thumbW) / thumbH);
-  }
+function galleryItem(src: string, thumbW: number, thumbH: number, altKey: string): IschiaGalleryItem {
+  // Per immagini locali: thumb/full puntano alla stessa risorsa.
   return {
-    thumbSrc: unsplash(photoId, thumbW, thumbH),
-    fullSrc: unsplash(photoId, fullW, fullH),
+    thumbSrc: src,
+    fullSrc: src,
     altKey,
     thumbW,
     thumbH,
@@ -92,22 +62,22 @@ function galleryItem(photoId: string, thumbW: number, thumbH: number, altKey: st
 
 /** Galleria home. */
 export const ISCHIA_GALLERY: ReadonlyArray<IschiaGalleryItem> = [
-  galleryItem('1631049307264-da0ec9d70304', 800, 600, 'home.gallery.items.brightRoom'),
-  galleryItem('1618773928121-c32242e63f39', 600, 800, 'home.gallery.items.stairs'),
-  galleryItem('1556912172-45b7abe8b7e1', 800, 800, 'home.gallery.items.breakfastTable'),
-  galleryItem('1512917774080-9991f1c4c750', 800, 600, 'home.gallery.items.garden'),
-  galleryItem('1586023492125-27b2c045efd7', 600, 800, 'home.gallery.items.lounge'),
-  galleryItem('1600210492486-724fe5c67fb0', 800, 800, 'home.gallery.items.greenView'),
-  galleryItem('1506905925346-21bda4d32df4', 800, 600, 'home.gallery.items.relaxCorner'),
-  galleryItem('1564013799919-ab600027ffc6', 600, 800, 'home.gallery.items.terrace'),
-  galleryItem('1522771739844-6a9f6d5f14af', 800, 800, 'home.gallery.items.linens'),
+  galleryItem(IMG_1, 800, 600, 'home.gallery.items.brightRoom'),
+  galleryItem(IMG_2, 600, 800, 'home.gallery.items.stairs'),
+  galleryItem(IMG_3, 800, 800, 'home.gallery.items.breakfastTable'),
+  galleryItem(IMG_1, 800, 600, 'home.gallery.items.garden'),
+  galleryItem(IMG_2, 600, 800, 'home.gallery.items.lounge'),
+  galleryItem(IMG_3, 800, 800, 'home.gallery.items.greenView'),
+  galleryItem(IMG_1, 800, 600, 'home.gallery.items.relaxCorner'),
+  galleryItem(IMG_2, 600, 800, 'home.gallery.items.terrace'),
+  galleryItem(IMG_3, 800, 800, 'home.gallery.items.linens'),
 ];
 
 /** Avatar recensioni. */
 export const ISCHIA_REVIEW_AVATARS: ReadonlyArray<string> = [
-  unsplash('1438761681033-6461ffad8d80', 100, 100),
-  unsplash('1500648767791-00dcc994a43e', 100, 100),
-  unsplash('1494790108377-be9c29b29330', 100, 100),
-  unsplash('1506794778202-cad84cf45f1d', 100, 100),
-  unsplash('1534528741775-53994a69daeb', 100, 100),
+  IMG_1,
+  IMG_2,
+  IMG_3,
+  IMG_1,
+  IMG_2,
 ];
