@@ -18,7 +18,9 @@
       </button>
 
       <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <ul
+          class="navbar-nav ms-auto align-items-lg-center gap-lg-1 flex-column flex-lg-row flex-lg-nowrap navbar-bnb__nav"
+        >
           <li class="nav-item">
             <a
               class="nav-link"
@@ -32,21 +34,21 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              routerLink="/camere"
-              (click)="onNavLinkClick($event, 'home-camere', 'camere')"
-              [class.active]="isNavActive('camere')"
-              [attr.aria-current]="isNavActive('camere') ? 'page' : null"
-              >{{ 'nav.rooms' | translate }}</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
               routerLink="/chi-siamo"
               (click)="onNavLinkClick($event, 'home-chi-siamo', 'chi-siamo')"
               [class.active]="isNavActive('chi-siamo')"
               [attr.aria-current]="isNavActive('chi-siamo') ? 'page' : null"
               >{{ 'nav.about' | translate }}</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/camere"
+              (click)="onNavLinkClick($event, 'home-camere', 'camere')"
+              [class.active]="isNavActive('camere')"
+              [attr.aria-current]="isNavActive('camere') ? 'page' : null"
+              >{{ 'nav.rooms' | translate }}</a
             >
           </li>
           <li class="nav-item">

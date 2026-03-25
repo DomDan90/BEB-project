@@ -31,6 +31,16 @@
     padding-block: v.$space-1;
     justify-content: space-between;
   }
+
+  /* Riga unica desktop: logo a sinistra, collapse che riempie lo spazio senza sovrapporsi */
+  @include m.respond-to(lg) {
+    > .container-bnb {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      width: 100%;
+    }
+  }
 }
 
 .logo-bnb {
@@ -38,6 +48,12 @@
   margin: 0;
   text-decoration: none;
   max-width: calc(100% - 56px);
+
+  @include m.respond-to(lg) {
+    max-width: none;
+    flex-shrink: 0;
+    margin-right: v.$space-3;
+  }
 
   &:focus-visible {
     outline: v.$outline-width solid v.$input-focus-border;
@@ -129,6 +145,20 @@
 
   &.active {
     color: v.$nav-link-active;
+  }
+}
+
+@include m.respond-to(lg) {
+  #mainNav.navbar-collapse {
+    flex: 1 1 auto;
+    min-width: 0;
+    justify-content: flex-end;
+  }
+
+  .navbar-bnb__nav {
+    flex-wrap: nowrap;
+    width: auto;
+    max-width: 100%;
   }
 }
 

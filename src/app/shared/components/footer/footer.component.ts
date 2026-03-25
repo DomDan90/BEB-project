@@ -25,8 +25,8 @@ export class FooterComponent {
 
   readonly quickLinks: ReadonlyArray<{ labelKey: string; path: string }> = [
     { labelKey: 'nav.home', path: '/' },
-    { labelKey: 'nav.rooms', path: '/camere' },
     { labelKey: 'nav.about', path: '/chi-siamo' },
+    { labelKey: 'nav.rooms', path: '/camere' },
     { labelKey: 'nav.gallery', path: '/galleria' },
     { labelKey: 'nav.contacts', path: '/contatti' },
   ];

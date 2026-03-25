@@ -23,15 +23,15 @@ type BootstrapCollapse = {
 /** Chiave voce menu allineata a route o sezione home (scroll spy). */
 type NavRouteKey = 'home' | 'chi-siamo' | 'camere' | 'galleria' | 'blog' | 'contatti' | 'prenota';
 
-/** Sezioni home (ordine scroll): `nav: null` mantiene l’ultima voce esplicita (es. servizi → resta “Chi siamo”). */
+/** Sezioni home (ordine = ordine DOM di scroll, allineato al menu): `nav: null` mantiene l’ultima voce esplicita. */
 const HOME_SCROLL_SECTIONS: ReadonlyArray<{ id: string; nav: NavRouteKey | null }> = [
   { id: 'home-hero', nav: 'home' },
-  { id: 'home-camere', nav: 'camere' },
   { id: 'home-chi-siamo', nav: 'chi-siamo' },
-  { id: 'home-servizi', nav: null },
+  { id: 'home-camere', nav: 'camere' },
   { id: 'home-galleria', nav: 'galleria' },
-  { id: 'home-recensioni', nav: null },
   { id: 'home-dove-siamo', nav: 'contatti' },
+  { id: 'home-servizi', nav: null },
+  { id: 'home-recensioni', nav: null },
 ];
 
 /** Sotto la navbar fissa (~80px) + piccolo margine. */
