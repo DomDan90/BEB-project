@@ -36,7 +36,7 @@ export class RoomDetailComponent {
     const r = this.room();
     return [
       { label: 'nav.home', link: '/' },
-      { label: 'nav.rooms', link: '/camere' },
+      { label: 'nav.rooms', link: '/', fragment: 'home-camere' },
       ...(r ? [{ label: r.name }] : []),
     ];
   });

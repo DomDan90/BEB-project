@@ -6,6 +6,8 @@ export interface BreadcrumbItem {
   /** Chiave ngx-translate. */
   label: string;
   link?: string;
+  /** Opzionale: ancoraggio sulla route (es. sezione home). */
+  fragment?: string;
 }
 
 @Component({

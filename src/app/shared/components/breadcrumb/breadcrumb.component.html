@@ -4,7 +4,9 @@
       @for (item of items(); track $index) {
         <li class="breadcrumb-item" [class.active]="!item.link">
           @if (item.link) {
-            <a [routerLink]="item.link">{{ item.label | translate }}</a>
+            <a [routerLink]="item.link" [fragment]="item.fragment ?? undefined">{{
+              item.label | translate
+            }}</a>
           } @else {
             {{ item.label | translate }}
           }

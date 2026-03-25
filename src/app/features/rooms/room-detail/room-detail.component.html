@@ -27,11 +27,15 @@
         <a routerLink="/prenota" class="btn-primary-bnb me-2" (click)="selectForBooking()">{{
           'common.book' | translate
         }}</a>
-        <a routerLink="/camere" class="btn-outline-bnb">{{ 'rooms.backToList' | translate }}</a>
+        <a routerLink="/" fragment="home-camere" class="btn-outline-bnb">{{
+          'rooms.backToList' | translate
+        }}</a>
       </div>
     </div>
   } @else {
     <p>{{ 'rooms.notFound' | translate }}</p>
-    <a routerLink="/camere" class="btn-outline-bnb">{{ 'rooms.backToList' | translate }}</a>
+    <a routerLink="/" fragment="home-camere" class="btn-outline-bnb">{{
+      'rooms.backToList' | translate
+    }}</a>
   }
 </div>
